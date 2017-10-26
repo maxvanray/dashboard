@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>
         @section('title')
-            | Core + Admin Template
+            | SpaceTime
         @show
     </title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -23,9 +23,10 @@
 <!-- end of global css -->
 </head>
 <body class="skin-coreplus">
+    <?php /*
 <div class="preloader">
     <div class="loader_img"><img src="{{asset('assets/img/loader.gif')}}" alt="loading..." height="64" width="64"></div>
-</div>
+</div> */ ?>
 <!-- header logo: style can be found in header-->
 <header class="header">
     <nav class="navbar navbar-static-top" role="navigation">
@@ -1006,6 +1007,7 @@
 </div>
 <!-- wrapper-->
 <!-- global js -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="{{asset('assets/js/app.js')}}" type="text/javascript"></script>
 <!-- end of global js -->
 @yield('footer_scripts')

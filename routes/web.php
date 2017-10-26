@@ -21,9 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 //dashboard
-
-Route::prefix('dashboard')->group(function () {
-    Route::get('calendar', function () {
-        // Matches The "/admin/users" URL
-    })->name('calendar');
+Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
+    Route::resource('calendar', 'CalendarController');
+    Route::resource('user_profile', 'UserController');
+    Route::resource('new_user', 'NewUserController');
 });

@@ -56,7 +56,7 @@ var paths = {
     'fancybox': vendors + 'fancybox/',
     'gmaps': vendors + 'gmaps/',
     'holderjs': vendors + 'holderjs/',
-    'jquery': vendors + 'jquery/',
+    'jquery': vendors + 'jquery/dist/',
     'inputmask': vendors + 'jquery.inputmask/dist/',
     'knob': vendors + 'jquery-knob/js/',
     'select2': vendors + 'select2/dist/',
@@ -326,8 +326,12 @@ mix.copy(paths.clockpicker + 'bootstrap-clockpicker.min.js', destVendors + 'cloc
 mix.copy(paths.daterangepicker + 'daterangepicker.js', destVendors + 'daterangepicker/js');
 mix.copy(paths.daterangepicker + 'daterangepicker.css', destVendors + 'daterangepicker/css');
 
+
+//::::::::::::::::::::Quarantine
+
 // metis menu
-mix.copy(srcJs + 'metisMenu.js', destJs);
+
+mix.copy(paths.metisMenu + 'metisMenu.js', destJs);
 
 // jquery file upload
 mix.copy(paths.fileUpload + 'css/jquery.fileupload.css', destVendors + 'blueimp-file-upload/css');
@@ -521,6 +525,9 @@ mix.copy(paths.jvectormap + 'jquery-jvectormap-1.2.2.css', destVendors + 'bower-
 mix.copy(paths.jvectormap + 'jquery-jvectormap-1.2.2.min.js', destVendors + 'bower-jvectormap/js/jquery-jvectormap-1.2.2.min.js');
 mix.copy(paths.jvectormap + 'jquery-jvectormap-world-mill-en.js', destVendors + 'bower-jvectormap/js/jquery-jvectormap-world-mill-en.js');
 
+//jquery
+mix.copy(paths.jquery + '/jquery.min.js', destVendors + 'jquery/js/jquery.min.js');
+
 //jvector map
 mix.copy(paths.jqvmap + 'dist/jquery.vmap.js', destVendors + 'jqvmap/js');
 mix.copy(paths.jqvmap + 'dist/jqvmap.css', destVendors + 'jqvmap/css');
@@ -552,10 +559,12 @@ mix.copy(paths.maxlength + 'bootstrap-maxlength.js', destVendors + 'bootstrap-ma
 mix.copy(paths.magnify + 'css/bootstrap-magnify.min.css', destVendors + 'bootstrap-magnify/css');
 mix.copy(paths.magnify + 'js/bootstrap-magnify.js', destVendors + 'bootstrap-magnify/js');
 
+//::::::::::::::::::::Quarantine
 
+/*
 // session timeout page
 mix.copy(srcJs + 'jquery.sessionTimeout.min.js', destJs);
-
+*/
 // x-editable
 mix.copy(paths.xeditable + 'bootstrap3-editable/css/bootstrap-editable.css', destVendors + 'x-editable/css');
 mix.copy(paths.xeditable + 'bootstrap3-editable/js/bootstrap-editable.js', destVendors + 'x-editable/js');
@@ -591,21 +600,25 @@ mix.copy(paths.holderjs + 'holder.min.js', destJs);
 // wow
 mix.copy(paths.wow + 'wow.min.js', destVendors + 'wow/js');
 
+
+/*
+
 //sass compilation
 mix.sass('node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss', destCss + 'bootstrap.css');
-/*
+mix.sass('node_modules/bootstrap-sass/assets/stylesheets/_buttons.scss', destCss + 'buttons_sass.css').options({
+    processCssUrls: false
+}); 
+
+
 mix.sass(resourcesAssets + 'sass/bootstrap/bootstrap.scss', destCss + 'bootstrap.css').options({
     processCssUrls: false
 });
 mix.sass(resourcesAssets + 'sass/buttons/buttons.scss', destCss + 'buttons_sass.css').options({
     processCssUrls: false
-});
-mix.sass(resourcesAssets + 'sass/custom.scss', destCss + 'custom.css').options({
-    processCssUrls: false
-});
+}); 
+mix.sass(resourcesAssets + 'sass/custom.scss', destCss + 'custom.css');
+
 */
-
-
 //copy end
 
 // Custom Styles
@@ -613,15 +626,15 @@ mix.sass(resourcesAssets + 'sass/custom.scss', destCss + 'custom.css').options({
 mix.combine(
     [
         'public/assets/css/bootstrap.css',
-        'resources/assets/css/font-awesome.min.css',
-        'resources/assets/css/custom_css/metisMenu.css'
+        paths.fontawesome + 'font-awesome.min.css',
+        paths.metisMenu + 'metisMenu.css'
     ], destCss + 'app.css');
 
 
 // all global js files into app.js
 mix.combine(
     [
-        'resources/assets/js/jquery.min.js',
+        'resources/assets/jquery/js/jquery.min.js',
         'resources/assets/vendors/jquery-ui/jquery-ui.min.js',
         'resources/assets/js/bootstrap.min.js',
         'resources/assets/js/custom_js/leftmenu.js',
@@ -629,3 +642,4 @@ mix.combine(
         'resources/assets/js/custom_js/rightside_bar.js',
         'resources/assets/vendors/holderjs/holder.min.js'
     ], destJs + 'app.js');
+

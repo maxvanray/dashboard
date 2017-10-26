@@ -141,6 +141,7 @@
 {{-- page level scripts --}}
 @section('footer_scripts')
     <!-- begining of page level js -->
+    
     <script type="text/javascript" src="{{asset('assets/vendors/moment/js/moment.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/vendors/fullcalendar/js/fullcalendar.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/vendors/iCheck/js/icheck.js')}}"></script>
