@@ -292,7 +292,7 @@
                              height="35" alt="User Image">
                         <div class="riot">
                             <div>
-                                Natali
+                                {{ $user->name }}
                                 <span>
                                         <i class="caret"></i>
                                     </span>
@@ -303,7 +303,7 @@
                         <!-- User image -->
                         <li class="user-header">
                             <img src="{{asset('assets/img/authors/avatar1.jpg')}}" class="img-circle" alt="User Image">
-                            <p> Nataliapery</p>
+                            <p> {{ $user->name }}</p>
                         </li>
                         <!-- Menu Body -->
                         <li class="p-t-3"><a href="{{ URL :: to('user_profile') }}"> <i class="fa fa-fw fa-user"></i> My
@@ -350,7 +350,7 @@
                         </a>
                         <div class="content-profile">
                             <h4 class="media-heading">
-                                Nataliapery
+                                {{ $user->name }}
                             </h4>
                             <ul class="icon-list">
                                 <li>
@@ -1007,7 +1007,7 @@
 </div>
 <!-- wrapper-->
 <!-- global js -->
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="{{asset('assets/vendors/jquery/js/jquery.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/app.js')}}" type="text/javascript"></script>
 <!-- end of global js -->
 @yield('footer_scripts')

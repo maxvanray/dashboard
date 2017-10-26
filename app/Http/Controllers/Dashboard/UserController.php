@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class UserController extends Controller
 {
@@ -14,7 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('dashboard/user_profile');
+        $user = User::find(1);
+        //return $user;
+        return view('dashboard/user_profile', ['user' => $user]);
     }
 
     /**

@@ -48,8 +48,8 @@
                                     </div>
                                 </div>
                                 <div class="profile_user">
-                                    <h3 class="user_name_max">Nataliapery</h3>
-                                    <p>nataliaperye@sf.com</p>
+                                    <h3 class="user_name_max">{{ $user->name }}</h3>
+                                    <p>{{ $user->email }}</p>
                                     <span class="fa-stack faceb fa-lg">
                                          <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-stack-1x fa-facebook fa-inverse"></i>
