@@ -57,7 +57,7 @@
                         <div class="panel-body">
                             <!-- errors -->
                             <!--main content-->
-                            <form id="adduser_form" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                            <form id="adduser_form" method="POST" enctype="multipart/form-data" class="form-horizontal" action="{{ @route('edit_user.store') }}">
                                 <!-- CSRF Token -->
                                 <input type="hidden" name="_token"/>
                                 <div id="pager_wizard">
@@ -84,7 +84,7 @@
                                                 <div class="col-sm-10">
                                                     <input id="first_name" name="first_name" type="text"
                                                            placeholder="First Name" class="form-control required"
-                                                           value="Nataliapery"/>
+                                                           value="{{ $user->first_name }}"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -93,7 +93,7 @@
                                                 <div class="col-sm-10">
                                                     <input id="last_name" name="last_name" type="text"
                                                            placeholder="Last Name" class="form-control required"
-                                                           value="Schmeler"/>
+                                                           value="{{ $user->last_name }}"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -101,7 +101,7 @@
                                                 <div class="col-sm-10">
                                                     <input id="email" name="email" placeholder="E-mail" type="text"
                                                            class="form-control required email"
-                                                           value="nataliaperye@sf.com"/>
+                                                           value="{{ $user->email }}"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -127,7 +127,7 @@
                                                 <label for="dob" class="col-sm-2 control-label">Date of Birth</label>
                                                 <div class="col-sm-10">
                                                     <input id="dob" name="dob" type="text" class="form-control"
-                                                           placeholder="dd/mm/yyyy"/>
+                                                           placeholder="{{ $user->dob }}"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -160,7 +160,7 @@
                                                 </label>
                                                 <div class="col-sm-10">
                                                     <textarea name="bio" id="bio" class="form-control resize_vertical"
-                                                              rows="4">Iam Nataliapery Schmeler</textarea>
+                                                              rows="4">{{ $user->last_name }}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -171,9 +171,9 @@
                                                     <select class="form-control select21" id="gender"
                                                             title="Select Gender..." name="gender">
                                                         <option disabled>Select Gender</option>
-                                                        <option value="male">MALE</option>
-                                                        <option value="female" selected>FEMALE</option>
-                                                        <option value="other">OTHER</option>
+                                                        <option value="Male" {{ $user->gender === 'Male' ? 'selected' : '' }} >MALE</option>
+                                                        <option value="Female" {{ $user->gender === 'Female' ? 'selected' : '' }}>FEMALE</option>
+                                                        <option value="Other" {{ $user->gender === 'Other' ? 'selected' : '' }}>OTHER</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -248,7 +248,69 @@
                                             <div class="form-group ">
                                                 <label for="state" class="col-sm-2 control-label">State </label>
                                                 <div class="col-sm-10">
-                                                    <input id="state" name="state" type="text" class="form-control"/>
+                                                    <select class="select21 form-control" name="state" id="state">
+                                                        <optgroup label="Alaskan/Hawaiian Time Zone">
+                                                            <option>Select Country</option>
+                                                            <option value="AK">Alaska</option>
+                                                            <option value="HI">Hawaii</option>
+                                                        </optgroup>
+                                                        <optgroup label="Pacific Time Zone">
+                                                            <option value="CA">California</option>
+                                                            <option value="NV">Nevada</option>
+                                                            <option value="OR">Oregon</option>
+                                                            <option value="WA">Washington</option>
+                                                        </optgroup>
+                                                        <optgroup label="Mountain Time Zone">
+                                                            <option value="AZ">Arizona</option>
+                                                            <option value="CO">Colorado</option>
+                                                            <option value="ID">Idaho</option>
+                                                            <option value="MT">Montana</option>
+                                                            <option value="NE">Nebraska</option>
+                                                            <option value="NM">New Mexico</option>
+                                                            <option value="ND">North Dakota</option>
+                                                            <option value="UT">Utah</option>
+                                                            <option value="WY">Wyoming</option>
+                                                        </optgroup>
+                                                        <optgroup label="Central Time Zone">
+                                                            <option value="AL">Alabama</option>
+                                                            <option value="AR">Arkansas</option>
+                                                            <option value="IL">Illinois</option>
+                                                            <option value="IA">Iowa</option>
+                                                            <option value="KS">Kansas</option>
+                                                            <option value="KY">Kentucky</option>
+                                                            <option value="LA">Louisiana</option>
+                                                            <option value="MN">Minnesota</option>
+                                                            <option value="MS">Mississippi</option>
+                                                            <option value="MO">Missouri</option>
+                                                            <option value="OK">Oklahoma</option>
+                                                            <option value="SD">South Dakota</option>
+                                                            <option value="TX">Texas</option>
+                                                            <option value="TN">Tennessee</option>
+                                                            <option value="WI">Wisconsin</option>
+                                                        </optgroup>
+                                                        <optgroup label="Eastern Time Zone">
+                                                            <option value="CT">Connecticut</option>
+                                                            <option value="DE">Delaware</option>
+                                                            <option value="FL">Florida</option>
+                                                            <option value="GA">Georgia</option>
+                                                            <option value="IN">Indiana</option>
+                                                            <option value="ME">Maine</option>
+                                                            <option value="MD">Maryland</option>
+                                                            <option value="MA">Massachusetts</option>
+                                                            <option value="MI">Michigan</option>
+                                                            <option value="NH">New Hampshire</option>
+                                                            <option value="NJ">New Jersey</option>
+                                                            <option value="NY">New York</option>
+                                                            <option value="NC">North Carolina</option>
+                                                            <option value="OH">Ohio</option>
+                                                            <option value="PA">Pennsylvania</option>
+                                                            <option value="RI">Rhode Island</option>
+                                                            <option value="SC">South Carolina</option>
+                                                            <option value="VT">Vermont</option>
+                                                            <option value="VA">Virginia</option>
+                                                            <option value="WV">West Virginia</option>
+                                                        </optgroup>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group required">

@@ -47,11 +47,33 @@
                     </div>
                     <div class="box-body">
                         <div id='external-events'>
-                            <div class='external-event palette-warning'>Team Out</div>
-                            <div class='external-event palette-primary'>Product Seminar</div>
-                            <div class='external-event palette-danger'>Client Meeting</div>
-                            <div class='external-event palette-info'>Repeating Event</div>
-                            <div class='external-event palette-success'>Anniversary Celebrations</div>
+
+
+
+                            @foreach($events as $event)
+
+                            <div data-event='{{ $event->id }}' class='external-event 
+                            palette-<?php 
+                            switch($event->type){
+                                case '1':
+                                     echo 'warning';
+                                break;
+                                case '2':
+                                    echo 'primary';
+                                break;
+                                case '3':
+                                    echo 'danger';
+                                break;
+                                case '4':
+                                    echo 'info';
+                                break;
+                                default:
+                                    echo 'success';
+                            } ?>
+                            '>{{ $event->name }}</div>
+
+                            @endforeach
+
                             <p class="well no-border no-radius">
                                 <input type='checkbox' class="custom_icheck" id='drop-remove'/>
                                 <label for='drop-remove'>remove after drop</label>

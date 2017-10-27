@@ -71,13 +71,13 @@
                                 <br/>
                                 <div class="panel panel-widget panel-default">
                                     <div class="panel-heading">
-                                        <span class="panel-title"> <i class="icon-chart icons"></i> Project Status<i
+                                        <span class="panel-title"> <i class="icon-chart icons"></i> Status<i
                                                 class="icon-settings icons pull-right"></i></span>
                                     </div>
                                     <div class="panel-body profile_status">
                                         <div>
                                             <p>
-                                                <strong>Admin Template</strong>
+                                                <strong>On Time</strong>
                                                 <small class="pull-right text-muted">
                                                     40% Complete
                                                 </small>
@@ -91,37 +91,12 @@
                                                 </span>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div>
-                                            <p>
-                                                <strong>Wordpress Theme</strong>
-                                                <small class="pull-right text-muted">
-                                                    60% Complete
-                                                </small>
-                                            </p>
                                             <div class="progress progress-xs progress-striped active">
-                                                <div class="progress-bar progress-bar-warning" role="progressbar"
-                                                     aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                                                     style="width: 60%">
+                                                <div class="progress-bar progress-bar-success" role="progressbar"
+                                                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+                                                     style="width: 40%">
                                                         <span class="sr-only">
-                                                    60% Complete (warning)
-                                                </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <p>
-                                                <strong>Laravel Project</strong>
-                                                <small class="pull-right text-muted">
-                                                    80% Complete
-                                                </small>
-                                            </p>
-                                            <div class="progress progress-xs progress-striped active">
-                                                <div class="progress-bar progress-bar-info" role="progressbar"
-                                                     aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                     style="width: 80%">
-                                                        <span class="sr-only">
-                                                    80% Complete (info)
+                                                    Text -dropdown:user- on -dropdown:activity:checkin-
                                                 </span>
                                                 </div>
                                             </div>
@@ -140,13 +115,13 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#followers" data-toggle="tab">
-                                                    <strong>Followers</strong>
+                                                <a href="#tab-events" data-toggle="tab">
+                                                    <strong>My Events</strong>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#tab-events" data-toggle="tab">
-                                                    <strong>My Events</strong>
+                                                <a href="#staff" data-toggle="tab">
+                                                    <strong>Staff</strong>
                                                 </a>
                                             </li>
                                         </ul>
@@ -288,199 +263,6 @@
                                                 </div>
                                             </div>
                                             <!-- tab-pane -->
-                                            <div class="tab-pane" id="followers">
-                                                <div class="row m-t-l-10">
-                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <div class="img">
-                                                                    <a href="#">
-                                                                        <img class="media-object thumbnail img-responsive"
-                                                                             height="60" width="60"
-                                                                             src="{{asset('assets/img/authors/avatar2.jpg')}}"
-                                                                             alt="avatar image">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <div class="details">
-                                                                    <div class="name">
-                                                                        <a href="#">Scarlett Johansson</a>
-                                                                    </div>
-                                                                    <div class="time">
-                                                                        <i class="icon-clock icons"></i> Last online: 7
-                                                                        minutes ago
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <div class="img">
-                                                                    <a href="#">
-                                                                        <img class="media-object thumbnail img-responsive"
-                                                                             src="{{asset('assets/img/authors/avatar.jpg')}}"
-                                                                             alt="avatar image" height="60" width="60">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <div class="details">
-                                                                    <div class="name">
-                                                                        <a href="#">Mila Kunis</a>
-                                                                    </div>
-                                                                    <div class="time online">
-                                                                        <i class="icon-check icons"></i> Online
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <div class="img">
-                                                                    <a href="#">
-                                                                        <img class="media-object thumbnail img-responsive"
-                                                                             src="{{asset('assets/img/authors/avatar4.jpg')}}"
-                                                                             alt="avatar image" height="60" width="60">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <div class="details">
-                                                                    <div class="name">
-                                                                        <a href="#">Ryan Gossling</a>
-                                                                    </div>
-                                                                    <div class="time online">
-                                                                        <i class="icon-check icons"></i> Online
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <div class="img">
-                                                                    <a href="#">
-                                                                        <img class="media-object thumbnail img-responsive"
-                                                                             src="{{asset('assets/img/authors/avatar3.jpg')}}"
-                                                                             alt="avatar image" height="60" width="60">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <div class="details">
-                                                                    <div class="name">
-                                                                        <a href="#">Robert Downey Jr.</a>
-                                                                    </div>
-                                                                    <div class="time">
-                                                                        <i class="icon-clock icons"></i> Last online:
-                                                                        Tuesday
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <div class="img">
-                                                                    <a href="#">
-                                                                        <img class="media-object thumbnail img-responsive"
-                                                                             src="{{asset('assets/img/authors/avataraa.jpg')}}"
-                                                                             alt="avatar image" height="60" width="60">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <div class="details">
-                                                                    <div class="name">
-                                                                        <a href="#">Emma Watson</a>
-                                                                    </div>
-                                                                    <div class="time">
-                                                                        <i class="icon-clock icons"></i> Last online: 1
-                                                                        week ago
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <div class="img">
-                                                                    <a href="#">
-                                                                        <img class="media-object thumbnail img-responsive"
-                                                                             src="{{asset('assets/img/authors/avatar7.jpg')}}"
-                                                                             alt="avatar image" height="60" width="60">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <div class="details">
-                                                                    <div class="name">
-                                                                        <a href="#">George Clooney</a>
-                                                                    </div>
-                                                                    <div class="time">
-                                                                        <i class="icon-clock icons"></i> Last online: 1
-                                                                        month ago
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <div class="img">
-                                                                    <a href="#">
-                                                                        <img class="media-object thumbnail img-responsive"
-                                                                             src="{{asset('assets/img/authors/avatar3.jpg')}}"
-                                                                             alt="avatar image" height="60" width="60">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <div class="details">
-                                                                    <div class="name">
-                                                                        <a href="#">Mila Kunis</a>
-                                                                    </div>
-                                                                    <div class="time online">
-                                                                        <i class="icon-check icons"></i> Online
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
-                                                        <div class="row">
-                                                            <div class="col-md-3">
-                                                                <div class="img">
-                                                                    <a href="#">
-                                                                        <img class="media-object thumbnail img-responsive"
-                                                                             src="{{asset('assets/img/authors/avatar.jpg')}}"
-                                                                             alt="avatar image" height="60" width="60">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-9">
-                                                                <div class="details">
-                                                                    <div class="name">
-                                                                        <a href="#">Ryan Gossling</a>
-                                                                    </div>
-                                                                    <div class="time online">
-                                                                        <i class="icon-check icons"></i> Online
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="tab-pane" id="tab-events">
                                                 <div class="events">
                                                     <h5 class="lg-title m-b-15">Upcoming Events</h5>
@@ -718,6 +500,200 @@
                                                     <!-- row -->
                                                 </div>
                                                 <!-- events -->
+                                            </div>
+
+                                            <div class="tab-pane" id="staff">
+                                                <div class="row m-t-l-10">
+                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="img">
+                                                                    <a href="#">
+                                                                        <img class="media-object thumbnail img-responsive"
+                                                                             height="60" width="60"
+                                                                             src="{{asset('assets/img/authors/avatar2.jpg')}}"
+                                                                             alt="avatar image">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <div class="details">
+                                                                    <div class="name">
+                                                                        <a href="#">Scarlett Johansson</a>
+                                                                    </div>
+                                                                    <div class="time">
+                                                                        <i class="icon-clock icons"></i> Last online: 7
+                                                                        minutes ago
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="img">
+                                                                    <a href="#">
+                                                                        <img class="media-object thumbnail img-responsive"
+                                                                             src="{{asset('assets/img/authors/avatar.jpg')}}"
+                                                                             alt="avatar image" height="60" width="60">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <div class="details">
+                                                                    <div class="name">
+                                                                        <a href="#">Mila Kunis</a>
+                                                                    </div>
+                                                                    <div class="time online">
+                                                                        <i class="icon-check icons"></i> Online
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="img">
+                                                                    <a href="#">
+                                                                        <img class="media-object thumbnail img-responsive"
+                                                                             src="{{asset('assets/img/authors/avatar4.jpg')}}"
+                                                                             alt="avatar image" height="60" width="60">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <div class="details">
+                                                                    <div class="name">
+                                                                        <a href="#">Ryan Gossling</a>
+                                                                    </div>
+                                                                    <div class="time online">
+                                                                        <i class="icon-check icons"></i> Online
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="img">
+                                                                    <a href="#">
+                                                                        <img class="media-object thumbnail img-responsive"
+                                                                             src="{{asset('assets/img/authors/avatar3.jpg')}}"
+                                                                             alt="avatar image" height="60" width="60">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <div class="details">
+                                                                    <div class="name">
+                                                                        <a href="#">Robert Downey Jr.</a>
+                                                                    </div>
+                                                                    <div class="time">
+                                                                        <i class="icon-clock icons"></i> Last online:
+                                                                        Tuesday
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="img">
+                                                                    <a href="#">
+                                                                        <img class="media-object thumbnail img-responsive"
+                                                                             src="{{asset('assets/img/authors/avataraa.jpg')}}"
+                                                                             alt="avatar image" height="60" width="60">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <div class="details">
+                                                                    <div class="name">
+                                                                        <a href="#">Emma Watson</a>
+                                                                    </div>
+                                                                    <div class="time">
+                                                                        <i class="icon-clock icons"></i> Last online: 1
+                                                                        week ago
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="img">
+                                                                    <a href="#">
+                                                                        <img class="media-object thumbnail img-responsive"
+                                                                             src="{{asset('assets/img/authors/avatar7.jpg')}}"
+                                                                             alt="avatar image" height="60" width="60">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <div class="details">
+                                                                    <div class="name">
+                                                                        <a href="#">George Clooney</a>
+                                                                    </div>
+                                                                    <div class="time">
+                                                                        <i class="icon-clock icons"></i> Last online: 1
+                                                                        month ago
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="img">
+                                                                    <a href="#">
+                                                                        <img class="media-object thumbnail img-responsive"
+                                                                             src="{{asset('assets/img/authors/avatar3.jpg')}}"
+                                                                             alt="avatar image" height="60" width="60">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <div class="details">
+                                                                    <div class="name">
+                                                                        <a href="#">Mila Kunis</a>
+                                                                    </div>
+                                                                    <div class="time online">
+                                                                        <i class="icon-check icons"></i> Online
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-lg-6 col-sm-6 bord">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="img">
+                                                                    <a href="#">
+                                                                        <img class="media-object thumbnail img-responsive"
+                                                                             src="{{asset('assets/img/authors/avatar.jpg')}}"
+                                                                             alt="avatar image" height="60" width="60">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <div class="details">
+                                                                    <div class="name">
+                                                                        <a href="#">Ryan Gossling</a>
+                                                                    </div>
+                                                                    <div class="time online">
+                                                                        <i class="icon-check icons"></i> Online
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <!-- tab-pane -->
                                         </div>

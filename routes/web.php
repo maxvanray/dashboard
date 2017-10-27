@@ -24,6 +24,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
     Route::resource('calendar', 'CalendarController');
     Route::resource('user_profile', 'UserController');
-    Route::get('edit_user', 'UserController@edit')->name('edit_user');
+    Route::resource('edit_user', 'EditUserController');
     Route::resource('new_user', 'NewUserController');
 });

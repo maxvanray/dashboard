@@ -275,6 +275,10 @@ class ComposerStaticInite0f207ac8813fafc325c3303e473aec8
         ),
         'M' => 
         array (
+            'Monarobase\\CountryList' => 
+            array (
+                0 => __DIR__ . '/..' . '/monarobase/country-list/src',
+            ),
             'Mockery' => 
             array (
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
@@ -303,13 +307,16 @@ class ComposerStaticInite0f207ac8813fafc325c3303e473aec8
     public static $classMap = array (
         'App\\Activities' => __DIR__ . '/../..' . '/app/Activities.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Event' => __DIR__ . '/../..' . '/app/Event.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\Dashboard\\ActivitiesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/ActivitiesController.php',
         'App\\Http\\Controllers\\Dashboard\\CalendarController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/CalendarController.php',
+        'App\\Http\\Controllers\\Dashboard\\EditUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/EditUserController.php',
         'App\\Http\\Controllers\\Dashboard\\NewUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/NewUserController.php',
         'App\\Http\\Controllers\\Dashboard\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/UserController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
@@ -1831,6 +1838,10 @@ class ComposerStaticInite0f207ac8813fafc325c3303e473aec8
         'Mockery\\Undefined' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Undefined.php',
         'Mockery\\VerificationDirector' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationDirector.php',
         'Mockery\\VerificationExpectation' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/VerificationExpectation.php',
+        'Monarobase\\CountryList\\CountryList' => __DIR__ . '/..' . '/monarobase/country-list/src/Monarobase/CountryList/CountryList.php',
+        'Monarobase\\CountryList\\CountryListFacade' => __DIR__ . '/..' . '/monarobase/country-list/src/Monarobase/CountryList/CountryListFacade.php',
+        'Monarobase\\CountryList\\CountryListServiceProvider' => __DIR__ . '/..' . '/monarobase/country-list/src/Monarobase/CountryList/CountryListServiceProvider.php',
+        'Monarobase\\CountryList\\CountryNotFoundException' => __DIR__ . '/..' . '/monarobase/country-list/src/Monarobase/CountryList/CountryNotFoundException.php',
         'Monolog\\ErrorHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/ErrorHandler.php',
         'Monolog\\Formatter\\ChromePHPFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/ChromePHPFormatter.php',
         'Monolog\\Formatter\\ElasticaFormatter' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Formatter/ElasticaFormatter.php',
