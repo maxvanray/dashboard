@@ -36,6 +36,7 @@ class User extends Authenticatable
         'linkedin',
         'username',
         'user_id',
+        'last_login',
 
     ];
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Activities;
 
 class UserController extends Controller
 {
@@ -16,8 +17,12 @@ class UserController extends Controller
     public function index()
     {
         $user = User::find(1);
-        //return $user;
-        return view('dashboard/user_profile', ['user' => $user]);
+        $activities = Activities::where('user_id', '=', 1)->get();
+
+        return view('dashboard/user_profile', [
+            'user' => $user, 
+            'activities' => $activities
+        ]);
     }
 
     /**
@@ -58,9 +63,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id='')
     {
-        //
+        $user = User::find(1);
+        //return $user;
+        return view('dashboard/edit_user', ['user' => $user]);
     }
 
     /**

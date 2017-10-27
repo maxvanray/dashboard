@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class CalendarController extends Controller
 {
@@ -14,7 +15,9 @@ class CalendarController extends Controller
      */
     public function index()
     {
-        return view('dashboard/calendar');
+        $user = User::find(1);
+
+        return view('dashboard/calendar', ['user' => $user]);
     }
 
     /**

@@ -306,7 +306,7 @@
                             <p> {{ $user->name }}</p>
                         </li>
                         <!-- Menu Body -->
-                        <li class="p-t-3"><a href="{{ URL :: to('user_profile') }}"> <i class="fa fa-fw fa-user"></i> My
+                        <li class="p-t-3"><a href="{{ @route('user_profile.index') }}"> <i class="fa fa-fw fa-user"></i> My
                                 Profile </a>
                         </li>
                         <li role="presentation"></li>
@@ -354,7 +354,7 @@
                             </h4>
                             <ul class="icon-list">
                                 <li>
-                                    <a href="{{ URL::to('users') }} ">
+                                    <a href="{{ @route('user_profile.index') }} ">
                                         <i class="fa fa-fw fa-user"></i>
                                     </a>
                                 </li>
@@ -1007,7 +1007,7 @@
 </div>
 <!-- wrapper-->
 <!-- global js -->
-<script src="{{asset('assets/vendors/jquery/js/jquery.min.js')}}" type="text/javascript"></script>
+<?php  /* <script src="{{asset('assets/vendors/jquery/js/jquery.min.js')}}" type="text/javascript"></script> */ ?>
 <script src="{{asset('assets/js/app.js')}}" type="text/javascript"></script>
 <!-- end of global js -->
 @yield('footer_scripts')

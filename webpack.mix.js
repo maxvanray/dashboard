@@ -625,8 +625,8 @@ mix.sass(resourcesAssets + 'sass/custom.scss', destCss + 'custom.css');
 //black color scheme
 mix.combine(
     [
-        'public/assets/css/bootstrap.css',
-        paths.fontawesome + 'font-awesome.min.css',
+        paths.bootstrap + 'css/bootstrap.min.css',
+        paths.fontawesome + 'css/font-awesome.min.css',
         paths.metisMenu + 'metisMenu.css'
     ], destCss + 'app.css');
 
@@ -634,12 +634,12 @@ mix.combine(
 // all global js files into app.js
 mix.combine(
     [
-        'resources/assets/jquery/js/jquery.min.js',
-        'resources/assets/vendors/jquery-ui/jquery-ui.min.js',
-        'resources/assets/js/bootstrap.min.js',
+        paths.jquery + 'jquery.min.js',
+        paths.jqueryui + 'jquery-ui.min.js',
+        paths.bootstrap + 'js/bootstrap.min.js',
         'resources/assets/js/custom_js/leftmenu.js',
-        'resources/assets/js/metisMenu.js',
+        paths.metisMenu + 'metisMenu.js',
         'resources/assets/js/custom_js/rightside_bar.js',
-        'resources/assets/vendors/holderjs/holder.min.js'
+        paths.holderjs + 'holder.js'
     ], destJs + 'app.js');
 

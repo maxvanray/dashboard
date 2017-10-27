@@ -91,6 +91,7 @@ class RegisterController extends Controller
             'linkedin' => '',
             'username' => 'fbeans',
             'user_id' => 8675309,
+            'last_login' => \Carbon\Carbon::now(),
 
             'name' => $data['name'],
             'email' => $data['email'],

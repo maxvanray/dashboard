@@ -37,6 +37,8 @@ class CreateUsersTable extends Migration
             $table->string('instagram');
             $table->string('snapchat');
             $table->string('linkedin');
+
+            $table->date('last_login');
             $table->rememberToken();
             $table->timestamps();
         });
