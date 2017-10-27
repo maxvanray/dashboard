@@ -8,6 +8,7 @@
 
 {{-- page level styles --}}
 @section('header_styles')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!--page level css -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/fullcalendar/css/fullcalendar.css')}}"/>
     <link rel="stylesheet" media='print' type="text/css" href="{{asset('assets/vendors/fullcalendar/css/fullcalendar.print.css')}}">
@@ -56,19 +57,22 @@
                             palette-<?php 
                             switch($event->type){
                                 case '1':
-                                     echo 'warning';
+                                     echo 'primary';
                                 break;
                                 case '2':
-                                    echo 'primary';
+                                    echo 'success';
                                 break;
                                 case '3':
-                                    echo 'danger';
-                                break;
-                                case '4':
                                     echo 'info';
                                 break;
+                                case '4':
+                                    echo 'warning';
+                                break;
+                                case '5':
+                                    echo 'danger';
+                                break;
                                 default:
-                                    echo 'success';
+                                    echo 'default';
                             } ?>
                             '>{{ $event->name }}</div>
 
@@ -119,26 +123,30 @@
                                 </button>
                                 <ul class="dropdown-menu pull-right" id="color-chooser">
                                     <li>
-                                        <a class="palette-primary" href="#">Primary</a>
+                                        <a class="palette-primary" href="#">1 - Primary</a>
                                     </li>
                                     <li>
-                                        <a class="palette-success" href="#">Success</a>
+                                        <a class="palette-success" href="#">2 - Success</a>
                                     </li>
                                     <li>
-                                        <a class="palette-info" href="#">Info</a>
+                                        <a class="palette-info" href="#">3 - Info</a>
                                     </li>
                                     <li>
-                                        <a class="palette-warning" href="#">warning</a>
+                                        <a class="palette-warning" href="#">4 - warning</a>
                                     </li>
                                     <li>
-                                        <a class="palette-danger" href="#">Danger</a>
+                                        <a class="palette-danger" href="#">5 - Danger</a>
                                     </li>
                                     <li>
-                                        <a class="palette-default" href="#">Default</a>
+                                        <a class="palette-default" href="#">6 - Default</a>
                                     </li>
                                 </ul>
                             </div>
                             <!-- /btn-group -->
+                        </div>
+
+                        <div class="input-group" style="width: 100%">
+                            <input type="textarea" id="new-event-description" class="form-control" placeholder="Event Description...">
                         </div>
                         <!-- /input-group -->
                     </div>

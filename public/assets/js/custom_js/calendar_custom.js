@@ -1,4 +1,3 @@
-
 "use strict";
 
 $(document).ready(function () {
@@ -127,6 +126,9 @@ $(document).ready(function () {
         e.preventDefault();
         //Get value and make sure it is not null
         var val = $("#new-event").val();
+        var desc = $("#new-event-description").val();
+        var type = $("#color-chooser-btn").text().trim();
+
         if (val.length == 0) {
             return;
         }
@@ -140,6 +142,21 @@ $(document).ready(function () {
         }).addClass("external-event");
         event.html(val);
         $('#external-events').prepend(event);
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+           type:'POST',
+           url:'/dashboard/event',
+           data:{name:val, description:desc, type:type},
+           success:function(data){
+              alert(data.success);
+           }
+        });
 
         //Add draggable funtionality
         ini_events(event);

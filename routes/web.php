@@ -26,4 +26,5 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
     Route::resource('user_profile', 'UserController');
     Route::resource('edit_user', 'EditUserController');
     Route::resource('new_user', 'NewUserController');
+    Route::resource('event', 'EventController');
 });
