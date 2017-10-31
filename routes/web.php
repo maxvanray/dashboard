@@ -28,3 +28,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
     Route::resource('new_user', 'NewUserController');
     Route::resource('event', 'EventController');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

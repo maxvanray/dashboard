@@ -125,21 +125,38 @@ $(document).ready(function () {
     });
     $("#add-new-event").on('click', function (e) {
         e.preventDefault();
-        //Get value and make sure it is not null
+        //Get values and make sure event title it is not null
         var val = $("#new-event").val();
+        var description = $("#new-event-description").val();
+        var type = $('#color-chooser-btn').text().trim();
         if (val.length == 0) {
             return;
         }
-
         //Create event
         var event = $("<div />");
         event.css({
             "background-color": currColor,
-            "border-color": currColor,
+            "border-color": currColor,  
             "color": "#fff"
         }).addClass("external-event");
         event.html(val);
         $('#external-events').prepend(event);
+        //Save Event
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+           type:'POST',
+           url:'/dashboard/event',
+           data:{name:val, description:description, type:type},
+           success:function(data){
+              alert(data.success);
+           }
+        });
+
+
 
         //Add draggable funtionality
         ini_events(event);

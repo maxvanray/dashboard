@@ -29,25 +29,30 @@
                         <h2 class="text-center">
                             Login
                             <small> with</small>
-                            <img src="{{asset('assets/img/pages/logo.png')}}" alt="logo">
+                            <img src="{{asset('assets/img/logo.png')}}" alt="logo">
                         </h2>
                     </div>
                 </div>
             </div>
             <div class="row row-bg-color">
-                <div class="col-md-8 core-login">
-                    <form class="form-horizontal" action="{{URL::to('index')}}" id="authentication">
+                <div class="col-md-12 core-login">
+                    <form class="form-horizontal" action="{{ route('login') }}" id="authentication">
                         <!-- CSRF Token -->
-                        <input type="hidden" name="_token" value="sSAo7cToGJCJ2IBFgOpYbLNnqV5n8O4DdNG5jdez"/>
+                        {{ csrf_field() }}
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group ">
                                     <label class="control-label" for="email">EMAIL</label>
                                     <div class="input-group">
                                         <input type="text" placeholder="Email Address" class="form-control"
-                                               name="username" id="email" value=""/>
+                                               name="username" id="email" value="{{ old('email') }}" required autofocus/>
                                     </div>
                                 </div>
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="row">
@@ -56,15 +61,20 @@
                                     <label class="control-label" for="password">PASSWORD</label>
                                     <div class="input-group">
                                         <input type="password" placeholder="Password" class="form-control"
-                                               name="password" id="password"/>
+                                               name="password" id="password" required/>
                                     </div>
                                 </div>
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="form-group">
-                                <input type="checkbox" name="remember" id="remember"> &nbsp;
+                                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> &nbsp;
                             <label for="remember"> Remember Me </label>
-                            <a href="{{URL::to('forgot_password')}}" id="forgot" class="text-primary forgot1  pull-right"> Forgot Password? </a>
+                            <a href="{{ route('password.request') }}" id="forgot" class="text-primary forgot1  pull-right"> Forgot Password? </a>
                         </div>
                         <div class="form-group ">
                             <button type="submit"  class="btn btn-primary login-btn">Login</button>
@@ -74,25 +84,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-md-4">
-                    <div class="social-buttons">
-                        <p class="text-center">
-                            <label>YOU CAN ALSO LOGIN WITH</label>
-                        </p>
-                        <a class="btn btn-block btn-social btn-google-plus">
-                            <i class="fa fa-google-plus"></i> Login with Google
-                        </a>
-                        <a class="btn btn-block btn-social btn-facebook">
-                            <i class="fa fa-facebook"></i> Login with Facebook
-                        </a>
-                        <a class="btn btn-block btn-social btn-twitter">
-                            <i class="fa fa-twitter"></i> Login with Twitter
-                        </a>
-                        <a class="btn btn-block btn-social btn-linkedin">
-                            <i class="fa fa-linkedin"></i> Login with LinkedIn
-                        </a>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
