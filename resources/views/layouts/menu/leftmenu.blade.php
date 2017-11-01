@@ -1,3 +1,5 @@
+{{ $routename = Route::currentRouteName() }}
+
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="left-side sidebar-offcanvas">
     <!-- sidebar: style can be found in sidebar-->
@@ -38,24 +40,140 @@
                 </div>
             </div>
             <ul class="navigation">
+
+                <?php // ROUTENAME ?>
+                <li {!! (Request::is('location')|| Request::is('/')? 'class="active"':"") !!}>
+                    <!-- {{ $routename==='calendar.index' ? 'class="active"':"" }} -->
+                    <a href="{{ URL::to('index') }} ">
+                        <i class="menu-icon fa fa-fw fa-home"></i>
+                        <span class="mm-text "><?php echo 'ROUTENAME: '.$routename ?></span>
+                    </a>
+                </li>
+
+                <?php // DASHBOARD ?>
                 <li {!! (Request::is('index')|| Request::is('/')? 'class="active"':"") !!}>
                     <a href="{{ URL::to('index') }} ">
                         <i class="menu-icon fa fa-fw fa-home"></i>
                         <span class="mm-text ">Dashboard</span>
                     </a>
                 </li>
-                <li {!! (Request::is('index')|| Request::is('/')? 'class="active"':"") !!}>
-                    <a href="{{ URL::to('index') }} ">
-                        <i class="menu-icon fa fa-fw fa-home"></i>
-                        <span class="mm-text ">Dashboard</span>
+
+                <?php // GUESTS ?>
+                <li {!! (Request::is('users')||Request::is('addnew_user')||Request::is('user_profile.index')||Request::is('deleted_users')? 'class="active"':"") !!}>
+                    <a href="#">
+                        <i class="menu-icon fa fa-fw fa-users"></i>
+                        <span>Users</span> <span
+                                class="fa arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                            <a href="{{URL::to('users')}} ">
+                                <i class="fa fa-list" aria-hidden="true"></i> Guests
+                            </a>
+                        </li>
+                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                            <a href="{{URL::to('users')}} ">
+                                <i class="fa fa-list" aria-hidden="true"></i> Staff
+                            </a>
+                        </li>
+                        <li {!! (Request::is('addnew_user')? 'class="active"':"") !!}>
+                            <a href="{{URL::to('addnew_user')}} ">
+                                <i class="fa fa-fw fa-user"></i> Add New User
+                            </a>
+                        </li>
+                        <li {!! (Request::is('user_profile.index')? 'class="active"':"") !!}>
+                            <a href="{{ @route('user_profile.index') }} ">
+                                <i class="fa fa-fw fa-user-md"></i> View Profile
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <?php // CALENDAR ?>
+                <li {!! (Request::is('users')||Request::is('addnew_user')||Request::is('user_profile.index')||Request::is('deleted_users')? 'class="active"':"") !!}>
+                    <a href="#">
+                        <i class="menu-icon fa fa-fw fa-calendar"></i>
+                        <span>Calendar</span> <span
+                                class="fa arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                            <a href="{{URL::to('users')}} ">
+                                <i class="fa fa-calendar-o" aria-hidden="true"></i> View Calendar
+                            </a>
+                        </li>
+                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                            <a href="{{URL::to('users')}} ">
+                                <i class="fa fa-list" aria-hidden="true"></i> Event List
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <?php // LOCATION ?>
+                <li {!! (Request::is('users')||Request::is('addnew_user')||Request::is('user_profile.index')||Request::is('deleted_users')? 'class="active"':"") !!}>
+                    <a href="#">
+                        <i class="menu-icon fa fa-fw fa-location-arrow"></i>
+                        <span>Location</span> <span
+                                class="fa arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                            <a href="{{URL::to('users')}} ">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i> View Locations
+                            </a>
+                        </li>
+                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                            <a href="{{URL::to('users')}} ">
+                                <i class="fa fa-list" aria-hidden="true"></i> Add/Edit Locations
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <?php // TRAFFIC ?>
+                <li {!! (Request::is('users')||Request::is('addnew_user')||Request::is('user_profile.index')||Request::is('deleted_users')? 'class="active"':"") !!}>
+                    <a href="#">
+                        <i class="menu-icon fa fa-fw fa-line-chart"></i>
+                        <span>Traffic</span> <span
+                                class="fa arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                            <a href="{{URL::to('users')}} ">
+                                <i class="fa fa-tachometer" aria-hidden="true"></i> View Analytics
+                            </a>
+                        </li>
+                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                            <a href="{{URL::to('users')}} ">
+                                <i class="fa fa-list" aria-hidden="true"></i> View Check-in List
+                            </a>
+                        </li>
+                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                            <a href="{{URL::to('users')}} ">
+                                <i class="fa fa-barcode" aria-hidden="true"></i> Sales
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <?php // LOCKSCREEN ?>
+                <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                    <a href="{{ @route('calendar.index') }} ">
+                        <i class="menu-icon fa fa-fw fa-lock"></i>
+                        <span class="mm-text ">Lockscreen</span>
                     </a>
                 </li>
-                <li {!! (Request::is('index')|| Request::is('/')? 'class="active"':"") !!}>
-                    <a href="{{ URL::to('index') }} ">
-                        <i class="menu-icon fa fa-fw fa-home"></i>
-                        <span class="mm-text ">Dashboard</span>
+
+                <?php // LOGOUT ?>
+                <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                    <a href="{{ @route('calendar.index') }} ">
+                        <i class="menu-icon fa fa-fw fa-sign-out"></i>
+                        <span class="mm-text ">Logout</span>
                     </a>
                 </li>
+
+                
             <?php /*
                 <li {!! (Request::is('form_elements')|| Request::is('form_editors') || Request::is('form_validations')|| Request::is('form_layouts')|| Request::is('form_wizards')|| Request::is('complex_forms')|| Request::is('complex_forms2')|| Request::is('radio_checkboxes')|| Request::is('dropdowns')|| Request::is('datepicker')|| Request::is('advanceddate_pickers')|| Request::is('x-editable') ? 'class="active"' : '') !!}>
                     <a href="#">
