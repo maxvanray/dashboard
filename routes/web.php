@@ -22,11 +22,29 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //dashboard
 Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
-    Route::resource('calendar', 'CalendarController');
-    Route::resource('user_profile', 'UserController');
-    Route::resource('edit_user', 'EditUserController');
-    Route::resource('new_user', 'NewUserController');
-    Route::resource('event', 'EventController');
+
+	// Dashboard
+	Route::get('/', 'DashboardController@index')->name('dashboard');
+
+	// User
+	Route::get('/guests', 'UserController@index')->name('guests');
+	Route::get('/staff', 'UserController@index')->name('staff');
+	Route::get('/add-user', 'UserController@index');
+	Route::resource('/profile', 'UserController@index');
+
+	// Calendar
+    Route::get('calendar', 'EventController@index')->name('calendar');
+    Route::get('events', 'EventController@index')->name('events');
+
+    // Location
+    Route::get('location', 'LocationController@index')->name('location');
+    Route::get('location-list', 'LocationController@getEvents')->name('location-list');
+
+    // Traffic
+    Route::get('analytics', 'TrafficController@index')->name('analytics');
+    Route::get('check-in', 'TrafficController@checkin')->name('checkin');
+
+
 });
 
 Auth::routes();

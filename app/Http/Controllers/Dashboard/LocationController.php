@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Event;
-use App\User;
 
-class EventController extends Controller
+class LocationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,15 +14,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $user = User::find(1);
-        $events = Event::all();
-
-        return view('dashboard/calendar', ['user' => $user, 'events' => $events]);
-    }
-
-    public function getEvents()
-    {
-        return 'EVENTS';
+        //
     }
 
     /**
@@ -45,15 +35,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $event = new Event;
-
-        $event->name = $request->name;
-        $event->description = $request->description;
-        $event->type = $request->type;
-        $event->facilitator = 1;
-
-        $event->save();
-        return response()->json(['success'=>'A new event has been created.']);
+        //
     }
 
     /**
