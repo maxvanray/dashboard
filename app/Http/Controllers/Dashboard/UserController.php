@@ -19,7 +19,7 @@ class UserController extends Controller
         $user = User::find(1);
         $activities = Activities::where('user_id', '=', 1)->get();
 
-        return view('dashboard/user_profile', [
+        return view('dashboard/guests', [
             'user' => $user, 
             'activities' => $activities
         ]);
