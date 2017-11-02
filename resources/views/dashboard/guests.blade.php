@@ -41,23 +41,29 @@
                         <div class="panel-body">
                             <div class="table-responsive">
 
-                                <table class="table table-striped table-bordered table-hover" id="datatable" width="100%" border="0" cellspacing="0" cellpadding="0" summary="This is a list of the guests.">
-                                  <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Pin</th>
-                                    <th>Active </th>
-                                    <th>Edit</th>
-                                  </tr>
-                                  <tr>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                  </tr>
+                                <table id="datatable" class="table table-striped table-bordered table-hover" width="100%" border="0" cellspacing="0" cellpadding="0" summary="This is a list of the guests.">
+                                    <thead>
+                                      <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Pin</th>
+                                        <th>Active </th>
+                                        <th>Edit</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                       @foreach($guests as $guest)
+                                      <tr>
+                                        <td>{{ $guest->name }}</td>
+                                        <td><a href="mailto:{{ $guest->email }}">{{ $guest->email }}</a></td>
+                                        <td>{{ $guest->phone }}</td>
+                                        <td>{{ $guest->pin }}</td>
+                                        <td>{{ $guest->active }}</td>
+                                        <td><a href=#>Edit</a> | <a href="#">Delete</a></td>
+                                      </tr>
+                                       @endforeach
+                                    </tbody>
                                 </table>
 
                             </div>

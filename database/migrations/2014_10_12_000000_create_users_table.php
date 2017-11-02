@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('phone');
             $table->date('dob');
             $table->string('pic');
             $table->text('bio');
@@ -31,12 +32,14 @@ class CreateUsersTable extends Migration
             $table->string('city');
             $table->string('zip');
 
-            $table->string('password');
             $table->string('facebook');
             $table->string('twitter');
             $table->string('instagram');
             $table->string('snapchat');
             $table->string('linkedin');
+
+            $table->string('password');
+            $table->string('pin');
 
             $table->date('last_login');
             $table->rememberToken();

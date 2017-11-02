@@ -17,9 +17,29 @@ $factory->define(App\User::class, function (Faker $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
+    	'user_id' => 11111,
+    	'username' => str_random(10),
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'name' => $faker->firstName .' '.$faker->lastName,
         'email' => $faker->unique()->safeEmail,
+        'phone' => $faker->phoneNumber,
+        'dob' => $faker->dateTime,
+        'pic' => '0',
+        'bio' => '0',
+        'Gender' => 'M',
+        'country' => $faker->country,
+        'state' => 'NY',
+        'city' => $faker->city,
+        'zip' => str_random(7),
+        'facebook' => str_random(20),
+        'twitter' => str_random(20),
+        'instagram' => str_random(20),
+        'snapchat' => str_random(20),
+        'linkedin' => str_random(20),
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'pin' => str_random(4),
+        'last_login' => $faker->dateTime,
     ];
 });

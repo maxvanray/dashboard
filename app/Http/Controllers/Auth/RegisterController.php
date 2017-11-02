@@ -76,6 +76,7 @@ class RegisterController extends Controller
 
             'first_name' => 'Franks',
             'last_name' => 'Nbeans',
+            'phone' => '',
             'dob' => \Carbon\Carbon::now(),
             'pic' => 'Y',
             'bio' => 'This is the user bio',
@@ -96,6 +97,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'pin' => '1234',
         ]);
     }
 }

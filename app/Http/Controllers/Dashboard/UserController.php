@@ -17,10 +17,12 @@ class UserController extends Controller
     public function index()
     {
         $user = User::find(1);
+        $guests = User::get();
         $activities = Activities::where('user_id', '=', 1)->get();
 
         return view('dashboard/guests', [
             'user' => $user, 
+            'guests' => $guests,
             'activities' => $activities
         ]);
     }
