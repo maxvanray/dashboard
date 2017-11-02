@@ -28,8 +28,8 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
 
 	// User
 	Route::get('/guests', 'UserController@index')->name('guests');
-	Route::get('/staff', 'UserController@index')->name('staff');
-	Route::get('/add-user', 'UserController@index');
+	Route::get('/staff', 'UserController@staff')->name('staff');
+	Route::get('/add-user', 'UserController@addUser');
 	Route::resource('/profile', 'UserController@index');
 
 	// Calendar

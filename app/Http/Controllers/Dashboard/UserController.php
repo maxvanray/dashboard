@@ -25,6 +25,28 @@ class UserController extends Controller
         ]);
     }
 
+    public function staff()
+    {
+        $user = User::find(1);
+        $activities = Activities::where('user_id', '=', 1)->get();
+
+        return view('dashboard/staff', [
+            'user' => $user, 
+            'activities' => $activities
+        ]);
+    }
+
+    public function addUser()
+    {
+        $user = User::find(1);
+        $activities = Activities::where('user_id', '=', 1)->get();
+
+        return view('dashboard/edit_user', [
+            'user' => $user, 
+            'activities' => $activities
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
