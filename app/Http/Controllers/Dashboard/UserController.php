@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Activities;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -30,10 +31,14 @@ class UserController extends Controller
     public function staff()
     {
         $user = User::find(1);
+        $staff = DB::table('user_admin')
+            ->leftJoin('users', 'users.id', '=', 'user_admin.user_id')
+            ->get();
         $activities = Activities::where('user_id', '=', 1)->get();
 
         return view('dashboard/staff', [
             'user' => $user, 
+            'staff'=> $staff,
             'activities' => $activities
         ]);
     }

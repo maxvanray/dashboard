@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-    Guests
+    Staff
     @parent
 @stop
 
@@ -42,22 +42,28 @@
                             <div class="table-responsive">
 
 <table id="datatable" class="table table-striped table-bordered table-hover" width="100%" border="0" cellspacing="0" cellpadding="0" summary="This is a list of the staff members.">
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Title</th>
-    <th>Active</th>
-    <th>Edit</th>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Title</th>
+        <th>Active</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+     @foreach($staff as $staff_member)
+      <tr>
+        <td>{{ $staff_member->name }}</td>
+        <td>{{ $staff_member->email }}</td>
+        <td>{{ $staff_member->phone }}</td>
+        <td>{{ $staff_member->name }}</td>
+        <td>{{ $staff_member->name }}</td>
+        <td><a href=#>Edit</a> | <a href="#">Delete</a></td>
+      </tr>
+     @endforeach
+    </tbody>
 </table>
 
 
