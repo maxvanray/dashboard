@@ -15,7 +15,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function guests(Request $request)
     {
         $user = User::find(1);
         $guests = User::get();
@@ -28,7 +28,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function staff()
+    public function staff(Request $request)
     {
         $user = User::find(1);
         $staff = DB::table('user_admin')
@@ -43,13 +43,26 @@ class UserController extends Controller
         ]);
     }
 
-    public function addUser()
+    public function addUser(Request $request)
     {
         $user = User::find(1);
         $activities = Activities::where('user_id', '=', 1)->get();
 
         return view('dashboard/edit_user', [
             'user' => $user, 
+            'activities' => $activities
+        ]);
+    }
+
+     public function profile(Request $request)
+    {
+        $user = User::find(1);
+        $guests = User::get();
+        $activities = Activities::where('user_id', '=', 1)->get();
+
+        return view('dashboard/user_profile', [
+            'user' => $user, 
+            'guests' => $guests,
             'activities' => $activities
         ]);
     }

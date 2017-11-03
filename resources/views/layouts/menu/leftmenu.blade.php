@@ -16,7 +16,7 @@
                         </h4>
                         <ul class="icon-list">
                             <li>
-                                <a href="{{ @route('profile.index') }} ">
+                                <a href="{{ @route('profile') }} ">
                                     <i class="fa fa-fw fa-user"></i>
                                 </a>
                             </li>
@@ -26,7 +26,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ @route('profile.index') }} ">
+                                <a href="{{ @route('profile') }} ">
                                     <i class="fa fa-fw fa-gear"></i>
                                 </a>
                             </li>
@@ -51,38 +51,41 @@
                 </li>
 
                 <?php // DASHBOARD ?>
-                <li {!! (Request::is('index')|| Request::is('/')? 'class="active"':"") !!}>
+                <li {!! ($routename===('dashboard')|| Request::is('/')? 'class="active"':"") !!}>
                     <a href="{{ @route('dashboard') }} ">
                         <i class="menu-icon fa fa-fw fa-home"></i>
                         <span class="mm-text ">Dashboard</span>
                     </a>
                 </li>
 
-                <?php // GUESTS ?>
-                <li {!! (Request::is('users')||Request::is('addnew_user')||Request::is('profile.index')||Request::is('deleted_users')? 'class="active"':"") !!}>
+                <?php // USER ?>
+                <li {!! 
+                ($routename===('guests')||$routename===('staff')||$routename===('users')||$routename===('users')||$routename===('adduser')||$routename===('profile')? 'class="active"':"") 
+
+                !!}>
                     <a href="#">
                         <i class="menu-icon fa fa-fw fa-users"></i>
                         <span>User</span> <span
                                 class="fa arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                        <li {!! ($routename===('guests')? 'class="active"':"") !!}>
                             <a href="{{ @route('guests') }} ">
                                 <i class="fa fa-list" aria-hidden="true"></i> Guests
                             </a>
                         </li>
-                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                        <li {!! ($routename===('staff')? 'class="active"':"") !!}>
                             <a href="{{ @route('staff') }} ">
                                 <i class="fa fa-list" aria-hidden="true"></i> Staff
                             </a>
                         </li>
-                        <li {!! (Request::is('addnew_user')? 'class="active"':"") !!}>
-                            <a href="{{URL::to('addnew_user')}} ">
+                        <li {!! ($routename===('adduser')? 'class="active"':"") !!}>
+                            <a href="{{ @route('adduser') }} ">
                                 <i class="fa fa-fw fa-user"></i> Add New User
                             </a>
                         </li>
-                        <li {!! (Request::is('profile.index')? 'class="active"':"") !!}>
-                            <a href="{{ @route('profile.index') }} ">
+                        <li {!! ($routename===('profile')? 'class="active"':"") !!}>
+                            <a href="{{ @route('profile') }} ">
                                 <i class="fa fa-fw fa-user-md"></i> View Profile
                             </a>
                         </li>
@@ -90,19 +93,19 @@
                 </li>
 
                 <?php // CALENDAR ?>
-                <li {!! (Request::is('users')||Request::is('addnew_user')||Request::is('profile.index')||Request::is('deleted_users')? 'class="active"':"") !!}>
+                <li {!! ($routename===('calendar')||$routename===('events')? 'class="active"':"") !!}>
                     <a href="#">
                         <i class="menu-icon fa fa-fw fa-calendar"></i>
                         <span>Calendar</span> <span
                                 class="fa arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                        <li {!! ($routename===('calendar')? 'class="active"':"") !!}>
                             <a href="{{ @route('calendar') }} ">
                                 <i class="fa fa-calendar-o" aria-hidden="true"></i> View Calendar
                             </a>
                         </li>
-                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                        <li {!! ($routename===('events')? 'class="active"':"") !!}>
                             <a href="{{ @route('events') }} ">
                                 <i class="fa fa-list" aria-hidden="true"></i> Event List
                             </a>
@@ -111,7 +114,7 @@
                 </li>
 
                 <?php // LOCATION ?>
-                <li {!! (Request::is('users')||Request::is('addnew_user')||Request::is('profile.index')||Request::is('deleted_users')? 'class="active"':"") !!}>
+                <li {!! (Request::is('users')||Request::is('addnew_user')||Request::is('profile')||Request::is('deleted_users')? 'class="active"':"") !!}>
                     <a href="#">
                         <i class="menu-icon fa fa-fw fa-location-arrow"></i>
                         <span>Location</span> <span
@@ -132,7 +135,7 @@
                 </li>
 
                 <?php // TRAFFIC ?>
-                <li {!! (Request::is('users')||Request::is('addnew_user')||Request::is('profile.index')||Request::is('deleted_users')? 'class="active"':"") !!}>
+                <li {!! (Request::is('users')||Request::is('addnew_user')||Request::is('profile')||Request::is('deleted_users')? 'class="active"':"") !!}>
                     <a href="#">
                         <i class="menu-icon fa fa-fw fa-line-chart"></i>
                         <span>Traffic</span> <span
@@ -158,10 +161,10 @@
                 </li>
 
                 <?php // LOCKSCREEN ?>
-                <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                <li {{ (Request::is('adduser')? 'class="active"':"") }}>
                     <a href="{{ @route('login') }} ">
                         <i class="menu-icon fa fa-fw fa-lock"></i>
-                        <span class="mm-text ">Lockscreen</span>
+                        <span class="mm-text ">Lockscreen: {{Request::segment(2)}}</span>
                     </a>
                 </li>
 
