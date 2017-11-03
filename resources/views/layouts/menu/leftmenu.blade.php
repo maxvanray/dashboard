@@ -123,12 +123,12 @@
                     <ul class="sub-menu">
                         <li {!! ($routename===('location')? 'class="active"':"") !!}>
                             <a href="{{ @route('location') }} ">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i> Locations
+                                <i class="fa fa-list" aria-hidden="true"></i> Locations
                             </a>
                         </li>
                         <li {!! ($routename===('location-list')? 'class="active"':"") !!}>
                             <a href="{{ @route('location-list') }} ">
-                                <i class="fa fa-list" aria-hidden="true"></i> Add/Edit Location
+                                <i class="fa fa-map-marker" aria-hidden="true"></i> Add/Edit Location
                             </a>
                         </li>
                     </ul>
