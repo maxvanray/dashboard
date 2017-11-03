@@ -45,6 +45,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
     // Traffic
     Route::get('analytics', 'TrafficController@index')->name('analytics');
     Route::get('check-in', 'TrafficController@checkin')->name('checkin');
+    Route::get('sales', 'TrafficController@sales')->name('sales');
 
 
 });

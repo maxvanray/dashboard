@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
+use App\Event;
 
 class TrafficController extends Controller
 {
@@ -14,7 +16,10 @@ class TrafficController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::find(1);
+        $events = Event::all();
+
+        return view('dashboard/blank', ['user' => $user, 'events' => $events]);
     }
 
     /**
@@ -24,7 +29,18 @@ class TrafficController extends Controller
      */
     public function checkin()
     {
-        //
+        $user = User::find(1);
+        $events = Event::all();
+
+        return view('dashboard/blank', ['user' => $user, 'events' => $events]);
+    }
+
+    public function sales()
+    {
+        $user = User::find(1);
+        $events = Event::all();
+
+        return view('dashboard/blank', ['user' => $user, 'events' => $events]);
     }
 
     /**

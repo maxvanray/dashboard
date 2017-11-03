@@ -114,20 +114,20 @@
                 </li>
 
                 <?php // LOCATION ?>
-                <li {!! (Request::is('users')||Request::is('addnew_user')||Request::is('profile')||Request::is('deleted_users')? 'class="active"':"") !!}>
+                <li {!! ($routename===('location')||$routename===('location-list')? 'class="active"':"") !!}>
                     <a href="#">
                         <i class="menu-icon fa fa-fw fa-location-arrow"></i>
                         <span>Location</span> <span
                                 class="fa arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
-                            <a href="{{URL::to('location')}} ">
+                        <li {!! ($routename===('location')? 'class="active"':"") !!}>
+                            <a href="{{ @route('location') }} ">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i> Locations
                             </a>
                         </li>
-                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
-                            <a href="{{URL::to('users')}} ">
+                        <li {!! ($routename===('location-list')? 'class="active"':"") !!}>
+                            <a href="{{ @route('location-list') }} ">
                                 <i class="fa fa-list" aria-hidden="true"></i> Add/Edit Location
                             </a>
                         </li>
@@ -135,25 +135,25 @@
                 </li>
 
                 <?php // TRAFFIC ?>
-                <li {!! (Request::is('users')||Request::is('addnew_user')||Request::is('profile')||Request::is('deleted_users')? 'class="active"':"") !!}>
+                <li {!! ($routename===('analytics')||$routename===('checkin')||$routename===('sales')? 'class="active"':"") !!}>
                     <a href="#">
                         <i class="menu-icon fa fa-fw fa-line-chart"></i>
                         <span>Traffic</span> <span
                                 class="fa arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
-                            <a href="{{URL::to('users')}} ">
+                        <li {!! ($routename===('analytics')? 'class="active"':"") !!}>
+                            <a href="{{ @route('analytics') }} ">
                                 <i class="fa fa-tachometer" aria-hidden="true"></i> View Analytics
                             </a>
                         </li>
-                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
-                            <a href="{{URL::to('users')}} ">
+                        <li {!! ($routename===('checkin')? 'class="active"':"") !!}>
+                            <a href="{{ @route('checkin') }} ">
                                 <i class="fa fa-list" aria-hidden="true"></i> View Check-in List
                             </a>
                         </li>
-                        <li {!! (Request::is('users')? 'class="active"':"") !!}>
-                            <a href="{{URL::to('users')}} ">
+                        <li {!! ($routename===('sales')? 'class="active"':"") !!}>
+                            <a href="{{ @route('sales') }} ">
                                 <i class="fa fa-barcode" aria-hidden="true"></i> Sales
                             </a>
                         </li>
@@ -161,7 +161,7 @@
                 </li>
 
                 <?php // LOCKSCREEN ?>
-                <li {{ (Request::is('adduser')? 'class="active"':"") }}>
+                <li {{ ($routename===('login')? 'class="active"':"") }}>
                     <a href="{{ @route('login') }} ">
                         <i class="menu-icon fa fa-fw fa-lock"></i>
                         <span class="mm-text ">Lockscreen: {{Request::segment(2)}}</span>
@@ -169,7 +169,7 @@
                 </li>
 
                 <?php // LOGOUT ?>
-                <li {!! (Request::is('users')? 'class="active"':"") !!}>
+                <li {!! ($routename===('login')? 'class="active"':"") !!}>
                     <a href="{{ @route('login') }} ">
                         <i class="menu-icon fa fa-fw fa-sign-out"></i>
                         <span class="mm-text ">Logout</span>
