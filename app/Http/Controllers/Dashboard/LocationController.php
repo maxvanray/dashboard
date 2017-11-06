@@ -33,7 +33,7 @@ class LocationController extends Controller
         $user = User::find(1);
         $events = Event::all();
 
-        return view('dashboard/blank', ['user' => $user, 'events' => $events]);
+        return view('dashboard/location_add', ['user' => $user, 'events' => $events]);
     }
 
     /**

@@ -12,7 +12,9 @@
                     </a>
                     <div class="content-profile">
                         <h4 class="media-heading">
-                            {{ $user->name }}
+                            @auth
+                                {{ Auth::user()->name }}
+                            @endauth
                         </h4>
                         <ul class="icon-list">
                             <li>

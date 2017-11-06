@@ -292,7 +292,9 @@
                              height="35" alt="User Image">
                         <div class="riot">
                             <div>
-                                {{ $user->name }}
+                                @auth
+                                    {{ Auth::user()->name }}
+                                @endauth
                                 <span>
                                         <i class="caret"></i>
                                     </span>
@@ -303,7 +305,9 @@
                         <!-- User image -->
                         <li class="user-header">
                             <img src="{{asset('assets/img/authors/avatar1.jpg')}}" class="img-circle" alt="User Image">
-                            <p> {{ $user->name }}</p>
+                            <p> @auth
+                                    {{ Auth::user()->name }}
+                                @endauth</p>
                         </li>
                         <!-- Menu Body -->
                         <li class="p-t-3"><a href="{{ @route('profile') }}"> <i class="fa fa-fw fa-user"></i> My

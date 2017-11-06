@@ -30,6 +30,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () 
 	Route::get('/guests', 'UserController@guests')->name('guests');
 	Route::get('/staff', 'UserController@staff')->name('staff');
 	Route::get('/add-user', 'UserController@addUser')->name('adduser');
+    Route::post('/add-user', 'UserController@addUserPost')->name('adduser_post');
     Route::get('/edit-user', 'UserController@store')->name('edit_user.store');
 	//Route::get('/profile', 'UserController@profile')->name('profile.index');
     Route::get('/profile', 'UserController@profile')->name('profile');

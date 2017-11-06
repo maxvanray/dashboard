@@ -45,10 +45,50 @@ class UserController extends Controller
 
     public function addUser(Request $request)
     {
+/*
+        'first_name', 
+        'last_name', 
+        'name', 
+        'email', 
+        'phone',
+        'password', 
+        'dob', 
+        'pic', 
+        'bio', 
+        'gender', 
+        'country', 
+        'state', 
+        'city', 
+        'zip',
+        'pin',
+        'password',
+        'facebook',
+        'twitter',
+        'instagram',
+        'snapchat',
+        'linkedin',
+        'username',
+        'user_id',
+        'last_login',
+
+*/
+
+
         $user = User::find(1);
         $activities = Activities::where('user_id', '=', 1)->get();
 
-        return view('dashboard/edit_user', [
+        return view('dashboard/addnew_user', [
+            'user' => $user, 
+            'activities' => $activities
+        ]);
+    }
+
+    public function addUserPost(Request $request)
+    {
+        $user = User::find(1);
+        $activities = Activities::where('user_id', '=', 1)->get();
+
+        return view('dashboard/addnew_user', [
             'user' => $user, 
             'activities' => $activities
         ]);
