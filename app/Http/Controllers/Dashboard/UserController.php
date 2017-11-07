@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Activities;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -17,7 +18,7 @@ class UserController extends Controller
      */
     public function guests(Request $request)
     {
-        $user = User::find(1);
+        $user = Auth::user();
         $guests = User::get();
         $activities = Activities::where('user_id', '=', 1)->get();
 
@@ -30,7 +31,7 @@ class UserController extends Controller
 
     public function staff(Request $request)
     {
-        $user = User::find(1);
+        $user = Auth::user();
         $staff = DB::table('user_admin')
             ->leftJoin('users', 'users.id', '=', 'user_admin.user_id')
             ->get();
@@ -45,36 +46,9 @@ class UserController extends Controller
 
     public function addUser(Request $request)
     {
-/*
-        'first_name', 
-        'last_name', 
-        'name', 
-        'email', 
-        'phone',
-        'password', 
-        'dob', 
-        'pic', 
-        'bio', 
-        'gender', 
-        'country', 
-        'state', 
-        'city', 
-        'zip',
-        'pin',
-        'password',
-        'facebook',
-        'twitter',
-        'instagram',
-        'snapchat',
-        'linkedin',
-        'username',
-        'user_id',
-        'last_login',
 
-*/
-
-
-        $user = User::find(1);
+        //$user = User::find(1);
+        $user = Auth::user();
         $activities = Activities::where('user_id', '=', 1)->get();
 
         return view('dashboard/addnew_user', [
@@ -85,7 +59,7 @@ class UserController extends Controller
 
     public function addUserPost(Request $request)
     {
-        $user = User::find(1);
+        $user = Auth::user();
         $activities = Activities::where('user_id', '=', 1)->get();
 
         return view('dashboard/addnew_user', [
@@ -94,9 +68,14 @@ class UserController extends Controller
         ]);
     }
 
-     public function profile(Request $request)
+     public function profile(Request $request, $id = '')
     {
-        $user = User::find(1);
+        if( empty($id) ){
+            $id = Auth::id();
+        }
+        //$user = User::find(1);
+        //$user = Auth::user();
+        $user = User::find($id);
         $guests = User::get();
         $activities = Activities::where('user_id', '=', 1)->get();
 
@@ -125,7 +104,33 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->first_name = $data['first_name'];
+        $user->last_name = $data['last_name'];
+        $user->dob = $data['dob'];
+        $user->pic = $data['pic'];
+        $user->bio = $data['bio'];
+        $user->gender = $data['gender'];
+        $user->country = $data['country'];
+        $user->state = $data['state'];
+        $user->city = $data['city'];
+        $user->zip = $data['zip'];
+        $user->facebook = '';
+        $user->twitter = '';
+        $user->instagram = '';
+        $user->snapchat = '';
+        $user->linkedin = '';
+        $user->username = str_random(10);
+        $user->user_id = str_random(10);
+        $user->last_login = '';
+        $user->name = $data['first_name'].' '.$data['last_name'];
+        $user->email = $data['email'];
+        $user->password = bcrypt($data['password']);
+        $user->pin = rand ( 10000 , 99999 );
+
+        $user->save();
+
+        return response($user, 201);
     }
 
     /**

@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 //dashboard
-Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
+Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard', 'middleware' => 'auth'], function () {
 
 	// Dashboard
 	Route::get('/', 'DashboardController@index')->name('dashboard');

@@ -114,6 +114,8 @@ $(document).ready(function () {
         $('#adduser_form').bootstrapValidator('revalidateField', $('#activate'));
     });
 
+
+
     $('#pager_wizard').bootstrapWizard({
         'tabClass': 'nav nav-pills',
         'onNext': function (tab, navigation, index) {
@@ -140,7 +142,30 @@ $(document).ready(function () {
             pager_wizard.find('.finish').click(function () {
                 var $validator = $('#adduser_form').data('bootstrapValidator').validate();
                 if ($validator.isValid()) {
-                    $('#myModal').modal('show');
+
+                    var that = $(this),
+                    action = that.attr('action'),
+                    type = that.attr('method'),
+                    formdata = {};
+
+                    that.find('[name]').each(function(index, value){
+                        var that = $(this),
+                        name = that.attr('name'),
+                        value = that.val();
+
+                        formdata[name] = value;
+                    });
+
+                    $.ajax({
+                        url: action,
+                        type: type,
+                        data: formdata,
+                        success: function(response) {
+                            console.log(response);
+                            $('#myModal').modal('show');
+                        }
+                    });
+                    
                     return $validator.isValid();
                     $('#pager_wizard').find("a[href='#tab1']").tab('show');
                 }

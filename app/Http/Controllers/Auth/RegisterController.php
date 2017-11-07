@@ -94,7 +94,7 @@ class RegisterController extends Controller
             'user_id' => 8675309,
             'last_login' => \Carbon\Carbon::now(),
 
-            'name' => $data['name'],
+            'name' => $data['first_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'pin' => '1234',

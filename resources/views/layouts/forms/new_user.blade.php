@@ -1,7 +1,7 @@
 <!--main content-->
 <form id="adduser_form" action="{{ route('register') }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
     <!-- CSRF Token -->
-    <input type="hidden" name="_token"/>
+    {{ csrf_field() }}
     <div id="pager_wizard">
         <ul>
             <li>
