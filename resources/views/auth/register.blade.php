@@ -1,82 +1,156 @@
-@extends('layouts/default')
+<!DOCTYPE html>
+<html>
 
-{{-- Page title --}}
-@section('title')
-    Add New User
-    @parent
-@stop
-
-{{-- page level styles --}}
-@section('header_styles')
+<head>
+    <title>Register | {{ config('app.name', 'SpaceTime') }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{asset('assets/img/favicon.ico')}}" />
+    <!-- global css -->
+    <link href="{{asset('assets/css/app.css')}}" rel="stylesheet">
+    <!-- end of global css -->
     <!--page level css -->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/jasny-bootstrap/css/jasny-bootstrap.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/select2/css/select2.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/select2/css/select2-bootstrap.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/bootstrapvalidator/css/bootstrapValidator.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/datetimepicker/css/bootstrap-datetimepicker.min.css')}}" >
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/iCheck/css/all.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom_css/wizard.css')}}">
-    <!--end of page level css -->
-@stop
+    <link rel="stylesheet" href="{{asset('assets/vendors/iCheck/css/all.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom.css')}}">
+    <link href="{{asset('assets/css/register2.css')}}" rel="stylesheet">
+    <!--end of page level css-->
+</head>
 
+<body class="bg-slider">
+<div class="preloader">
+    <div class="loader_img"><img src="{{ asset('assets/img/loader.gif') }}" alt="loading..." height="64" width="64"></div>
+</div>
+<div class="container">
+    <div class="row " id="form-login">
 
-{{-- Page content --}}
-@section('content')
-    <section class="content-header">
-        <!--section starts-->
-        <h1>
-            Add New User
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <a href="index">
-                    <i class="fa fa-fw fa-home"></i> Dashboard
-                </a>
-            </li>
-            <li>
-                <a href="#"> Users</a>
-            </li>
-            <li class="active">
-                Add New User
-            </li>
-        </ol>
-    </section>
-    <!-- Main content -->
-    <section class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <i class="livicon" data-name="user-add" data-size="18" data-c="#fff" data-hc="#fff"
-                               data-loop="true"></i> Add New User
-                        </h3>
-                        <span class="pull-right">
-                                    <i class="fa fa-fw fa-chevron-up clickable"></i>
-                                </span>
-                    </div>
-                    <div class="panel-body">
-                         @include('layouts.forms.new_user')
+        <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 register-content">
+            <div class="row">
+               <div class="col-md-12">
+                   <div class="header">
+                       <h2 class="text-center">
+                           Register
+                           <small> with</small>
+                           
+                            <img src="{{ asset('assets/img/logo.png') }}" alt="logo"/>
+    
+                       </h2>
+                   </div>
+               </div>
+            </div>
+            <div class="row row-bg-color">
+                <div class="col-md-8 core-register">
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+                    <form 
+                        class="form-horizontal" 
+                        role="form" 
+                        method="post"
+                        action="{{ route('register') }}"
+                        >
+                        <!-- CSRF Token -->
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label" for="first_name">FIRST NAME</label>
+                                    <input type="text" class="form-control" placeholder="First Name"
+                                               name="first_name" id="first_name" value="{{ old('first_name') }}" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="last_name">LAST NAME</label>
+                                    <input type="text" class="form-control" placeholder="Last Name"
+                                               name="last_name" id="last_name" value="{{ old('last_name') }}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group ">
+                                    <label class="control-label" for="email">EMAIL</label>
+                                    <div class="input-group">
+                                        <input type="text" placeholder="Email Address" class="form-control"         
+                                            name="email" id="email" value="{{ old('email') }}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row password">
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label class="control-label" for="password">PASSWORD</label>
+                                    <div class="input-group">
+                                        <input type="password" placeholder="Password" class="form-control"
+                                               name="password" id="password"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group cp-group">
+                                    <label class="control-label confirm_pwd" for="password_confirmation">CONFIRM PASSWORD</label>
+                                    <div class="input-group pull-right">
+                                        <input type="password" placeholder="Confirm Password" class="form-control"
+                                               name="password_confirmation" id="password_confirmation"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <label class="checkbox-inline sr-only" for="terms">Agree to terms and conditions</label>
+                                <input type="checkbox" value="1" name="terms" id="terms"/>&nbsp;
+                                <label for="terms"> I agree to <a href="#section"> Terms and Conditions</a>.</label>
+                        </div>
+                        <div class="form-group">
+                                <button type="submit" class="btn btn-primary" >Sign Up</button>
+                                <input type="reset" class="btn btn-default" value="Reset" id="dee1"/><br>
+                                <hr>
+                                <span> Already Have an account? <a href="{{ @route('login') }}">Login</a></span>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <div class="social-buttons">
+                        <p class="text-center"><label>YOU CAN ALSO SIGN UP WITH</label></p>
+                        <a class="btn btn-block btn-social btn-google-plus">
+                            <i class="fa fa-google-plus"></i>
+                            Sign Up with Google
+                        </a>
+                        <a class="btn btn-block btn-social btn-facebook">
+                            <i class="fa fa-facebook"></i>
+                            Sign Up with Facebook
+                        </a>
+                        <a class="btn btn-block btn-social btn-twitter">
+                            <i class="fa fa-twitter"></i>
+                            Sign Up with Twitter
+                        </a>
+                        <a class="btn btn-block btn-social btn-linkedin">
+                            <i class="fa fa-linkedin"></i>
+                            Sign Up with LinkedIn
+                        </a>
+
                     </div>
                 </div>
             </div>
         </div>
-        <!--row end-->
-       
-        </section>
 
-@stop
+    </div>
+</div>
+<!-- global js -->
+<script src="{{asset('assets/js/app.js')}}" type="text/javascript"></script>
+<!-- end of global js -->
+<!-- begining of page level js -->
+<script src="{{asset('assets/vendors/iCheck/js/icheck.js')}}"></script>
+<script src="{{asset('assets/vendors/bootstrapvalidator/js/bootstrapValidator.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/js/backstretch.js')}}"></script>
+<script src="{{asset('assets/js/custom_js/register.js')}}"></script>
+<!-- end of page level js -->
+</body>
 
-{{-- page level scripts --}}
-@section('footer_scripts')
-    <!-- begining of page level js -->
-    <script type="text/javascript" src="{{asset('assets/vendors/moment/js/moment.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/vendors/jasny-bootstrap/js/jasny-bootstrap.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/vendors/select2/js/select2.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/vendors/bootstrapwizard/js/jquery.bootstrap.wizard.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/vendors/bootstrapvalidator/js/bootstrapValidator.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/vendors/datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/vendors/iCheck/js/icheck.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/js/custom_js/adduser.js')}}"></script>
-    <!-- end of page level js -->
-@stop
+</html>

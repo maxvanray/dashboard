@@ -30,7 +30,7 @@
 <!-- header logo: style can be found in header-->
 <header class="header">
     <nav class="navbar navbar-static-top" role="navigation">
-        <a href="index " class="logo">
+        <a href="{{ @route('dashboard') }}" class="logo">
             <!-- Add the class icon to your logo image or logo icon to add the margining -->
             <img src="{{asset('assets/img/logo.png')}}" alt="logo"/>
         </a>

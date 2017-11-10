@@ -48,7 +48,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -62,42 +63,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         return User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
-            'dob' => $data['dob'],
-            'pic' => $data['pic'],
-            'bio' => $data['bio'],
-            'gender' => $data['gender'],
-            'country' => $data['country'],
-            'state' => $data['state'],
-            'city' => $data['city'],
-            'zip' => $data['zip'],
-
-            // 'first_name' => 'Franks',
-            // 'last_name' => 'Nbeans',
-            // 'phone' => '',
-            // 'dob' => \Carbon\Carbon::now(),
-            // 'pic' => 'Y',
-            // 'bio' => 'This is the user bio',
-            // 'gender' => 'Male',
-            // 'country' => 'United States',
-            // 'state' => 'NY',
-            // 'city' => 'New York',
-            // 'zip' => '11754',
-            'facebook' => '',
-            'twitter' => '',
-            'instagram' => '',
-            'snapchat' => '',
-            'linkedin' => '',
-            'username' => 'fbeans',
-            'user_id' => 8675309,
-            'last_login' => \Carbon\Carbon::now(),
-
-            'name' => $data['first_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'pin' => '1234',
+            'phone' => '0',
+            'dob' => \Carbon\Carbon::now(), 
+            'pic' => '0', 
+            'bio' => 'Bio', 
+            'gender' => '0', 
+            'country' => \Request::ip(), 
+            'state' => '0', 
+            'city' => '0', 
+            'zip' => '0',
+            'facebook' => '0',
+            'twitter' => '0',
+            'instagram' => '0',
+            'snapchat' => '0',
+            'linkedin' => '0',        
+            'username' => str_random(10),
+            'user_id' => rand ( 100000 , 999999 ),
+            'last_login' => \Carbon\Carbon::now(),
+            'name' => $data['first_name'],
+            'pin' => rand ( 10000 , 99999 ),
         ]);
     }
 }

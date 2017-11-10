@@ -21,7 +21,7 @@ $(document).ready(function () {
 
     $('#register_form').bootstrapValidator({
         fields: {
-            user_name: {
+            first_name: {
                 validators: {
                     notEmpty: {
                         message: 'The user name is required'
@@ -88,7 +88,7 @@ $(document).ready(function () {
      Background slideshow
      */
     $('.bg-slider').backstretch([
-        "img/pages/bg-1.jpg", "img/pages/bg-2.jpg", "img/pages/bg-3.jpg", "img/pages/bg-4.jpg"
+        "assets/img/pages/bg-1.jpg", "assets/img/pages/bg-2.jpg", "assets/img/pages/bg-3.jpg", "assets/img/pages/bg-4.jpg"
     ], { duration: 2500, fade: 850 });
 
     $("#terms").on("ifChanged", function () {

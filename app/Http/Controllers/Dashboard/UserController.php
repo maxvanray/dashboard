@@ -8,6 +8,7 @@ use App\User;
 use App\Activities;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -96,6 +97,13 @@ class UserController extends Controller
         //
     }
 
+    public function dateformat($date)
+    {
+        $a = strtotime($date);
+        return date('Y-m-d H:i:s', $a);
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -104,33 +112,42 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $user = new User;
-        $user->first_name = $data['first_name'];
-        $user->last_name = $data['last_name'];
-        $user->dob = $data['dob'];
-        $user->pic = $data['pic'];
-        $user->bio = $data['bio'];
-        $user->gender = $data['gender'];
-        $user->country = $data['country'];
-        $user->state = $data['state'];
-        $user->city = $data['city'];
-        $user->zip = $data['zip'];
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+         $dob = $request->dob;
+        $user->dob = $this->dateformat($dob);
+        if($request->hasFile('picfile')){
+            $avatar = $request->file('picfile');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+        }else{
+            $filename = 0;
+        }
+        $user->pic = $filename;
+        $user->bio = $request->bio;
+        $user->gender = $request->gender;
+        $user->phone = $request->phone;
+        $user->country = request()->ip();
+        $user->state = $request->state;
+        $user->city = $request->city;
+        $user->zip = $request->postal;
         $user->facebook = '';
         $user->twitter = '';
         $user->instagram = '';
         $user->snapchat = '';
         $user->linkedin = '';
         $user->username = str_random(10);
-        $user->user_id = str_random(10);
-        $user->last_login = '';
-        $user->name = $data['first_name'].' '.$data['last_name'];
-        $user->email = $data['email'];
-        $user->password = bcrypt($data['password']);
+        $user->user_id = rand ( 100000 , 999999 );
+        $user->last_login = Carbon::now();
+        $user->name = $request->first_name.' '.$request->last_name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
         $user->pin = rand ( 10000 , 99999 );
-
         $user->save();
 
-        return response($user, 201);
+        return response('success', 201);
     }
 
     /**

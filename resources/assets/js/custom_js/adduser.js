@@ -85,11 +85,17 @@ $(document).ready(function () {
                 },
                 minlength: 20
             },
-
             gender: {
                 validators: {
                     notEmpty: {
                         message: 'Please select a gender'
+                    }
+                }
+            },
+            activate: {
+                validators: {
+                    notEmpty: {
+                        message: 'Please include your phone number'
                     }
                 }
             },
@@ -143,31 +149,45 @@ $(document).ready(function () {
                 var $validator = $('#adduser_form').data('bootstrapValidator').validate();
                 if ($validator.isValid()) {
 
-                    var that = $(this),
-                    action = that.attr('action'),
-                    type = that.attr('method'),
-                    formdata = {};
-
-                    that.find('[name]').each(function(index, value){
-                        var that = $(this),
-                        name = that.attr('name'),
-                        value = that.val();
-
-                        formdata[name] = value;
-                    });
-
-                    $.ajax({
-                        url: action,
-                        type: type,
-                        data: formdata,
-                        success: function(response) {
-                            console.log(response);
-                            $('#myModal').modal('show');
-                        }
-                    });
                     
-                    return $validator.isValid();
-                    $('#pager_wizard').find("a[href='#tab1']").tab('show');
+
+                     var that = $('#adduser_form'),
+                        action = that.attr('action'),
+                        type = that.attr('method'),
+                        formdata = {};
+
+                        that.find('[name]').each(function(index, value){
+                            var that = $(this),
+                            name = that.attr('name'),
+                            value = that.val();
+
+                            formdata[name] = value;
+                        });
+
+                        // console.log(action);
+                        // console.log(type);
+                        // console.log(formdata);
+
+                        $.ajax({
+                            url: action,
+                            type: type,
+                            data: formdata,
+                            success: function(response) {
+                                console.log(response);
+                                
+                            }
+                        }).done(function( msg ) {
+                            alert( "Data Saved: " + msg );
+                            $('#myModal').modal('show');
+                            return $validator.isValid();
+                            $('#pager_wizard').find("a[href='#tab1']").tab('show');
+                        });
+
+                        // $('#myModal').modal('show');
+                        // return $validator.isValid();
+                        // $('#pager_wizard').find("a[href='#tab1']").tab('show');
+                    
+                    
                 }
             });
             $('#myModal').on('hide.bs.modal', function (e) {

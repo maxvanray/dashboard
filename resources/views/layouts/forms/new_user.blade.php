@@ -1,7 +1,8 @@
 <!--main content-->
-<form id="adduser_form" action="{{ route('register') }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
+<form id="adduser_form" action="{{ route('adduser_post') }}" method="POST" enctype="multipart/form-data" class="form-horizontal">
     <!-- CSRF Token -->
     {{ csrf_field() }}
+
     <div id="pager_wizard">
         <ul>
             <li>
@@ -84,10 +85,10 @@
                                  style="max-width: 200px; max-height: 200px;"></div>
                             <div>
                                         <span class="btn btn-default btn-file">
-            <span class="fileinput-new">Select image</span>
-                                        <span class="fileinput-exists">Change</span>
-                                        <input id="pic" name="pic_file" type="file"
-                                               class="form-control"/>
+                                            <span class="fileinput-new">Select image</span>
+                                            <span class="fileinput-exists">Change</span>
+                                            <input id="pic" name="picfile" type="file"
+                                                class="form-control"/>
                                         </span>
                                 <a href="#" class="btn btn-danger fileinput-exists"
                                    data-dismiss="fileinput">Remove</a>
@@ -116,6 +117,13 @@
                             <option value="female">FEMALE</option>
                             <option value="other">OTHER</option>
                         </select>
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label for="phone" class="  col-sm-3 control-label">Phone </label>
+                    <div class="col-sm-9">
+                        <input id="phone" name="phone" type="text"
+                               class="form-control"/>
                     </div>
                 </div>
                 <div class="form-group required">
