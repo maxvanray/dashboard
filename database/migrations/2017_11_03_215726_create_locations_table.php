@@ -16,34 +16,55 @@ class CreateLocationsTable extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('name');
-            $table->string('address');
-            $table->string('city');
-            $table->string('state');
-            $table->string('zip');
-            $table->string('floor');
+            $table->string('name')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('floor')->nullable();
+            $table->string('description')->nullable();
 
-            $table->string('contact');
-            $table->string('contact_email');
-            $table->string('contact_phone');
+            $table->string('contact')->nullable();
+            $table->string('contact_email')->nullable();
+            $table->string('contact_phone')->nullable();
 
-            $table->string('mon_from');
-            $table->string('mon_to');
-            $table->string('tues_from');
-            $table->string('tues_to');
-            $table->string('wed_from');
-            $table->string('wed_to');
-            $table->string('thur_from');
-            $table->string('thur_to');
-            $table->string('fri_from');
-            $table->string('fri_to');
-            $table->string('sat_from');
-            $table->string('sat_to');
-            $table->string('sun_from');
-            $table->string('sun_to');
+            $table->string('sunday_from')->nullable();
+            $table->string('sunday_to')->nullable();
+            $table->string('sunday_notes')->nullable();
+            $table->string('closed_sunday')->nullable();
+
+            $table->string('monday_from')->nullable();
+            $table->string('monday_to')->nullable();
+            $table->string('monday_notes')->nullable();
+            $table->string('closed_monday')->nullable();
+
+            $table->string('tuesday_from')->nullable();
+            $table->string('tuesday_to')->nullable();
+            $table->string('tuesday_notes')->nullable();
+            $table->string('closed_tuesday')->nullable();
+
+            $table->string('wednesday_from')->nullable();
+            $table->string('wednesday_to')->nullable();
+            $table->string('wednesday_notes')->nullable();
+            $table->string('closed_wednesday')->nullable();
+
+            $table->string('thursday_from')->nullable();
+            $table->string('thursday_to')->nullable();
+            $table->string('thursday_notes')->nullable();
+            $table->string('closed_thursday')->nullable();
+
+            $table->string('friday_from')->nullable();
+            $table->string('friday_to')->nullable();
+            $table->string('friday_notes')->nullable();
+            $table->string('closed_friday')->nullable();
+
+            $table->string('saturday_from')->nullable();
+            $table->string('saturday_to')->nullable();
+            $table->string('saturday_notes')->nullable();
+            $table->string('closed_saturday')->nullable();
             
-            $table->string('images');
-            $table->string('description');
+            $table->string('images')->nullable();
+            
 
             $table->integer('created_by')->unsigned();
             $table->foreign('created_by')->references('id')->on('users');

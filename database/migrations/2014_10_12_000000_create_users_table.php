@@ -22,24 +22,28 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone');
-            $table->date('dob');
-            $table->string('pic');
-            $table->text('bio');
-            $table->string('gender');
-            $table->string('country');
-            $table->string('state');
-            $table->string('city');
-            $table->string('zip');
 
-            $table->string('facebook');
-            $table->string('twitter');
-            $table->string('instagram');
-            $table->string('snapchat');
-            $table->string('linkedin');
+            $table->string('phone')->nullable();
+            $table->date('dob')->nullable();
+            $table->string('pic')->nullable();
+            $table->text('bio')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zip')->nullable();
+
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('snapchat')->nullable();
+            $table->string('linkedin')->nullable();
 
             $table->string('password');
             $table->string('pin');
+
+            $table->string('active')->default('1');
+            $table->string('terms')->default('No');
 
             $table->date('last_login');
             $table->rememberToken();

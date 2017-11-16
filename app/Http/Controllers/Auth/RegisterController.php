@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -64,30 +65,19 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
+Log::info( $data['terms'] );
         return User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'phone' => '0',
-            'dob' => \Carbon\Carbon::now(), 
-            'pic' => '0', 
-            'bio' => 'Bio', 
-            'gender' => '0', 
-            'country' => \Request::ip(), 
-            'state' => '0', 
-            'city' => '0', 
-            'zip' => '0',
-            'facebook' => '0',
-            'twitter' => '0',
-            'instagram' => '0',
-            'snapchat' => '0',
-            'linkedin' => '0',        
+            'country' => \Request::ip(),    
             'username' => str_random(10),
             'user_id' => rand ( 100000 , 999999 ),
             'last_login' => \Carbon\Carbon::now(),
             'name' => $data['first_name'],
             'pin' => rand ( 10000 , 99999 ),
+            'terms' => $data['terms'],
         ]);
     }
 }

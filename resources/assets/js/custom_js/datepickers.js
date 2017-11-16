@@ -1,6 +1,7 @@
 "use strict";
 
 $(document).ready(function () {
+    
 
     $('#datetimepicker1').datetimepicker();
     $("#departure").dateDropper({

@@ -15,9 +15,21 @@
 @section('content')
         <!-- Content Header (Page header) -->
         <section class="content-header">
+            <!--section starts-->
             <h1>
                 Locations
             </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="index">
+                        <i class="fa fa-fw fa-home"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#"> Location</a>
+                </li>
+                
+            </ol>
         </section>
         <!-- Main content -->
         <section class="content">

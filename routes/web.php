@@ -45,8 +45,10 @@ Route::group([
     Route::get('/events', 'EventController@index')->name('events');
 
     // Location
-    Route::get('/location', 'LocationController@index')->name('location');
-    Route::get('/location-list', 'LocationController@getEvents')->name('location-list');
+    Route::resource('/location', 'LocationController');
+    //Route::resource('/location', 'LocationController@index')->name('location');
+    //Route::get('/add-location', 'LocationController@index')->name('add-location');
+    //Route::get('/location-list', 'LocationController@getEvents')->name('location-list');
 
     // Traffic
     Route::get('/analytics', 'TrafficController@index')->name('analytics');

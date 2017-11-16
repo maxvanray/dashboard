@@ -116,21 +116,21 @@
                 </li>
 
                 <?php // LOCATION ?>
-                <li {!! ($routename===('location')||$routename===('location-list')? 'class="active"':"") !!}>
+                <li {!! ($routename===('location.index')||$routename===('location.create')? 'class="active"':"") !!}>
                     <a href="#">
                         <i class="menu-icon fa fa-fw fa-location-arrow"></i>
                         <span>Location</span> <span
                                 class="fa arrow"></span>
                     </a>
                     <ul class="sub-menu">
-                        <li {!! ($routename===('location')? 'class="active"':"") !!}>
-                            <a href="{{ @route('location') }} ">
+                        <li {!! ($routename===('location.index')? 'class="active"':"") !!}>
+                            <a href="{{ @route('location.index') }} ">
                                 <i class="fa fa-list" aria-hidden="true"></i> Locations
                             </a>
                         </li>
-                        <li {!! ($routename===('location-list')? 'class="active"':"") !!}>
-                            <a href="{{ @route('location-list') }} ">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i> Add/Edit Location
+                        <li {!! ($routename===('location.create')? 'class="active"':"") !!}>
+                            <a href="{{ @route('location.create') }} ">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i> Create Location
                             </a>
                         </li>
                     </ul>

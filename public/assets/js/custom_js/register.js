@@ -21,7 +21,7 @@ $(document).ready(function () {
 
     $('#register_form').bootstrapValidator({
         fields: {
-            first_name: {
+            user_name: {
                 validators: {
                     notEmpty: {
                         message: 'The user name is required'
