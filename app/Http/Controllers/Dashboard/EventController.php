@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Event;
 use App\User;
+use Auth;
 
 class EventController extends Controller
 {
@@ -16,15 +17,17 @@ class EventController extends Controller
      */
     public function index()
     {
-        $user = User::find(1);
+        $user = Auth::user();
         $events = Event::all();
 
         return view('dashboard/calendar', ['user' => $user, 'events' => $events]);
     }
 
-    public function getEvents()
+    public function events()
     {
-        return 'EVENTS';
+        $user = Auth::user();
+        $events = Event::all();
+        return view('dashboard/events', ['user' => $user, 'events' => $events]);
     }
 
     /**

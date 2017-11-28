@@ -65,9 +65,10 @@ class CreateLocationsTable extends Migration
             
             $table->string('images')->nullable();
             
-
             $table->integer('created_by')->unsigned();
             $table->foreign('created_by')->references('id')->on('users');
+
+            $table->integer('active')->default(1);
 
             $table->integer('last_edited_by')->unsigned();
             $table->foreign('last_edited_by')->references('id')->on('users');

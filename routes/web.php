@@ -40,9 +40,12 @@ Route::group([
     Route::get('/profile', 'UserController@profile')->name('profile');
     Route::get('/profile/{id}', 'UserController@profile')->name('profile.id');
 
-	// Calendar
+	// Scheduling & alendar
     Route::get('/calendar', 'EventController@index')->name('calendar');
-    Route::get('/events', 'EventController@index')->name('events');
+    Route::get('/events', 'EventController@events')->name('events');
+
+    // Event
+    Route::resource('/location', 'LocationController');
 
     // Location
     Route::resource('/location', 'LocationController');

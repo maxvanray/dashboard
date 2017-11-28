@@ -65,7 +65,6 @@ class LocationController extends Controller
     {
         $user = Auth::user();
 
-
         $location = new Location;
         $location->name = $request->name;
         $location->address = $request->address;
@@ -114,24 +113,14 @@ class LocationController extends Controller
         $location->saturday_notes = $request->saturday_notes;
         $location->closed_saturday = $request->closed_saturday;
 
-$location->images = "";
+        $location->images = "";
 
-$location->created_by = $user->id;
-
-$location->last_edited_by = $user->id;
-
+        $location->created_by = $user->id;
+        $location->last_edited_by = $user->id;
 
         $location->save();
 
-        $user = Auth::user();
-        $events = Event::all();
-        $locations = Location::all();
-
-        return view('dashboard/locations', [
-            'user' => $user, 
-            'events' => $events, 
-            'locations' => $locations
-        ]);
+        return back()->withInput()->with('status', 'Location Created!');
     }
 
     /**
@@ -142,7 +131,8 @@ $location->last_edited_by = $user->id;
      */
     public function show($id)
     {
-        //
+        $location = Location::find($id);
+        return view('dashboard.location_show', compact('location'));
     }
 
     /**
@@ -153,7 +143,8 @@ $location->last_edited_by = $user->id;
      */
     public function edit($id)
     {
-        //
+        $location = Location::find($id);
+        return view('location.edit', compact('location'));
     }
 
     /**
@@ -165,7 +156,13 @@ $location->last_edited_by = $user->id;
      */
     public function update(Request $request, $id)
     {
-        //
+        // request()->validate([
+        //     'title' => 'required',
+        //     'body' => 'required',
+        // ]);
+        Location::find($id)->update($request->all());
+        return redirect()->route('location.index')
+                        ->with('success','Location updated successfully');
     }
 
     /**
@@ -174,8 +171,20 @@ $location->last_edited_by = $user->id;
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        $location = Location::findOrFail( $id );
+        if ( $request->ajax() ) {
+
+            $location->delete( $request->all() );
+
+            return response(['msg' => 'Location deleted', 'status' => 'success']);
+        }
+        return response(['msg' => 'Failed deleting the location', 'status' => 'failed']);
+
+        //Location::find($id)->delete();
+        //return redirect()->route('location.index')
+                        //->with('success','Location deleted successfully');
     }
+    
 }

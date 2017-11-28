@@ -31,12 +31,8 @@
 <header class="header">
     <nav class="navbar navbar-static-top" role="navigation">
         <a href="{{ @route('dashboard') }}" class="logo">
-            <!-- Add the class icon to your logo image or logo icon to add the margining -->
             <img src="{{asset('assets/img/logo.png')}}" alt="logo"/>
         </a>
-        <!-- Header Navbar: style can be found in header-->
-        <!-- Sidebar toggle button-->
-        <!-- Sidebar toggle button-->
         <div>
             <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button"> <i
                         class="fa fa-fw fa-bars"></i>

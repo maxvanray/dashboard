@@ -43,14 +43,14 @@
             </div>
             <ul class="navigation">
 
-                <?php // ROUTENAME ?>
+                <?php /*  // ROUTENAME ?>
                 <li {!! (Request::is('location')|| Request::is('/')? 'class="active"':"") !!}>
                     <!-- {{ $routename==='login' ? 'class="active"':"" }} -->
                     <a href="{{ @route('dashboard') }} ">
                         <i class="menu-icon fa fa-fw fa-home"></i>
                         <span class="mm-text "><?php echo 'ROUTENAME: '.$routename ?></span>
                     </a>
-                </li>
+                </li> */ ?>
 
                 <?php // DASHBOARD ?>
                 <li {!! ($routename===('dashboard')|| Request::is('/')? 'class="active"':"") !!}>
@@ -67,7 +67,7 @@
                 !!}>
                     <a href="#">
                         <i class="menu-icon fa fa-fw fa-users"></i>
-                        <span>User</span> <span
+                        <span>Users</span> <span
                                 class="fa arrow"></span>
                     </a>
                     <ul class="sub-menu">
@@ -98,7 +98,7 @@
                 <li {!! ($routename===('calendar')||$routename===('events')? 'class="active"':"") !!}>
                     <a href="#">
                         <i class="menu-icon fa fa-fw fa-calendar"></i>
-                        <span>Calendar</span> <span
+                        <span>Scheduling  Events</span> <span
                                 class="fa arrow"></span>
                     </a>
                     <ul class="sub-menu">

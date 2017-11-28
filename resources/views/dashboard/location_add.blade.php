@@ -38,7 +38,7 @@
     <section class="content-header">
         <!--section starts-->
         <h1>
-            Add Location
+            Create Location
         </h1>
         <ol class="breadcrumb">
             <li>
@@ -47,7 +47,7 @@
                 </a>
             </li>
             <li>
-                <a href="#"> Location</a>
+                <a href="{{ @route('location.index') }}"> Location</a>
             </li>
             <li class="active">
                 Create Location
@@ -61,14 +61,19 @@
 <form id="create_location" class="form-horizontal" method="POST" action="{{ route('location.store') }}">
     {{ csrf_field() }}
 
-
+    @if (session('status'))
+    <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">&times;</button>
+        <strong>{{ session('status') }}</strong> Create another location below or <a href="{{ route('location.index') }}">Click Here</a> to view all the locations
+    </div>
+    @endif
 
 <!-- Text input : Location Name-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="name">Location Name</label>  
   <div class="col-md-4">
   <input id="name" name="name" type="text" placeholder="Location Name" class="form-control input-md">
-    
   </div>
 </div>
 
@@ -704,4 +709,4 @@
 <!-- <script type="text/javascript" src="{{asset('assets/js/custom_js/form_elements.js')}}"></script> -->
 <!-- end of page level js -->
 
-    @stop
+@stop
