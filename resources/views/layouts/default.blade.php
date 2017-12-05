@@ -27,7 +27,7 @@
 <div class="preloader">
     <div class="loader_img"><img src="{{asset('assets/img/loader.gif')}}" alt="loading..." height="64" width="64"></div>
 </div> */ ?>
-<!-- header logo: style can be found in header-->
+<!-- header logo-->
 <header class="header">
     <nav class="navbar navbar-static-top" role="navigation">
         <a href="{{ @route('dashboard') }}" class="logo">

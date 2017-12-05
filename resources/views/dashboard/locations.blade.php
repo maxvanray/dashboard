@@ -72,7 +72,6 @@
                                                 <button 
                                                     class="btn btn-primary btn-xs locationEditBtn"
                                                     data-location="{{ $location->id }}" 
-                                                    data-toggle="modal"
                                                     data-target="#edit" 
                                                     data-placement="top">
                                                         <span class="glyphicon glyphicon-pencil"></span>
@@ -106,44 +105,6 @@
             </div>
 
             <!-- .modal-dialog -->
-            <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title custom_align" id="Heading">Edit Details</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input class="form-control name" type="text" placeholder="Location Name">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control address" type="text" placeholder="Address">
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control description" rows="5" id="description" placeholder="Description"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control contact" type="text" placeholder="Contact">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control hours" type="text" placeholder="Hours">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control active" type="text" placeholder="Active">
-                            </div>
-                        </div>
-                        <div class="modal-footer ">
-                            <button type="button" class="btn btn-success" data-dismiss="modal">
-                                <span class="glyphicon glyphicon-ok-sign"></span> Update
-                            </button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-
             <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" data-location="0">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -208,7 +169,13 @@
             var locationContact = $(this).parent().parent().find('.locationContact').data('locationcontact');
             var locationEmail = $(this).parent().parent().find('.locationContact').data('locationemail');
             var locationActive = $(this).parent().parent().find('.locationAddress').text();
+            var locationId = $(this).data('location');
 
+            var locationAddress ='{{ url('dashboard/location') }}' + '/' + locationId + '/';
+            window.location.href = locationAddress;
+
+
+            $("#formUpdateLocation").attr("action", locationAddress);
             $('#edit .name').val(locationName);
             $('#edit .address').val(locationAddress);
             $('#edit .description').text(locationDescription);
@@ -232,8 +199,6 @@
             var locationId = $('#formDeleteLocation').data('location');
             var inputData = $('#formDeleteLocation').serialize();
 
-            console.log('locationId: '+locationId);
-
             $.ajax({
                 url: '{{ url('dashboard/location') }}' + '/' + locationId,
                 type: 'DELETE',
@@ -256,6 +221,47 @@
 
             return false;
         });
+/*
+        // UPDATE LOCATION
+        $('.locationEditBtn').on('click', function(){
+            var locationId = $(this).data('location');
+            //$('#formUpdateLocation').data('location', locationId);
+            var address ='{{ url('dashboard/location') }}' + '/' + locationId + '/';
+            $("#formUpdateLocation").attr("action", address);
+        });
+
+        $('.btnupdate').on('click', function(event){
+            event.preventDefault();
+            var locationId = $('#formUpdateLocation').data('location');
+            var inputData = $('#formUpdateLocation').serialize();
+            var address ='{{ url('dashboard/location') }}' + '/' + locationId + '/';
+            var $_token = $('input[name=_token]').val();
+            console.log(address);
+
+            $.ajax({
+                url: address,
+                type: 'PUT',
+                cache: false,
+                headers: { 'X-XSRF-TOKEN' : $_token }, 
+                data: inputData,
+                success: function( msg ) {
+                    if ( msg.status === 'success' ) {
+                        console.log( msg.msg );
+                        location.reload();
+                        setInterval(function() {
+                            location.reload();
+                        }, 5900);
+                    }
+                },
+                error: function( data ) {
+                    if ( data.status === 422 ) {
+                        console.log('Cannot update the category');
+                    }
+                }
+            });
+        });
+*/
+        
 
         //
         // $('#delete .confirm').on('click', function(){

@@ -45,10 +45,11 @@ Route::group([
     Route::get('/events', 'EventController@events')->name('events');
 
     // Event
-    Route::resource('/location', 'LocationController');
+    //Route::resource('/location', 'LocationController');
 
     // Location
     Route::resource('/location', 'LocationController');
+    Route::post('location/{id}', ['as' => 'location.update', 'uses' => 'LocationController@update']);
     //Route::resource('/location', 'LocationController@index')->name('location');
     //Route::get('/add-location', 'LocationController@index')->name('add-location');
     //Route::get('/location-list', 'LocationController@getEvents')->name('location-list');

@@ -1,8 +1,20 @@
 'use strict';
 $(function(){
 
+
     //defaults
+var tokenval = $("#_token").data("token");
+
     $.fn.editable.defaults.url = '/post';
+    $.fn.editable.defaults.mode = 'inline';
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': tokenval
+      }
+    });
+
+
 
     //enable / disable
     $('#enable').on('click', function() {
@@ -11,25 +23,26 @@ $(function(){
 
     //editables 
     $('#name').editable({
-        url: '/post',
-        type: 'text',
-        pk: 1,
-        name: 'username',
-        title: 'Enter Location Name'
+    
+        error: function(response, newValue) {
+            if(response.status === 500) {
+                return 'Service unavailable. Please try later.';
+            } else {
+                return response.responseText;
+            }
+        }
     });
 
     $('#address').editable({
-        url: '/post',
+        
         type: 'text',
-        pk: 1,
         name: 'address',
         title: 'Enter Address'
     });
 
-    $('#zip').editable({
-        url: '/post',
+    $('#time').editable({
+      
         type: 'text',
-        pk: 1,
         name: 'zip',
         title: 'Enter Address'
     });

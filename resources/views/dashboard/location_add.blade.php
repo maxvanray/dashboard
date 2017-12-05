@@ -228,25 +228,46 @@
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#tab_1" data-toggle="tab">Sunday</a>
+                            <a href="#tab_1" data-toggle="tab">
+                                <span class="visible-xs visible-sm">Sun</span>
+                                <span class="visible-md visible-lg">Sunday</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#tab_2" data-toggle="tab">Monday</a>
+                            <a href="#tab_2" data-toggle="tab">
+                                <span class="visible-xs visible-sm">Mon</span>
+                                <span class="visible-md visible-lg">Monday</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#tab_3" data-toggle="tab">Tuesday</a>
+                            <a href="#tab_3" data-toggle="tab">
+                                <span class="visible-xs visible-sm">Tue</span>
+                                <span class="visible-md visible-lg">Tuesday</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#tab_4" data-toggle="tab">Wednesday</a>
+                            <a href="#tab_4" data-toggle="tab">
+                                <span class="visible-xs visible-sm">Wed</span>
+                                <span class="visible-md visible-lg">Wednesday</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#tab_5" data-toggle="tab">Thursday</a>
+                            <a href="#tab_5" data-toggle="tab">
+                                <span class="visible-xs visible-sm">Thu</span>
+                                <span class="visible-md visible-lg">Thursday</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#tab_6" data-toggle="tab">Friday</a>
+                            <a href="#tab_6" data-toggle="tab">
+                                <span class="visible-xs visible-sm">Fri</span>
+                                <span class="visible-md visible-lg">Friday</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#tab_7" data-toggle="tab">Saturday</a>
+                            <a href="#tab_7" data-toggle="tab">
+                                <span class="visible-xs visible-sm">Sat</span>
+                                <span class="visible-md visible-lg">Saturday</span>
+                            </a>
                         </li>
                         <li class="pull-right">
                             <a href="#" class="text-muted">

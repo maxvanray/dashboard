@@ -1,10 +1,11 @@
 "use strict";
-var c = window.location.href.match(/c=inline/i) ? 'inline' : 'popup';
-$.fn.editable.defaults.mode = c === 'inline' ? 'inline' : 'popup';
+//var c = window.location.href.match(/c=inline/i) ? 'inline' : 'popup';
+//$.fn.editable.defaults.mode = c === 'inline' ? 'inline' : 'popup';
+$.fn.editable.defaults.mode = 'inline';
 
 $(function () {
-    $('#f').val(f);
-    $('#c').val(c);
+    //$('#f').val(f);
+    //$('#c').val(c);
 });
 var f = 'bootstrap3';
 $('input[type="checkbox"].custom-checkbox, input[type="radio"].custom-radio').iCheck({
