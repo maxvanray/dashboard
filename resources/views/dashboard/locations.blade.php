@@ -63,34 +63,31 @@
                                         <td class="locationDescription">{{ $location->description }}</td>
                                         <td class="locationContact" 
                                             data-locationcontact="{{ $location->contact }}"
-                                            data-locationemail="{{ $location->contact_email }}"
-                                            >{{ $location->contact }} <<a href="mailto:{{ $location->contact_email }}">{{ $location->contact_email }}</a>></td>
+                                            data-locationemail="{{ $location->email }}"
+                                            >{{ $location->contact }} {{ $location->email }}</td>
                                         <td></td>                                        
                                         <td class="locationActive">{{ $location->active }}</td>
                                         <td class="locationEdit" data-location="{{ $location->id }}">
-                                            <?php /* <a href='/dashboard/location/{{ $location->id }}'> */ ?>
-                                                <button 
-                                                    class="btn btn-primary btn-xs locationEditBtn"
-                                                    data-location="{{ $location->id }}" 
-                                                    data-target="#edit" 
-                                                    data-placement="top">
-                                                        <span class="glyphicon glyphicon-pencil"></span>
-                                                </button>
-                                            <?php /* </a> */ ?>
-                                            | 
-                                            <?php /* <a href="#"> */ ?>
-                                                <button 
-                                                    class="btn btn-danger btn-xs locationDeleteBtn" 
-                                                    data-location="{{ $location->id }}"
-                                                    data-toggle="modal"
-                                                    data-target="#delete" 
-                                                    data-placement="top">
-                                                        <span class="glyphicon glyphicon-trash"></span>
-                                                </button>
-                                            <?php /* </a> */ ?>
-
                                             
-
+                                            <button 
+                                                class="btn btn-primary btn-xs locationEditBtn"
+                                                data-location="{{ $location->id }}" 
+                                                data-target="#edit" 
+                                                data-placement="top">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                            </button>
+                                            
+                                            | 
+                                            
+                                            <button 
+                                                class="btn btn-danger btn-xs locationDeleteBtn" 
+                                                data-location="{{ $location->id }}"
+                                                data-toggle="modal"
+                                                data-target="#delete" 
+                                                data-placement="top">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                            
 
                                         </td>
                                       </tr>
@@ -141,7 +138,6 @@
                     </div>
                     <!-- /.modal-content -->
                 </div>
-
             </div>
         </section>
 
@@ -161,6 +157,7 @@
     <script type="text/javascript" src="{{asset('assets/vendors/datatables/js/jquery.dataTables.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/js/custom_js/simple-table.js')}}"></script>
     <script type="text/javascript">
+
         // EDIT LOCATION
         $('.locationEditBtn').on('click', function(event){
             var locationName = $(this).parent().parent().find('.locationName').text();
@@ -173,7 +170,6 @@
 
             var locationAddress ='{{ url('dashboard/location') }}' + '/' + locationId + '/';
             window.location.href = locationAddress;
-
 
             $("#formUpdateLocation").attr("action", locationAddress);
             $('#edit .name').val(locationName);
@@ -191,14 +187,11 @@
             var warning = 'Are you sure you want to delete '+locationName+'?';
             $('#formDeleteLocation').data('location', locationId);
             $('#confirm').text(warning);
-
         });
 
         $('.deleteProduct').on('click', function(e) {
-
             var locationId = $('#formDeleteLocation').data('location');
             var inputData = $('#formDeleteLocation').serialize();
-
             $.ajax({
                 url: '{{ url('dashboard/location') }}' + '/' + locationId,
                 type: 'DELETE',

@@ -191,17 +191,17 @@
 
 <!-- Text input : Contact Email-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="contact_email">Contact Email</label>  
+  <label class="col-md-4 control-label" for="email">Contact Email</label>  
   <div class="col-md-4">
-  <input id="contact_email" name="contact_email" type="email" placeholder="contact_email" class="form-control input-md">
+  <input id="email" name="email" type="email" placeholder="email" class="form-control input-md">
   </div>
 </div>
 
 <!-- Text input : Contact Phone-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="contact_phone">Contact Phone</label>  
+  <label class="col-md-4 control-label" for="phone">Contact Phone</label>  
   <div class="col-md-4">
-  <input id="contact_phone" name="contact_phone" type="text" placeholder="contact_phone" class="form-control input-md">
+  <input id="phone" name="phone" type="text" placeholder="phone" class="form-control input-md">
   </div>
 </div>
 <hr>

@@ -5,7 +5,7 @@ $(function(){
     //defaults
 var tokenval = $("#_token").data("token");
 
-    $.fn.editable.defaults.url = '/post';
+    //$.fn.editable.defaults.url = '/post';
     $.fn.editable.defaults.mode = 'inline';
 
     $.ajaxSetup({
@@ -22,30 +22,30 @@ var tokenval = $("#_token").data("token");
     });
 
     //editables 
-    $('#name').editable({
+    // $('.location-update').editable({
     
-        error: function(response, newValue) {
-            if(response.status === 500) {
-                return 'Service unavailable. Please try later.';
-            } else {
-                return response.responseText;
-            }
-        }
-    });
+    //     error: function(response, newValue) {
+    //         if(response.status === 500) {
+    //             return 'Service unavailable. Please try later.';
+    //         } else {
+    //             return response.responseText;
+    //         }
+    //     }
+    // });
 
-    $('#address').editable({
+    // $('#address').editable({
         
-        type: 'text',
-        name: 'address',
-        title: 'Enter Address'
-    });
+    //     type: 'text',
+    //     name: 'address',
+    //     title: 'Enter Address'
+    // });
 
-    $('#time').editable({
+    // $('#time').editable({
       
-        type: 'text',
-        name: 'zip',
-        title: 'Enter Address'
-    });
+    //     type: 'text',
+    //     name: 'zip',
+    //     title: 'Enter Address'
+    // });
 
     // $('#address').editable({
     //     url: '/post',

@@ -75,8 +75,8 @@ class LocationController extends Controller
         $location->description = $request->description;
 
         $location->contact = $request->contact;
-        $location->contact_email = $request->contact_email;
-        $location->contact_phone = $request->contact_phone;
+        $location->email = $request->email;
+        $location->phone = $request->phone;
 
         $location->sunday_from = $request->sunday_from;
         $location->sunday_to = $request->sunday_to;

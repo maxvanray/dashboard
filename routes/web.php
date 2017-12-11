@@ -31,6 +31,7 @@ Route::group([
 	Route::get('/', 'DashboardController@index')->name('dashboard');
 
 	// User
+    Route::resource('user', 'UserController');
 	Route::get('/guests', 'UserController@guests')->name('guests');
 	Route::get('/staff', 'UserController@staff')->name('staff');
 	Route::get('/add-user', 'UserController@addUser')->name('adduser');

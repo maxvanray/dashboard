@@ -60,7 +60,24 @@
                                         <td>{{ $guest->phone }}</td>
                                         <td>{{ $guest->pin }}</td>
                                         <td>{{ $guest->active }}</td>
-                                        <td><a href=#>Edit</a> | <a href="#">Delete</a></td>
+                                        <td class="userEdit" data-user="{{ $user->id }}">
+                                            <button 
+                                                class="btn btn-primary btn-xs userEditBtn"
+                                                data-user="{{ $guest->id }}" 
+                                                data-target="#edit" 
+                                                data-placement="top">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                            </button> 
+                                            | 
+                                            <button 
+                                                class="btn btn-danger btn-xs userDeleteBtn" 
+                                                data-user="{{ $guest->id }}"
+                                                data-toggle="modal"
+                                                data-target="#delete" 
+                                                data-placement="top">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </td>
                                       </tr>
                                        @endforeach
                                     </tbody>
@@ -68,6 +85,44 @@
 
                             </div>
                         </div>
+                    </div>
+                </div>
+                <!-- .modal-dialog -->
+                <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true" data-location="0">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title custom_align" id="Heading5">Delete this entry</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="confirm" class="alert alert-info" data-location="0" >
+                                    <span class="glyphicon glyphicon-info-sign"></span>&nbsp;  this record ?
+                                </div>
+                            </div>
+                            <div class="modal-footer ">
+                                {!! Form::open([
+                                    'method' => 'DELETE', 
+                                    'id' => 'formDeleteUser', 
+                                    'data-user' => '0',
+                                    'data-dismiss' => 'modal',
+                                    'action' => ['Dashboard\UserController@destroy', 
+                                    $user->id]]) !!}
+                                    {!! Form::button( '
+                                            <span class="glyphicon glyphicon-ok-sign confirm"></span> Yes', 
+                                        [ 'type' => 'submit', 
+                                        'class' => 'btn btn-danger delete deleteProduct',
+                                        'id' => 'btnDeleteProduct', 
+                                        'data-id' => $user->id 
+                                    ] ) !!}
+                                {!! Form::close() !!}
+                                
+                                <button type="button" class="btn btn-success" data-dismiss="modal">
+                                    <span class="glyphicon glyphicon-remove"></span> No
+                                </button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
                     </div>
                 </div>
             </div>
@@ -80,8 +135,69 @@
 @section('footer_scripts')
     <!-- begining of page level js -->
 <script type="text/javascript" src="{{asset('assets/vendors/datatables/js/jquery.dataTables.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/vendors/datatables/js/dataTables.bootstrap.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/js/custom_js/datatables_custom.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/js/custom_js/simple-table.js')}}"></script>
+<script type="text/javascript">
+// EDIT USER
+$('.userEditBtn').on('click', function(event){
+    var userName = $(this).parent().parent().find('.userName').text();
+    var userAddress = $(this).parent().parent().find('.userAddress').text();
+    var userDescription = $(this).parent().parent().find('.userDescription').text();
+    var userContact = $(this).parent().parent().find('.userContact').data('usercontact');
+    var userEmail = $(this).parent().parent().find('.userContact').data('useremail');
+    var userActive = $(this).parent().parent().find('.userAddress').text();
+    var userId = $(this).data('user');
+
+    var userAddress ='{{ url('dashboard/user') }}' + '/' + userId + '/';
+    window.user.href = userAddress;
+
+
+    $("#formUpdateUser").attr("action", userAddress);
+    $('#edit .name').val(userName);
+    $('#edit .address').val(userAddress);
+    $('#edit .description').text(userDescription);
+    $('#edit .contact').val(userContact);
+    $('#edit .email').val(userEmail);
+    $('#edit .active').val(userActive);
+});
+
+// DELETE USER
+$('.userDeleteBtn').on('click', function(event){
+    var userName = $(this).parent().parent().find('.userName').text();
+    var userId = $(this).data('user');
+    var warning = 'Are you sure you want to delete '+userName+'?';
+    $('#formDeleteUser').data('user', userId);
+    $('#confirm').text(warning);
+
+});
+
+$('.deleteProduct').on('click', function(e) {
+
+    var userId = $('#formDeleteUser').data('user');
+    var inputData = $('#formDeleteUser').serialize();
+
+    $.ajax({
+        url: '{{ url('dashboard/user') }}' + '/' + userId,
+        type: 'DELETE',
+        data: inputData,
+        success: function( msg ) {
+            if ( msg.status === 'success' ) {
+                console.log( msg.msg );
+                user.reload();
+                setInterval(function() {
+                    user.reload();
+                }, 5900);
+            }
+        },
+        error: function( data ) {
+            if ( data.status === 422 ) {
+                console.log('Cannot delete the category');
+            }
+        }
+    });
+
+    return false;
+});
+</script>
     <!-- end of page level js -->
 @stop
 
