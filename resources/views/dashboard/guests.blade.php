@@ -136,9 +136,11 @@
     <!-- begining of page level js -->
 <script type="text/javascript" src="{{asset('assets/vendors/datatables/js/jquery.dataTables.js')}}"></script>
 <script type="text/javascript" src="{{asset('assets/js/custom_js/simple-table.js')}}"></script>
+
 <script type="text/javascript">
 // EDIT USER
 $('.userEditBtn').on('click', function(event){
+    console.log('click');
     var userName = $(this).parent().parent().find('.userName').text();
     var userAddress = $(this).parent().parent().find('.userAddress').text();
     var userDescription = $(this).parent().parent().find('.userDescription').text();
@@ -148,7 +150,7 @@ $('.userEditBtn').on('click', function(event){
     var userId = $(this).data('user');
 
     var userAddress ='{{ url('dashboard/user') }}' + '/' + userId + '/';
-    window.user.href = userAddress;
+    window.location.href = userAddress;
 
 
     $("#formUpdateUser").attr("action", userAddress);
