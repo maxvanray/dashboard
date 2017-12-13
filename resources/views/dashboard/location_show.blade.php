@@ -39,7 +39,10 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/bootstrap-table/css/bootstrap-table.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom_css/bootstrap_tables.css')}}">
 
-    <meta name="csrf-token" id="_token" data-token="{{ csrf_token() }}" >
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/toastr/css/toastr.min.css')}}"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom_css/toastr_notificatons.css')}}">
+
+    <meta name="csrf-token" id="_token" data-token="{{ csrf_token() }}" content="{!! csrf_token() !!}" >
     
 @stop
 
@@ -244,7 +247,7 @@
         <div class="row">
                 
             <div class="col-lg-12">
-                <div class="panel panel-default">
+                <div class="panel panel-default" id="hours-of-operation" data-id="{{ $location->id }}">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             <i class="fa fa-fw fa-info-circle"></i> Hours of Operation
@@ -736,6 +739,9 @@
 <script type="text/javascript"  src="{{asset('assets/vendors/x-editable/js/address.js')}}"></script>
 <script type="text/javascript"  src="{{asset('assets/vendors/iCheck/js/icheck.js')}}"></script>
 
+<script type="text/javascript" src="{{asset('assets/vendors/toastr/js/toastr.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/js/custom_js/toastr_notifications.js')}}"></script>
+
 <!-- end of page level js -->
 
 <!-- begining of page level js -->
@@ -749,6 +755,7 @@
 <script  type="text/javascript" src="{{asset('assets/vendors/timedropper/js/timedropper.js')}}" ></script>
 <!--<script  type="text/javascript" src="{{asset('assets/js/custom_js/datepickers.js')}}" ></script>-->
 <script type="text/javascript" src="{{asset('assets/js/location-update.js')}}"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         

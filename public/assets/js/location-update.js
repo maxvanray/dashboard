@@ -1,20 +1,7 @@
 'use strict';
 $(function(){
 
-
-    $('input').on('ifChecked', function(event){
-        $(this).parent().parent().parent().parent().find('.from').hide();
-        $(this).parent().parent().parent().parent().find('.to').hide();
-    });
-    $('input').on('ifUnchecked', function(event){
-        $(this).parent().parent().parent().parent().find('.from').show();
-        $(this).parent().parent().parent().parent().find('.to').show();
-    });
-    $("input[type=checkbox]:checked").each(function(){
-        $(this).parent().parent().parent().parent().find('.from').hide();
-        $(this).parent().parent().parent().parent().find('.to').hide();
-    });
-
+    
 
     // TIME SELECT
     $(".timeselect").timeDropper({
@@ -34,19 +21,24 @@ $(function(){
     });
 
     // CLOSED
-    // $('#closed_sunday').on('change', function(event){
-    //     alert('click');
-    // });
-    // if ( $('#closed_sunday').is(':checked') ) {
-    //     $('#sunday_times').hide();
-    // }else{
-    //     $('#sunday_times').show();
-    // }
     $(".content").find('input').iCheck({
         checkboxClass: 'icheckbox_square-blue',
         radioClass: 'iradio_square-blue',
         increaseArea: '20%' // optional
     });
+    $('input').on('ifChecked', function(event){
+        $(this).parent().parent().parent().parent().find('.from').hide();
+        $(this).parent().parent().parent().parent().find('.to').hide();
+    });
+    $('input').on('ifUnchecked', function(event){
+        $(this).parent().parent().parent().parent().find('.from').show();
+        $(this).parent().parent().parent().parent().find('.to').show();
+    });
+    $("input[type=checkbox]:checked").each(function(){
+        $(this).parent().parent().parent().parent().find('.from').hide();
+        $(this).parent().parent().parent().parent().find('.to').hide();
+    });
+    
 
     // DEFAULTS 
     var tokenval = $("#_token").data("token");
@@ -115,18 +107,104 @@ $(function(){
         title: 'Enter Location Phone Number'
     });
 
-    var isClosed = function(event){
-        
-        
+
+    var saveTimes = function(times){
+        var id = $('#hours-of-operation').data('id');
+        var CSRF_TOKEN = $('#_token').data('token');
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+        //console.log(times);
+        $.ajax({
+            method: 'POST',
+            url: '/dashboard/location/'+id,
+            data: JSON.stringify(times), // convert array to JSON
+            dataType: 'json',
+            cache: false,
+            timeout: 100000,
+            success: function (data) {
+
+                console.log("SUCCESS : ", data);
+
+            },
+            error: function (e) {
+
+                console.log("ERROR : ", e);
+
+            }
+
+        });
     };
 
     $('#update-hours').on('click', function(e){
-        $('#closed_sunday').hide();
-        // if( $('#closed_sunday .icheckbox_square-blue').hasClass('checked') ){
-        //     alert('checked');
-        // }else{
-        //     alert('unch');
-        // }
+
+        var collection = {};
+
+        $('input[type=checkbox]').each(function(){
+            var name = $(this).val();
+            var value = (this.checked ? name : "");
+            collection[name] = value;
+        });
+
+        $('input[type=text]').each(function(){
+            var name = $(this).attr('name');
+            var value = $(this).val();
+            collection[name] = value;
+        });
+        
+        // saveTimes(collection);
+        var id = $('#hours-of-operation').data('id');
+        var CSRF_TOKEN = $('#_token').data('token');
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+        //console.log(times);
+        $.ajax({
+            method: 'POST',
+            url: '/dashboard/location/schedule/'+id,
+            data: collection, // convert array to JSON
+            dataType: 'json',
+            cache: false,
+            timeout: 100000,
+            success: function (data) {
+
+                console.log("SUCCESS : ", data);
+                
+                toastr.options = {
+                  "closeButton": true,
+                  "debug": false,
+                  "newestOnTop": false,
+                  "progressBar": false,
+                  "positionClass": "toast-top-right",
+                  "preventDuplicates": false,
+                  "onclick": null,
+                  "showDuration": "1000",
+                  "hideDuration": "1000",
+                  "timeOut": "5000",
+                  "extendedTimeOut": "1000",
+                  "showEasing": "swing",
+                  "hideEasing": "swing",
+                  "showMethod": "show"
+                }
+                toastr["success"]("Hours of Operation have been successfully updated.", "Successfully Updated")
+
+            },
+            error: function (e) {
+
+                console.log("ERROR : ", e);
+
+            }
+
+        });
+
     });
 
 

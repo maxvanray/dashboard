@@ -264,6 +264,51 @@ class LocationController extends Controller
 */
     }
 
+    public function updateLocationTime(Request $request, $id)
+    {
+
+        $location = Location::find($id);
+
+        $location->sunday_from = $request->sunday_from;
+        $location->sunday_to = $request->sunday_to;
+        $location->sunday_notes = $request->sunday_notes;
+        $location->closed_sunday = $request->closed_sunday;
+
+        $location->monday_from = $request->monday_from;
+        $location->monday_to = $request->monday_to;
+        $location->monday_notes = $request->monday_notes;
+        $location->closed_monday = $request->closed_monday;
+
+        $location->tuesday_from = $request->tuesday_from;
+        $location->tuesday_to = $request->tuesday_to;
+        $location->tuesday_notes = $request->tuesday_notes;
+        $location->closed_tuesday = $request->closed_tuesday;
+
+        $location->wednesday_from = $request->wednesday_from;
+        $location->wednesday_to = $request->wednesday_to;
+        $location->wednesday_notes = $request->wednesday_notes;
+        $location->closed_wednesday = $request->closed_wednesday;
+
+        $location->thursday_from = $request->thursday_from;
+        $location->thursday_to = $request->thursday_to;
+        $location->thursday_notes = $request->thursday_notes;
+        $location->closed_thursday = $request->closed_thursday;
+
+        $location->friday_from = $request->friday_from;
+        $location->friday_to = $request->friday_to;
+        $location->friday_notes = $request->friday_notes;
+        $location->closed_friday = $request->closed_friday;
+
+        $location->saturday_from = $request->saturday_from;
+        $location->saturday_to = $request->saturday_to;
+        $location->saturday_notes = $request->saturday_notes;
+        $location->closed_saturday = $request->closed_saturday;
+
+        $location->save();
+
+        return response()->json(['success'=>'Location Updated.']);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
