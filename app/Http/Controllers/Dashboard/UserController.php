@@ -33,10 +33,10 @@ class UserController extends Controller
     public function staff(Request $request)
     {
         $user = Auth::user();
-        $staff = DB::table('user_admin')
-            ->leftJoin('users', 'users.id', '=', 'user_admin.user_id')
+        $staff = DB::table('user_staff')
+            ->leftJoin('users', 'users.id', '=', 'user_staff.user_id')
             ->get();
-        $activities = Activities::where('user_id', '=', 1)->get();
+        $activities = Activities::where('user_id', '=', $user->id)->get();
 
         return view('dashboard/staff', [
             'user' => $user, 
