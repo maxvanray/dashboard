@@ -184,7 +184,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $name = $request->get('name');
+        $value = $request->get('value');
+        $user->$name = $value;
+        $user->save();
+
+        return $value;
     }
 
     /**

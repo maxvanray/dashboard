@@ -32,6 +32,7 @@ Route::group([
 
 	// User
     Route::resource('user', 'UserController');
+    Route::post('user/{id}', ['as' => 'user.update', 'uses' => 'UserController@update']);
 	Route::get('/guests', 'UserController@guests')->name('guests');
 	Route::get('/staff', 'UserController@staff')->name('staff');
 	Route::get('/add-user', 'UserController@addUser')->name('adduser');

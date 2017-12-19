@@ -90,26 +90,26 @@
                             <td class="table_superuser">
                                 <a 
                                 href="#" 
-                                id="name"
+                                id="first_name"
                                 class="editable editable-click"
                                 name="name" 
                                 data-type="text" 
                                 data-url="{{route('user.update', ['id'=>$user->id])}}"
                                 data-pk="{{ $user->id }}"
-                                data-title="Name">{{ $user->first_name or "<None>" }}</a>
+                                data-title="Enter User First Name">{{ $user->first_name or "<None>" }}</a>
                             </td>
                         </tr>
                         <tr>
                             <td class="table_simple">Last Name:</td>
                             <td class="table_superuser">
                                 <a href="#" 
-                                    id="address" 
+                                    id="last_name" 
                                     class="editable editable-click"
                                     name="address" 
                                     data-type="text" 
                                     data-url="{{route('user.update', ['id'=>$user->id])}}"
                                     data-pk="{{ $user->id }}"
-                                    data-title="Enter User Address">{{ $user->last_name or "<None>" }}</a>
+                                    data-title="Enter User Last Name">{{ $user->last_name or "<None>" }}</a>
                             </td>
                         </tr>
 
@@ -133,13 +133,13 @@
                             <td class="table_simple">Email:</td>
                             <td class="table_superuser">
                                 <a href="#" 
-                                    id="floor" 
+                                    id="email" 
                                     class="editable editable-click"
-                                    name="floor" 
+                                    name="email" 
                                     data-type="text" 
                                     data-url="{{route('user.update', ['id'=>$user->id])}}"
                                     data-pk="{{ $user->id }}"
-                                    data-title="Enter User Floor">{{ $user->email or "<None>" }}</a>
+                                    data-title="Enter User Email">{{ $user->email or "<None>" }}</a>
                             </td>
                         </tr>
                         <tr>
@@ -231,10 +231,7 @@
 <script type="text/javascript"  src="{{asset('assets/vendors/x-editable/js/typeahead.js')}}"></script>
 <script type="text/javascript"  src="{{asset('assets/vendors/x-editable/js/typeaheadjs.js')}}"></script>
 <script type="text/javascript"  src="{{asset('assets/vendors/x-editable/js/address.js')}}"></script>
-<script type="text/javascript"  src="{{asset('assets/vendors/iCheck/js/icheck.js')}}"></script>
 
-<script type="text/javascript" src="{{asset('assets/vendors/toastr/js/toastr.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/js/custom_js/toastr_notifications.js')}}"></script>
 
 <!-- end of page level js -->
 
@@ -246,9 +243,7 @@
 
 <!-- end of page level js -->
 
-<script  type="text/javascript" src="{{asset('assets/vendors/timedropper/js/timedropper.js')}}" ></script>
-<!--<script  type="text/javascript" src="{{asset('assets/js/custom_js/datepickers.js')}}" ></script>-->
-<script type="text/javascript" src="{{asset('assets/js/location-update.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/js/user-update.js')}}"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
