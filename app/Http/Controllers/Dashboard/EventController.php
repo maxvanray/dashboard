@@ -20,14 +20,20 @@ class EventController extends Controller
         $user = Auth::user();
         $events = Event::all();
 
-        return view('dashboard/calendar', ['user' => $user, 'events' => $events]);
+        return view('dashboard/calendar', [
+            'user' => $user, 
+            'events' => $events
+        ]);
     }
 
     public function events()
     {
         $user = Auth::user();
         $events = Event::all();
-        return view('dashboard/events', ['user' => $user, 'events' => $events]);
+        return view('dashboard/events', [
+            'user' => $user, 
+            'events' => $events
+        ]);
     }
 
     /**
@@ -52,10 +58,10 @@ class EventController extends Controller
 
         $event->name = $request->name;
         $event->description = $request->description;
-        $event->type = $request->type;
+        $event->type = 1;
         $event->facilitator = 1;
-
         $event->save();
+
         return response()->json(['success'=>'A new event has been created.']);
     }
 

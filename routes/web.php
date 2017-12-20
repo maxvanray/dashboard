@@ -45,6 +45,7 @@ Route::group([
 	// Scheduling & alendar
     Route::get('/calendar', 'EventController@index')->name('calendar');
     Route::get('/events', 'EventController@events')->name('events');
+    Route::post('/events', 'EventController@store');
 
     // Event
     //Route::resource('/location', 'LocationController');

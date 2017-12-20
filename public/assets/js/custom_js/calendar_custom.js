@@ -126,8 +126,8 @@ $(document).ready(function () {
     $("#add-new-event").on('click', function (e) {
         e.preventDefault();
         //Get values and make sure event title it is not null
-        var val = $("#new-event").val();
-        var description = $("#new-event-description").val();
+        var val = $("#name").val();
+        var description = $("#description").val();
         var type = $('#color-chooser-btn').text().trim();
         if (val.length == 0) {
             return;
@@ -149,7 +149,7 @@ $(document).ready(function () {
         });
         $.ajax({
            type:'POST',
-           url:'/dashboard/event',
+           url:'/dashboard/events',
            data:{name:val, description:description, type:type},
            success:function(data){
               alert(data.success);

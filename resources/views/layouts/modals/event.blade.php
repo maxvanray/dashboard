@@ -10,43 +10,22 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <div class="input-group">
-                    <input type="text" id="new-event" class="form-control" placeholder="Event">
-                    <div class="input-group-btn">
-                        <button type="button" id="color-chooser-btn" class="btn btn-info dropdown-toggle"
-                                data-toggle="dropdown">
-                            Select
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu pull-right" id="color-chooser">
-                            <li>
-                                <a class="palette-primary" href="#">1 - Primary</a>
-                            </li>
-                            <li>
-                                <a class="palette-success" href="#">2 - Success</a>
-                            </li>
-                            <li>
-                                <a class="palette-info" href="#">3 - Info</a>
-                            </li>
-                            <li>
-                                <a class="palette-warning" href="#">4 - warning</a>
-                            </li>
-                            <li>
-                                <a class="palette-danger" href="#">5 - Danger</a>
-                            </li>
-                            <li>
-                                <a class="palette-default" href="#">6 - Default</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /btn-group -->
+
+                <div class="form-group">
+                  <label class="col-md-12 control-label" for="name">Event Name</label>  
+                  <div class="col-md-12">
+                  <input id="name" class="form-control input-md" name="name" type="text" placeholder="Event Name" >
+                  </div>
                 </div>
 
-                <div class="input-group" style="width: 100%">
-                    <input type="textarea" id="new-event-description" class="form-control" placeholder="Event Description...">
+                <div class="form-group">
+                  <label class="col-md-12 control-label" for="description">Description</label>
+                  <div class="col-md-12">                     
+                    <textarea id="description" class="form-control" name="description" placeholder="Event Description"></textarea>
+                  </div>
                 </div>
-                <!-- /input-group -->
-            </div>
+
+            </div><!-- /.modal-body -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger pull-right" id="close_calendar_event"
                         data-dismiss="modal">
