@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Calendar;
 use App\Event;
 use App\User;
 use Auth;
 
-class EventController extends Controller
+
+class CalendarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,24 +19,19 @@ class EventController extends Controller
      */
     public function index()
     {
-        
-    }
-
-    public function events()
-    {
         $user = Auth::user();
         $events = Event::all();
-        return view('dashboard/events', [
+
+        return view('dashboard/calendar', [
             'user' => $user, 
             'events' => $events
         ]);
     }
 
-    public function eventlist()
+    public function calendarList()
     {
-        $events = Event::all();
-        return $events;
-        
+    	$calendar = Calendar::all();
+    	return response( $this->transformCollection($calendar) );
     }
 
     /**
@@ -55,15 +52,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $event = new Event;
-
-        $event->name = $request->name;
-        $event->description = $request->description;
-        $event->type = 1;
-        $event->facilitator = 1;
-        $event->save();
-
-        return response()->json(['success'=>'A new event has been created.']);
+        //
     }
 
     /**
@@ -110,4 +99,31 @@ class EventController extends Controller
     {
         //
     }
+
+
+	/**
+     * @param $parameters
+     * @return array
+     */
+    private function transformCollection($parameters)
+    {
+        $collection = array_map( [$this, 'transform'], $parameters->toArray() );
+        return $collection;
+    }
+
+    /**
+     * @param $param
+     * @return array
+     */
+    private function transform($param)
+    {
+        return [
+            'id' => ($param['id'] === null ? '' : $param['id']),
+            'title' => ($param['title'] === null ? '' : $param['title']),
+            'start' => ($param['startDate'] === null ? '' : $param['startDate']),
+            'end' => ($param['endDate'] === null ? '' : $param['endDate']),
+        ];
+    }
+
+
 }

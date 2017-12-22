@@ -36,6 +36,18 @@ $(document).ready(function () {
         m = date.getMonth(),
         y = date.getFullYear();
     $('#calendar').fullCalendar({
+        eventSources: [
+
+            // your event source
+            {
+                url: '/dashboard/calendarlist', // use the `url` property
+                color: 'yellow',    // an option!
+                textColor: 'black'  // an option!
+            }
+
+            // any other sources...
+
+        ],
         header: {
             left: 'prev,next today',
             center: 'title',
@@ -161,7 +173,7 @@ $(document).ready(function () {
         //Add draggable funtionality
         ini_events(event);
 
-        //Remove event from text input
+        //Reset event text input
         $("#new-event").val("");
     });
     $("#close_calendar_event").on('click', function (e) {

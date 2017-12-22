@@ -51,31 +51,31 @@
 
                             @foreach($events as $event)
 
-                            <div data-event='{{ $event->id }}' class='external-event 
-                            palette-<?php 
+                            <div data-event-id='{{ $event->id }}' class='external-event 
+                            <?php 
                             switch($event->type){
                                 case '1 - primary': 
                                 case'1':
-                                     echo 'primary';
+                                     echo 'palette-primary';
                                 break;
                                 case '2 - success': 
                                 case'2':
-                                    echo 'success';
+                                    echo 'palette-success';
                                 break;
                                 case '3 - info': 
                                 case'3':
-                                    echo 'info';
+                                    echo 'palette-info';
                                 break;
                                 case '4 - warning': 
                                 case'4':
-                                    echo 'warning';
+                                    echo 'palette-warning';
                                 break;
                                 case '5 - danger': 
                                 case'5':
-                                    echo 'danger';
+                                    echo 'palette-danger';
                                 break;
                                 default:
-                                    echo 'default';
+                                    echo 'palette-default';
                             } ?>
                             '>{{ $event->name }}</div>
 

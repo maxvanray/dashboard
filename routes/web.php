@@ -42,9 +42,10 @@ Route::group([
     Route::get('/profile', 'UserController@profile')->name('profile');
     Route::get('/profile/{id}', 'UserController@profile')->name('profile.id');
 
-	// Scheduling & alendar
-    Route::get('/calendar', 'EventController@index')->name('calendar');
+	// Scheduling & Calendar
+    Route::get('/calendar', 'CalendarController@index')->name('calendar');
     Route::get('/events', 'EventController@events')->name('events');
+    Route::get('/calendarlist', 'CalendarController@calendarList');
     Route::post('/events', 'EventController@store');
 
     // Event

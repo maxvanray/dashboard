@@ -120,14 +120,15 @@
                                 'id' => 'formDeleteLocation', 
                                 'data-location' => '0',
                                 'data-dismiss' => 'modal',
-                                'action' => ['Dashboard\LocationController@destroy', 
-                                $location->id]]) !!}
+                                ]) 
+
+                            !!}
                                 {!! Form::button( '
                                         <span class="glyphicon glyphicon-ok-sign confirm"></span> Yes', 
                                     [ 'type' => 'submit', 
                                     'class' => 'btn btn-danger delete deleteProduct',
                                     'id' => 'btnDeleteProduct', 
-                                    'data-id' => $location->id 
+                                    'data-id' => 0 
                                 ] ) !!}
                             {!! Form::close() !!}
                             

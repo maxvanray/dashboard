@@ -7,6 +7,24 @@
 @stop
 
 @section('content')
+<style type="text/css">
+    html, body {
+        background-color: #313e4b;
+        color: #939393;
+        
+    }
+    .panel-default>.panel-heading{
+        background-color: #313e4b;
+        color: #ffffff;
+    }
+    .checkbox{
+        margin-left: 20px;
+        color: #939393;
+    }
+    .control-label{
+        color: #939393;
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

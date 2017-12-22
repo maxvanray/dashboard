@@ -33,7 +33,7 @@
                     <i class="fa fa-times"></i>
                 </button>
                 <button type="button" class="btn btn-success pull-left" id="add-new-event"
-                        data-dismiss="modal">
+                        <?php /* data-dismiss="modal" */ ?> >
                     <i class="fa fa-plus"></i> Add
                 </button>
             </div>

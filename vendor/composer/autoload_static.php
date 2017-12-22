@@ -321,6 +321,7 @@ class ComposerStaticInite0f207ac8813fafc325c3303e473aec8
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Dashboard\\ActivitiesController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/ActivitiesController.php',
+        'App\\Http\\Controllers\\Dashboard\\CalendarController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/CalendarController.php',
         'App\\Http\\Controllers\\Dashboard\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/DashboardController.php',
         'App\\Http\\Controllers\\Dashboard\\EditUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/EditUserController.php',
         'App\\Http\\Controllers\\Dashboard\\EventController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/EventController.php',
