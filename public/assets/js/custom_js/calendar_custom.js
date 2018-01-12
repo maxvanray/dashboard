@@ -10,7 +10,7 @@ $(document).ready(function () {
             // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
             // it doesn't need to have a start or end
             var eventObject = {
-                title: $.trim($(this).text()) // use the element's text as the event title
+                title: $.trim( $(this).text() ) // use the element's text as the event title
             };
 
             // store the Event Object in the DOM element so we can get to it later
@@ -26,7 +26,7 @@ $(document).ready(function () {
         });
     }
 
-    ini_events($('#external-events').find('div.external-event'));
+    ini_events( $('#external-events').find('div.external-event') );
 
     /* initialize the calendar
      -----------------------------------------------------------------*/
@@ -35,19 +35,22 @@ $(document).ready(function () {
     var d = date.getDate(),
         m = date.getMonth(),
         y = date.getFullYear();
+
     $('#calendar').fullCalendar({
-        eventSources: [
+        eventMouseover: function(calEvent, domEvent) {
+            var title = calEvent.title;
+            var start = calEvent.start;
+            var end = calEvent.end;
 
-            // your event source
-            {
-                url: '/dashboard/calendarlist', // use the `url` property
-                color: 'yellow',    // an option!
-                textColor: 'black'  // an option!
-            }
+            console.log( moment(calEvent.start).calendar() );
 
-            // any other sources...
+            //console.log(title);
 
-        ],
+            // $('h3.popover-title').html(title);
+
+            //alert('Title: ' + title);
+            //alert('Start: ' + start);
+      },
         header: {
             left: 'prev,next today',
             center: 'title',
@@ -60,6 +63,34 @@ $(document).ready(function () {
             week: 'week',
             day: 'day'
         },
+        eventRender: function(event, element){
+
+            var startTime = moment(event.start).calendar()
+            var endTime = moment(event.start).calendar()
+
+          element.popover({
+            html : true,
+            title: event.title,
+            animation:true,
+            delay: 300,
+            content: '<div><b>Start</b>:'+startTime+"<br><b>End</b>:"+endTime+"</div>",
+            trigger: 'hover'
+          });
+        },
+
+// $("[data-toggle=popover]").popover({
+//    html : true,
+//    content: function() {
+//       var content = $(this).attr("data-popover-content");
+//       setTimeout(function(){ console.log('execute'); },500);
+//       return $(content).children(".popover-body").html();
+//    },
+//    title: function() {
+//       var title = $(this).attr("data-popover-content");
+//       return $(title).children(".popover-heading").html();
+//    }
+// });
+
         //Random events
         events: [{
             title: 'Team Out',
@@ -139,7 +170,7 @@ $(document).ready(function () {
         e.preventDefault();
         //Get values and make sure event title it is not null
         var val = $("#name").val();
-        var description = $("#description").val();
+        var description = $("#new-event-description").val();
         var type = $('#color-chooser-btn').text().trim();
         if (val.length == 0) {
             return;
@@ -173,7 +204,7 @@ $(document).ready(function () {
         //Add draggable funtionality
         ini_events(event);
 
-        //Reset event text input
+        //Remove event from text input
         $("#new-event").val("");
     });
     $("#close_calendar_event").on('click', function (e) {

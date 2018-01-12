@@ -52,7 +52,20 @@ class CalendarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    	$calendar = Calendar::create($request->all());
+        return response()->json($calendar);
+        // $calendar_event = New Calendar();
+        // $calendar_event->title;
+        // $calendar_event->description;
+        // $calendar_event->startDate;
+        // $calendar_event->endDate;
+        // $calendar_event->startTime;
+        // $calendar_event->endDate;
+        // $calendar_event->backgroundColor;
+        // $calendar_event->facilitator;
+        // $calendar_event->location;
+        // $calendar_event->createdBy;
+        // $calendar_event->save();
     }
 
     /**
@@ -81,12 +94,13 @@ class CalendarController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $id                                                                                                                                                                                                                                                 
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $calendar = Calendar::find($id)->update($request->all());
+        return response()->json($calendar);
     }
 
     /**

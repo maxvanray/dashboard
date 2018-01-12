@@ -1,20 +1,8 @@
 'use strict';
 $(function(){
 
-
     //defaults
-var tokenval = $("#_token").data("token");
-
-    //$.fn.editable.defaults.url = '/post';
-    $.fn.editable.defaults.mode = 'inline';
-
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': tokenval
-      }
-    });
-
-
+    $.fn.editable.defaults.url = '/post';
 
     //enable / disable
     $('#enable').on('click', function() {
@@ -22,66 +10,12 @@ var tokenval = $("#_token").data("token");
     });
 
     //editables 
-    // $('.location-update').editable({
-    
-    //     error: function(response, newValue) {
-    //         if(response.status === 500) {
-    //             return 'Service unavailable. Please try later.';
-    //         } else {
-    //             return response.responseText;
-    //         }
-    //     }
-    // });
-
-    // $('#address').editable({
-        
-    //     type: 'text',
-    //     name: 'address',
-    //     title: 'Enter Address'
-    // });
-
-    // $('#time').editable({
-      
-    //     type: 'text',
-    //     name: 'zip',
-    //     title: 'Enter Address'
-    // });
-
-    // $('#address').editable({
-    //     url: '/post',
-    //     value: {
-    //         buildingnumber: "",
-    //         street: "",
-    //         floornumber: "",
-    //         roomnumber: ""
-    //     },
-    //     validate: function(value) {
-    //         if(value.buildingnumber == '') return 'A building number is required!';
-    //     },
-    //     display: function(value) {
-    //         if(!value) {
-    //             $(this).empty();
-    //             return;
-    //         }
-    //         var html = '<b>' + $('<div>').text(value.buildingnumber+" "+value.street).html() + '</b>, ' + $('<div>').text(value.floornumber).html() + ' Floor, ' + $('<div>Room:').text(value.roomnumber).html();
-    //         $(this).html(html);
-    //     }
-    // });
-
-    $('#city').editable({
+    $('#username').editable({
         url: '/post',
         type: 'text',
         pk: 1,
-        name: 'city',
-        title: 'Enter Location City'
-    });
-
-    $('#state').editable({
-        
-        typeahead: {
-            name: 'state',
-            local: ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
-        }
+        name: 'username',
+        title: 'Enter username'
     });
 
     $('#firstname').editable({
@@ -90,25 +24,25 @@ var tokenval = $("#_token").data("token");
         }
     });
 
-    // $('#sex').editable({
-    //     prepend: "Not Selected",
-    //     source: [
-    //         {value: 1, text: 'Male'},
-    //         {value: 2, text: 'Female'}
-    //     ],
-    //     display: function(value, sourceData) {
-    //         var colors = {"": "gray", 1: "green", 2: "blue"},
-    //             elem = $.grep(sourceData, function(o){return o.value == value;});
+    $('#sex').editable({
+        prepend: "Not Selected",
+        source: [
+            {value: 1, text: 'Male'},
+            {value: 2, text: 'Female'}
+        ],
+        display: function(value, sourceData) {
+            var colors = {"": "gray", 1: "green", 2: "blue"},
+                elem = $.grep(sourceData, function(o){return o.value == value;});
 
-    //         if(elem.length) {
-    //             $(this).text(elem[0].text).css("color", colors[value]);
-    //         } else {
-    //             $(this).empty();
-    //         }
-    //     }
-    // });
+            if(elem.length) {
+                $(this).text(elem[0].text).css("color", colors[value]);
+            } else {
+                $(this).empty();
+            }
+        }
+    });
 
-    //$('#status').editable();
+    $('#status').editable();
 
     $('#group').editable({
         showbuttons: false
@@ -152,7 +86,9 @@ var tokenval = $("#_token").data("token");
         $('#note').editable('toggle');
     });
 
-    
+    $('#state').editable({
+        source: ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]
+    });
 
     $('#state2').editable({
         value: 'California',
@@ -197,7 +133,25 @@ var tokenval = $("#_token").data("token");
 
 
 
-    
+    $('#address').editable({
+        url: '/post',
+        value: {
+            city: "Moscow",
+            street: "Lenina",
+            building: "12"
+        },
+        validate: function(value) {
+            if(value.city == '') return 'city is required!';
+        },
+        display: function(value) {
+            if(!value) {
+                $(this).empty();
+                return;
+            }
+            var html = '<b>' + $('<div>').text(value.city).html() + '</b>, ' + $('<div>').text(value.street).html() + ' st., bld. ' + $('<div>').text(value.building).html();
+            $(this).html(html);
+        }
+    });
 
     $('#user').find('.editable').on('hidden', function(e, reason){
         if(reason === 'save' || reason === 'nochange') {

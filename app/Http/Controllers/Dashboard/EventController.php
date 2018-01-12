@@ -17,7 +17,13 @@ class EventController extends Controller
      */
     public function index()
     {
-        
+        $user = Auth::user();
+        $events = Event::all();
+
+        return view('dashboard/calendar', [
+            'user' => $user, 
+            'events' => $events
+        ]);
     }
 
     public function events()
