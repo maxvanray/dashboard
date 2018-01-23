@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Calendar;
 use App\Event;
 use App\User;
 use Auth;
@@ -80,7 +81,15 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+        $calendar = Calendar::where('event_id', '=', $id)->get();
+        $event = Event::find($id);
+        $user = Auth::user();
+
+        return view('dashboard/events_show', [
+            'calendar' => $calendar,
+            'user' => $user, 
+            'event' => $event
+        ]);
     }
 
     /**

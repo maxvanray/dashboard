@@ -19,6 +19,7 @@
     <!-- global css -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/app.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/spacetime.css')}}">
 @yield('header_styles')
 <!-- end of global css -->
 </head>

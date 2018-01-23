@@ -8,6 +8,7 @@ use App\Calendar;
 use App\Event;
 use App\User;
 use Auth;
+use App\Location;
 
 
 class CalendarController extends Controller
@@ -133,9 +134,18 @@ class CalendarController extends Controller
     {
         return [
             'id' => ($param['id'] === null ? '' : $param['id']),
+            'event_id' => ($param['event_id'] === null ? '' : $param['event_id']),
             'title' => ($param['title'] === null ? '' : $param['title']),
-            'start' => ($param['startDate'] === null ? '' : $param['startDate']),
-            'end' => ($param['endDate'] === null ? '' : $param['endDate']),
+            'description' => ($param['description'] === null ? '' : $param['description']),
+            'start' => ($param['start'] === null ? '' : $param['start']),
+            'end' => ($param['end'] === null ? '' : $param['end']),
+            'all_day' => ($param['all_day'] === null ? '' : $param['all_day']),
+            'facilitator' => ($param['facilitator'] === null ? '' : User::find($param['facilitator'])),
+            'location' => ($param['location'] === null ? '' : Location::find($param['location'])),
+            'price' => ($param['price'] === null ? '' : $param['price']/100),
+            'created_by' => ($param['created_by'] === null ? '' : User::find($param['created_by'])),
+            'created_at' => ($param['created_at'] === null ? '' : $param['created_at']),
+            'updated_at' => ($param['updated_at'] === null ? '' : $param['updated_at']),
         ];
     }
 

@@ -58,7 +58,7 @@
                                         <td>{{ $event->description }}</td>
                                         <td>{{ $event->type }}</td>
                                         <td>{{ $event->pin }}</td>
-                                        <td><a href=#>Edit</a> | <a href="#">Delete</a></td>
+                                        <td><a href="events/{{ $event->id }}">Edit</a> | <a href="#">Delete</a></td>
                                       </tr>
                                        @endforeach
                                     </tbody>

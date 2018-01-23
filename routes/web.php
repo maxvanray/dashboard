@@ -45,6 +45,7 @@ Route::group([
 	// Scheduling & Calendar
     Route::get('/calendar', 'CalendarController@index')->name('calendar');
     Route::get('/events', 'EventController@events')->name('events');
+    Route::get('/events/{id}', 'EventController@show');
     Route::get('/calendarlist', 'CalendarController@calendarList');
     Route::post('/calendarlist', 'CalendarController@store');
     Route::post('/events', 'EventController@store');

@@ -9,12 +9,10 @@
 {{-- page level styles --}}
 @section('header_styles')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <!--page level css -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/fullcalendar/css/fullcalendar.css')}}"/>
     <link rel="stylesheet" media='print' type="text/css" href="{{asset('assets/vendors/fullcalendar/css/fullcalendar.print.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/iCheck/css/all.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/calendar_custom.css')}}"/>
-    <!--end of page level css-->
 @stop
 
 {{-- Page content --}}
@@ -98,6 +96,7 @@
                 <div class="box">
                     <div class="box-body">
                         <div id="calendar"></div>
+                        <div style='clear:both'></div>
                     </div>
                 </div>
                 <!-- /.box -->

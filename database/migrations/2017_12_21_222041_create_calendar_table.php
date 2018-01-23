@@ -16,25 +16,29 @@ class CreateCalendarTable extends Migration
         Schema::create('calendars', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->integer('event_id')->unsigned()->nullable();
+            $table->foreign('event_id')->references('id')->on('events');
+
             $table->string('title')->nullable();
 
             $table->text('description')->nullable();
 
-            $table->date('startDate')->nullable();
-            $table->date('endDate')->nullable();
-            $table->time('startTime')->nullable();
-            $table->time('endTime')->nullable();
+            $table->datetime('start')->nullable();
+            $table->datetime('end')->nullable();
+            $table->string('all_day')->nullable();
 
-            $table->string('backgroundColor')->nullable();
+            $table->string('background_color')->nullable();
 
-            $table->integer('facilitator')->unsigned();
+            $table->integer('facilitator')->unsigned()->nullable();
             $table->foreign('facilitator')->references('id')->on('users');
 
-            $table->integer('location')->unsigned();
+            $table->integer('location')->unsigned()->nullable();
             $table->foreign('location')->references('id')->on('locations');
 
-            $table->integer('createdBy')->unsigned();
-            $table->foreign('createdBy')->references('id')->on('users');
+            $table->integer('price')->nullable();
+
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->foreign('created_by')->references('id')->on('users');
 
             $table->timestamps();
         });

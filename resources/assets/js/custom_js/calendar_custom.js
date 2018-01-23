@@ -6,15 +6,11 @@ $(document).ready(function () {
      -----------------------------------------------------------------*/
     function ini_events(ele) {
         ele.each(function () {
-
-            // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-            // it doesn't need to have a start or end
-            var eventObject = {
-                title: $.trim( $(this).text() ) // use the element's text as the event title
-            };
-
-            // store the Event Object in the DOM element so we can get to it later
-            $(this).data('eventObject', eventObject);
+    
+            $(this).data('event', {
+                title: $.trim($(this).text()), // use the element's text as the event title
+                stick: true // maintain when user navigates (see docs on the renderEvent method)
+            });
 
             // make the event draggable using jQuery UI
             $(this).draggable({
@@ -36,119 +32,92 @@ $(document).ready(function () {
         m = date.getMonth(),
         y = date.getFullYear();
 
+    function closePopovers() {
+        $('.popover').not(this).popover('hide');
+    }
+
+    function event_object(event){
+        var event_data = {
+            event: {
+                allDay: event.allDay,
+                id: event.id,
+                start: event.start.format(),
+                end: event.end.format()
+            }
+        };
+        return event_data;
+    }
+
+    
+
     $('#calendar').fullCalendar({
-        eventMouseover: function(calEvent, domEvent) {
-            var title = calEvent.title;
-            var start = calEvent.start;
-            var end = calEvent.end;
-
-            console.log( moment(calEvent.start).calendar() );
-
-            //console.log(title);
-
-            // $('h3.popover-title').html(title);
-
-            //alert('Title: ' + title);
-            //alert('Start: ' + start);
-      },
         header: {
             left: 'prev,next today',
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
-        buttonText: {
-
-            today: 'today',
-            month: 'month',
-            week: 'week',
-            day: 'day'
-        },
-        eventRender: function(event, element){
-
-            var startTime = moment(event.start).calendar()
-            var endTime = moment(event.start).calendar()
-
-          element.popover({
-            html : true,
-            title: event.title,
-            animation:true,
-            delay: 300,
-            content: '<div><b>Start</b>:'+startTime+"<br><b>End</b>:"+endTime+"</div>",
-            trigger: 'hover'
-          });
-        },
-
-// $("[data-toggle=popover]").popover({
-//    html : true,
-//    content: function() {
-//       var content = $(this).attr("data-popover-content");
-//       setTimeout(function(){ console.log('execute'); },500);
-//       return $(content).children(".popover-body").html();
-//    },
-//    title: function() {
-//       var title = $(this).attr("data-popover-content");
-//       return $(title).children(".popover-heading").html();
-//    }
-// });
-
-        //Random events
-        events: [{
-            title: 'Team Out',
-            start: new Date(y, m, 2),
-            backgroundColor: "#ffb65f"
-        }, {
-            title: 'Client Meeting',
-            start: new Date(y, m, d - 2),
-            end: new Date(y, m, d - 5),
-            backgroundColor: "#4FC1E9"
-        }, {
-            title: 'Repeating Event',
-            start: new Date(y, m, 6)
-        }, {
-            title: 'Birthday Party',
-            start: new Date(y, m, 12),
-            backgroundColor: "#22d69d"
-        }, {
-            title: 'Product Seminar',
-            start: new Date(y, m, 16),
-            backgroundColor: "#dcdcdc"
-        }, {
-            title: 'Anniversary Celebrations',
-            start: new Date(y, m, 26),
-            backgroundColor: "#FFb65f"
-        }, {
-            title: 'Client Meeting',
-            start: new Date(y, m, 10),
-            backgroundColor: "#22d69d"
-        }],
-        editable: true,
-        droppable: true, // this allows things to be dropped onto the calendar !!!
-        drop: function (date, allDay) { // this function is called when something is dropped
-
-            // retrieve the dropped element's stored Event Object
-            var originalEventObject = $(this).data('eventObject');
-
-            // we need to copy it, so that multiple events don't have a reference to the same object
-            var copiedEventObject = $.extend({}, originalEventObject);
-
-            // assign it the date that was reported
-            copiedEventObject.start = date;
-            copiedEventObject.allDay = allDay;
-            copiedEventObject.backgroundColor = $(this).css("background-color");
-            copiedEventObject.borderColor = $(this).css("border-color");
-
-            // render the event on the calendar
-            // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-            $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-            $(".badge12").text(parseInt($(".badge12").text()) + 1);
+        selectable: true,
+        selectHelper: true,
+        droppable: true,
+        drop: function() {
             // is the "remove after drop" checkbox checked?
             if ($('#drop-remove').is(':checked')) {
-                // if so, remove the element from the "Draggable Events" list
-                $(this).remove();
+              // if so, remove the element from the "Draggable Events" list
+              $(this).remove();
             }
+        },
+        editable: true,
+        eventLimit: true,
+        defaultTimedEventDuration: '01:00:00',
+        events: '/dashboard/calendarlist',
+        eventDrop: function(event, delta, revertFunc, jsEvent, ui, view){
+//--------
+            alert(
+                event.title + " was moved " +
+                delta._days + " days and " +
+                delta._milliseconds + " minutes."
+            );
+//--------
+            if (event.allDay) {
+                alert("Event is now all-day");
+            }else{
+                alert("Event has a time-of-day");
+            }
+//--------
+            if (!confirm("Are you sure about this change?")) {
+                revertFunc();
+            }
+//--------
+        },
+        eventResize: function(event, delta, revertFunc) {
 
-        }
+            var event_data_response = event_object(event);
+            console.log(event);
+
+            //alert(event.title + " end is now " + event.end.format());
+
+            // if (!confirm("is this okay?")) {
+            //     revertFunc();
+            // }
+        },
+        eventRender: function(event, element){
+            var start_time = moment(event.start).calendar()
+            var end_time = moment(event.start).calendar()
+            var event_price = event.price;
+            var event_id = event.event_id;
+            element.popover({
+                animation: true,
+                content: '<div class="row"><div class="col-md-12"><b>Start</b>: '+start_time+"<br><b>End</b>: "+end_time+" <br><b>Price:</b> $"+event_price+"<br><a href='/dashboard/events/"+event_id+"' class='btn btn-primary' style='width: 100%'>Edit</a></div></div>",
+                container: 'body',
+                delay: 800,
+                html: true,
+                placement: 'top',
+                title: event.title,
+                trigger: 'hover',
+            });
+        },
     });
+
 
     /* ADDING EVENTS */
     var currColor = "#4FC1E9"; //default
@@ -198,8 +167,6 @@ $(document).ready(function () {
               alert(data.success);
            }
         });
-
-
 
         //Add draggable funtionality
         ini_events(event);

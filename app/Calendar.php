@@ -7,15 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Calendar extends Model
 {
     protected $fillable = [
+        'event_id',
         'title',
         'description',
-        'startDate',
-        'endDate',
-        'startTime',
-        'endDate',
-        'backgroundColor',
+        'start',
+        'end',
+        'all_day',
+        'background_color',
         'facilitator',
         'location',
-        'createdBy'
+        'price',
+        'created_by'
     ];
 }
