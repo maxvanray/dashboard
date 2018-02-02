@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Activities' => $baseDir . '/app/Activities.php',
     'App\\Calendar' => $baseDir . '/app/Calendar.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Event' => $baseDir . '/app/Event.php',
@@ -22,6 +21,7 @@ return array(
     'App\\Http\\Controllers\\Dashboard\\EditUserController' => $baseDir . '/app/Http/Controllers/Dashboard/EditUserController.php',
     'App\\Http\\Controllers\\Dashboard\\EventController' => $baseDir . '/app/Http/Controllers/Dashboard/EventController.php',
     'App\\Http\\Controllers\\Dashboard\\LocationController' => $baseDir . '/app/Http/Controllers/Dashboard/LocationController.php',
+    'App\\Http\\Controllers\\Dashboard\\MediaController' => $baseDir . '/app/Http/Controllers/Dashboard/MediaController.php',
     'App\\Http\\Controllers\\Dashboard\\NewUserController' => $baseDir . '/app/Http/Controllers/Dashboard/NewUserController.php',
     'App\\Http\\Controllers\\Dashboard\\TrafficController' => $baseDir . '/app/Http/Controllers/Dashboard/TrafficController.php',
     'App\\Http\\Controllers\\Dashboard\\UserController' => $baseDir . '/app/Http/Controllers/Dashboard/UserController.php',
@@ -33,6 +33,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Location' => $baseDir . '/app/Location.php',
+    'App\\Media' => $baseDir . '/app/Media.php',
     'App\\Organization' => $baseDir . '/app/Organization.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

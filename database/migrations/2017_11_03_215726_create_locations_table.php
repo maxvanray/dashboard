@@ -27,6 +27,7 @@ class CreateLocationsTable extends Migration
             $table->string('contact')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('capacity')->nullable();
 
             $table->string('sunday_from')->nullable();
             $table->string('sunday_to')->nullable();

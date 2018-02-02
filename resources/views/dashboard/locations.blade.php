@@ -8,9 +8,7 @@
 
 {{-- page level styles --}}
 @section('header_styles')
-    <!--page level css -->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/datatable.css')}}">
-    <!--end of page level css-->
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/datatables/css/dataTables.bootstrap.css')}}"/>
 @stop
 
 {{-- Page content --}}
@@ -156,8 +154,14 @@
 {{-- page level scripts --}}
 @section('footer_scripts')
     <script type="text/javascript" src="{{asset('assets/vendors/datatables/js/jquery.dataTables.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/js/custom_js/simple-table.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/vendors/datatables/js/dataTables.bootstrap.js')}}"></script>
     <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#datatable').DataTable({
+                "responsive": true
+            });
+        });
 
         // EDIT LOCATION
         $('.locationEditBtn').on('click', function(event){

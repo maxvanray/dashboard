@@ -131,21 +131,7 @@
                                                 <div class="table-responsive">
                                                     <table class="table table-responsive">
                                                         <tbody>
-                                                        @foreach ($activities as $activity)
 
-                                                            <tr>
-                                                            <td class="text-center">
-                                                                <i class="icon-hourglass icons"></i>
-                                                            </td>
-                                                            <td>
-                                                                {{ $activity->type }} at the {{ $activity->description }} 
-                                                            </td>
-                                                            <td>
-                                                                {{ $activity->created_at }}
-                                                            </td>
-                                                        </tr>
-
-                                                        @endforeach
                                                         <tr>
                                                             <td class="text-center">
                                                                 <i class="icon-bubble icons"></i>

@@ -4,11 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Activities extends Model
+class Media extends Model
 {
     protected $fillable = [
-        'user_id',
+        'name',
         'type',
         'description',
+        'created_by',
     ];
 }

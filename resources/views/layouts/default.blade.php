@@ -290,7 +290,7 @@
                         <div class="riot">
                             <div>
                                 @auth
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                                 @endauth
                                 <span>
                                         <i class="caret"></i>
@@ -303,7 +303,7 @@
                         <li class="user-header">
                             <img src="{{asset('assets/img/authors/avatar1.jpg')}}" class="img-circle" alt="User Image">
                             <p> @auth
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                                 @endauth</p>
                         </li>
                         <!-- Menu Body -->

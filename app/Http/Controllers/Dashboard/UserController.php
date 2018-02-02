@@ -21,12 +21,10 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $guests = User::get();
-        $activities = Activities::where('user_id', '=', 1)->get();
 
         return view('dashboard/guests', [
             'user' => $user, 
-            'guests' => $guests,
-            'activities' => $activities
+            'guests' => $guests
         ]);
     }
 
@@ -36,12 +34,10 @@ class UserController extends Controller
         $staff = DB::table('user_staff')
             ->leftJoin('users', 'users.id', '=', 'user_staff.user_id')
             ->get();
-        $activities = Activities::where('user_id', '=', $user->id)->get();
 
         return view('dashboard/staff', [
             'user' => $user, 
-            'staff'=> $staff,
-            'activities' => $activities
+            'staff'=> $staff
         ]);
     }
 
@@ -50,22 +46,18 @@ class UserController extends Controller
 
         //$user = User::find(1);
         $user = Auth::user();
-        $activities = Activities::where('user_id', '=', 1)->get();
 
         return view('dashboard/addnew_user', [
-            'user' => $user, 
-            'activities' => $activities
+            'user' => $user
         ]);
     }
 
     public function addUserPost(Request $request)
     {
         $user = Auth::user();
-        $activities = Activities::where('user_id', '=', 1)->get();
 
         return view('dashboard/addnew_user', [
-            'user' => $user, 
-            'activities' => $activities
+            'user' => $user
         ]);
     }
 
@@ -78,12 +70,10 @@ class UserController extends Controller
         //$user = Auth::user();
         $user = User::find($id);
         $guests = User::get();
-        $activities = Activities::where('user_id', '=', 1)->get();
 
         return view('dashboard/user_profile', [
             'user' => $user, 
-            'guests' => $guests,
-            'activities' => $activities
+            'guests' => $guests
         ]);
     }
 

@@ -135,7 +135,8 @@
 @section('footer_scripts')
 
 <script type="text/javascript" src="{{asset('assets/vendors/datatables/js/jquery.dataTables.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/js/custom_js/simple-table.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/vendors/datatables/js/dataTables.bootstrap.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/js/custom_js/datatables_custom.js')}}"></script>
 
 <script type="text/javascript">
 // EDIT USER

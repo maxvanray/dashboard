@@ -53,20 +53,30 @@ class CalendarController extends Controller
      */
     public function store(Request $request)
     {
-    	$calendar = Calendar::create($request->all());
-        return response()->json($calendar);
-        // $calendar_event = New Calendar();
-        // $calendar_event->title;
-        // $calendar_event->description;
-        // $calendar_event->startDate;
-        // $calendar_event->endDate;
-        // $calendar_event->startTime;
-        // $calendar_event->endDate;
-        // $calendar_event->backgroundColor;
-        // $calendar_event->facilitator;
-        // $calendar_event->location;
-        // $calendar_event->createdBy;
-        // $calendar_event->save();
+
+        $input = $request->all();
+
+        $event_id = $input['event'];
+        $user = Auth::user();
+        $event = Event::find($event_id);
+
+        $calendar = New Calendar();
+        if(!empty($event_id)){
+            $calendar->event_id = $event_id;
+            $calendar->price = $event->price;
+            $calendar->title = $event->name;
+            $calendar->description = $event->description;
+            $calendar->created_by = $user->id;
+        }
+        $calendar->background_color = $input['backgroundColor'];
+        $calendar->start = $input['date'];
+        $calendar->all_day = $input['all_day'];
+
+        
+        $calendar->save();
+
+        return $calendar;
+
     }
 
     /**
@@ -95,13 +105,26 @@ class CalendarController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id                                                                                                                                                                                                                                                 
+     * @param  int  $id                                                           
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $calendar = Calendar::find($id)->update($request->all());
-        return response()->json($calendar);
+        
+        $input = $request->all();
+
+        $calendar_id = $input['id'] ?? '';
+        $start = $input['start'] ?? '';
+        $end = $input['end'] ?? '';
+        $all_day = $input['all_day'] ?? '';
+
+        $calendar = Calendar::find($calendar_id);
+        $calendar->all_day = $all_day;
+        $calendar->end = $end;
+        $calendar->start = $start;
+        $calendar->save();
+
+        return response($calendar);
     }
 
     /**
@@ -137,12 +160,16 @@ class CalendarController extends Controller
             'event_id' => ($param['event_id'] === null ? '' : $param['event_id']),
             'title' => ($param['title'] === null ? '' : $param['title']),
             'description' => ($param['description'] === null ? '' : $param['description']),
+
             'start' => ($param['start'] === null ? '' : $param['start']),
             'end' => ($param['end'] === null ? '' : $param['end']),
-            'all_day' => ($param['all_day'] === null ? '' : $param['all_day']),
+            'allDay' => ($param['all_day'] === null ? '' : $param['all_day']),
+
+            'color' => ($param['background_color'] === null ? '' : '#'.$param['background_color']),
             'facilitator' => ($param['facilitator'] === null ? '' : User::find($param['facilitator'])),
             'location' => ($param['location'] === null ? '' : Location::find($param['location'])),
             'price' => ($param['price'] === null ? '' : $param['price']/100),
+            'backgroundColor' => ($param['background_color'] === null ? '' : $param['background_color']),
             'created_by' => ($param['created_by'] === null ? '' : User::find($param['created_by'])),
             'created_at' => ($param['created_at'] === null ? '' : $param['created_at']),
             'updated_at' => ($param['updated_at'] === null ? '' : $param['updated_at']),

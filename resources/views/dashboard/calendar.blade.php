@@ -11,6 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/fullcalendar/css/fullcalendar.css')}}"/>
     <link rel="stylesheet" media='print' type="text/css" href="{{asset('assets/vendors/fullcalendar/css/fullcalendar.print.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/toastr/css/toastr.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/iCheck/css/all.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/calendar_custom.css')}}"/>
 @stop
@@ -75,7 +76,7 @@
                                 default:
                                     echo 'palette-default';
                             } ?>
-                            '>{{ $event->name }}</div>
+                            ' title="{{ $event->name }}">{{ $event->name }}</div>
 
                             @endforeach
 
@@ -96,7 +97,6 @@
                 <div class="box">
                     <div class="box-body">
                         <div id="calendar"></div>
-                        <div style='clear:both'></div>
                     </div>
                 </div>
                 <!-- /.box -->
@@ -112,6 +112,7 @@
 {{-- page level scripts --}}
 @section('footer_scripts')
     <!-- begining of page level js -->
+    <script type="text/javascript" src="{{asset('assets/vendors/toastr/js/toastr.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/vendors/moment/js/moment.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/vendors/fullcalendar/js/fullcalendar.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/vendors/iCheck/js/icheck.js')}}"></script>

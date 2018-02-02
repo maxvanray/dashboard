@@ -13,7 +13,7 @@
                     <div class="content-profile">
                         <h4 class="media-heading">
                             @auth
-                                {{ Auth::user()->name }}
+                                {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                             @endauth
                         </h4>
                         <ul class="icon-list">
@@ -88,7 +88,7 @@
                         </li>
                         <li {!! ($routename===('profile')? 'class="active"':"") !!}>
                             <a href="{{ @route('profile') }} ">
-                                <i class="fa fa-fw fa-user-md"></i> View Profile
+                                <i class="fa fa-fw fa-user-md"></i> View My Profile
                             </a>
                         </li>
                     </ul>
@@ -131,6 +131,27 @@
                         <li {!! ($routename===('location.create')? 'class="active"':"") !!}>
                             <a href="{{ @route('location.create') }} ">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i> Create Location
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <?php // MEDIA ?>
+                <li {!! ($routename===('media.index')||$routename===('media.create')? 'class="active"':"") !!}>
+                    <a href="#">
+                        <i class="menu-icon fa fa-fw fa-camera"></i>
+                        <span>Media</span> <span
+                                class="fa arrow"></span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li {!! ($routename===('media.index')? 'class="active"':"") !!}>
+                            <a href="{{ @route('media.index') }} ">
+                                <i class="fa fa-list" aria-hidden="true"></i> Media Library
+                            </a>
+                        </li>
+                        <li {!! ($routename===('media.create')? 'class="active"':"") !!}>
+                            <a href="{{ @route('media.create') }} ">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i> Add Media
                             </a>
                         </li>
                     </ul>

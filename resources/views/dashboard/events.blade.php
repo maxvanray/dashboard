@@ -58,7 +58,33 @@
                                         <td>{{ $event->description }}</td>
                                         <td>{{ $event->type }}</td>
                                         <td>{{ $event->pin }}</td>
-                                        <td><a href="events/{{ $event->id }}">Edit</a> | <a href="#">Delete</a></td>
+                                        <td>
+                                            <a href="events/{{ $event->id }}">
+                                                <span class="glyphicon glyphicon-pencil"></span>
+                                            </a>
+                                            |
+                                            <a href="#">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </a>
+                                        </td>
+                                        <?php /*<td>
+                                          <button
+                                                  class="btn btn-primary btn-xs userEditBtn"
+                                                  data-user="{{ $staff_member->id }}"
+                                                  data-target="#edit"
+                                                  data-placement="top">
+                                              <span class="glyphicon glyphicon-pencil"></span>
+                                          </button>
+                                          |
+                                          <button
+                                                  class="btn btn-danger btn-xs userDeleteBtn"
+                                                  data-user="{{ $staff_member->id }}"
+                                                  data-toggle="modal"
+                                                  data-target="#delete"
+                                                  data-placement="top">
+                                              <span class="glyphicon glyphicon-trash"></span>
+                                          </button>
+                                        </td> */ ?>
                                       </tr>
                                        @endforeach
                                     </tbody>

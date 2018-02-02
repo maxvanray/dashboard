@@ -1,4 +1,3 @@
-
 "use strict";
 
 $(document).ready(function () {
@@ -6,7 +5,7 @@ $(document).ready(function () {
      -----------------------------------------------------------------*/
     function ini_events(ele) {
         ele.each(function () {
-    
+
             $(this).data('event', {
                 title: $.trim($(this).text()), // use the element's text as the event title
                 stick: true // maintain when user navigates (see docs on the renderEvent method)
@@ -22,7 +21,7 @@ $(document).ready(function () {
         });
     }
 
-    ini_events( $('#external-events').find('div.external-event') );
+    ini_events($('#external-events').find('div.external-event'));
 
     /* initialize the calendar
      -----------------------------------------------------------------*/
@@ -36,7 +35,7 @@ $(document).ready(function () {
         $('.popover').not(this).popover('hide');
     }
 
-    function event_object(event){
+    function event_object(event) {
         var event_data = {
             event: {
                 allDay: event.allDay,
@@ -48,7 +47,6 @@ $(document).ready(function () {
         return event_data;
     }
 
-    
 
     $('#calendar').fullCalendar({
         header: {
@@ -59,55 +57,95 @@ $(document).ready(function () {
         selectable: true,
         selectHelper: true,
         droppable: true,
-        drop: function() {
-            // is the "remove after drop" checkbox checked?
-            if ($('#drop-remove').is(':checked')) {
-              // if so, remove the element from the "Draggable Events" list
-              $(this).remove();
-            }
-        },
         editable: true,
         eventLimit: true,
+        defaultView: 'agendaWeek',
         defaultTimedEventDuration: '01:00:00',
         events: '/dashboard/calendarlist',
-        eventDrop: function(event, delta, revertFunc, jsEvent, ui, view){
-//--------
-            alert(
-                event.title + " was moved " +
-                delta._days + " days and " +
-                delta._milliseconds + " minutes."
-            );
-//--------
+        drop: function (date, event, ui, resourceId) {
+            var event_id = $(event.target).attr('data-event-id');
+            var calendar_date = date.format();
+            var calendar_time = date.format("hh:mm:ss a");
+            var all_day = date._ambigTime;
+            var bg_color = $(event.target).css('backgroundColor');
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'POST',
+                url: '/dashboard/calendar',
+                data: {
+                    event: event_id,
+                    date: calendar_date,
+                    time: calendar_time,
+                    all_day: all_day,
+                    backgroundColor: bg_color
+                },
+                success: function (data) {
+                    location.reload();
+                }
+            });
+            // var m = date.moment();
+            // console.log(m);
+            // is the "remove after drop" checkbox checked?
+            if ($('#drop-remove').is(':checked')) {
+                // if so, remove the element from the "Draggable Events" list
+                $(this).remove();
+            }
+        },
+        eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
+
+            /*--------
+                alert(
+                    " id " + event.id + " " +
+                    event.title + " was moved " +
+                    delta._days + " days and " +
+                    delta._milliseconds + " minutes."
+                );
+            */
             if (event.allDay) {
-                alert("Event is now all-day");
-            }else{
-                alert("Event has a time-of-day");
+                toastr["success"](event.title + " is now all-day", event.title);
+            } else {
+                toastr["success"](event.title + " has a time-of-day", event.title);
             }
-//--------
-            if (!confirm("Are you sure about this change?")) {
-                revertFunc();
-            }
-//--------
+        //--------
+        //     if (!confirm("Are you sure about this change?")) {
+        //         revertFunc();
+        //     }
+        //--------
+        // var calender_id = event.id;
+        // var all_day = event.allDay;
+        // var start = event.start.format();
+
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'POST',
+                url: '/dashboard/calendar/update',
+                data: {
+                    id: event.id,
+                    start: event.start.format(),
+                    all_day: event.allDay
+                },
+                success: function (data) {
+                    //location.reload();
+                },
+                fail: function (data) {
+                    console.log("error");
+                    console.log(data);
+                }
+            });
         },
-        eventResize: function(event, delta, revertFunc) {
-
-            var event_data_response = event_object(event);
-            console.log(event);
-
-            //alert(event.title + " end is now " + event.end.format());
-
-            // if (!confirm("is this okay?")) {
-            //     revertFunc();
-            // }
-        },
-        eventRender: function(event, element){
-            var start_time = moment(event.start).calendar()
-            var end_time = moment(event.start).calendar()
+        eventRender: function (event, element) {
+            var start_time = moment(event.start).calendar();
+            var end_time = moment(event.start).calendar();
             var event_price = event.price;
             var event_id = event.event_id;
             element.popover({
                 animation: true,
-                content: '<div class="row"><div class="col-md-12"><b>Start</b>: '+start_time+"<br><b>End</b>: "+end_time+" <br><b>Price:</b> $"+event_price+"<br><a href='/dashboard/events/"+event_id+"' class='btn btn-primary' style='width: 100%'>Edit</a></div></div>",
+                content: '<div class="row"><div class="col-md-12"><b>Start</b>: ' + start_time + "<br><b>End</b>: " + end_time + " <br><b>Price:</b> $" + event_price + "<br><a href='/dashboard/events/" + event_id + "' class='btn btn-primary' style='width: 100%'>Edit</a></div></div>",
                 container: 'body',
                 delay: 800,
                 html: true,
@@ -116,11 +154,36 @@ $(document).ready(function () {
                 trigger: 'hover',
             });
         },
+        eventResize: function (event, delta, revertFunc) {
+            var end = event.end.format();
+            console.log(end);
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'POST',
+                url: '/dashboard/calendar/update',
+                data: {
+                    id: event.id,
+                    start: event.start.format(),
+                    end: end,
+                    all_day: event.allDay
+                },
+                success: function (data) {
+                    //location.reload();
+                },
+                fail: function (data) {
+                    alert("error");
+                    console.log(data);
+                }
+            });
+        },
     });
 
 
     /* ADDING EVENTS */
-    var currColor = "#4FC1E9"; //default
+    var currColor = "#ffffff"; //default
     //Color chooser button
     var colorChooser = $("#color-chooser-btn");
     $("#color-chooser").find('li a').on('click', function (e) {
@@ -148,7 +211,7 @@ $(document).ready(function () {
         var event = $("<div />");
         event.css({
             "background-color": currColor,
-            "border-color": currColor,  
+            "border-color": currColor,
             "color": "#fff"
         }).addClass("external-event");
         event.html(val);
@@ -160,12 +223,12 @@ $(document).ready(function () {
             }
         });
         $.ajax({
-           type:'POST',
-           url:'/dashboard/events',
-           data:{name:val, description:description, type:type},
-           success:function(data){
-              alert(data.success);
-           }
+            type: 'POST',
+            url: '/dashboard/events',
+            data: {name: val, description: description, type: type},
+            success: function (data) {
+                alert(data.success);
+            }
         });
 
         //Add draggable funtionality

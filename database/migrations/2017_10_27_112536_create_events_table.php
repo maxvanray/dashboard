@@ -17,6 +17,7 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->longText('description')->nullable();
+            $table->string('background_color')->nullable();
             $table->string('type')->nullable();
             $table->decimal('price')->nullable();
             $table->integer('facilitator')->unsigned();

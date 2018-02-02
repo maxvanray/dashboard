@@ -23,8 +23,8 @@ class CreateCalendarTable extends Migration
 
             $table->text('description')->nullable();
 
-            $table->datetime('start')->nullable();
-            $table->datetime('end')->nullable();
+            $table->string('start')->nullable();
+            $table->string('end')->nullable();
             $table->string('all_day')->nullable();
 
             $table->string('background_color')->nullable();
@@ -34,6 +34,8 @@ class CreateCalendarTable extends Migration
 
             $table->integer('location')->unsigned()->nullable();
             $table->foreign('location')->references('id')->on('locations');
+
+            $table->string('capacity')->nullable();
 
             $table->integer('price')->nullable();
 

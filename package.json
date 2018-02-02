@@ -19,5 +19,8 @@
         "laravel-mix": "^1.5.1",
         "lodash": "^4.17.4",
         "vue": "^2.1.10"
+    },
+    "dependencies": {
+        "spectrum-colorpicker": "^1.8.0"
     }
 }

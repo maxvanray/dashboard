@@ -22,9 +22,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //dashboard
 Route::group([
+
     'prefix' => 'dashboard', 
     'namespace' => 'Dashboard', 
     'middleware' => 'auth'
+
 ], function () {
 
 	// Dashboard
@@ -42,12 +44,21 @@ Route::group([
     Route::get('/profile', 'UserController@profile')->name('profile');
     Route::get('/profile/{id}', 'UserController@profile')->name('profile.id');
 
-	// Scheduling & Calendar
+	// Calendar
     Route::get('/calendar', 'CalendarController@index')->name('calendar');
-    Route::get('/events', 'EventController@events')->name('events');
-    Route::get('/events/{id}', 'EventController@show');
+    Route::post('/calendar', 'CalendarController@store')->name('calendar.post');
+    Route::post('/calendar/update', 'CalendarController@update')->name('calendar.update');
+
     Route::get('/calendarlist', 'CalendarController@calendarList');
     Route::post('/calendarlist', 'CalendarController@store');
+
+    //Media
+    Route::get('/media', 'MediaController@index')->name('media.index');
+    Route::get('/media/create', 'MediaController@create')->name('media.create');
+
+    //Events
+    Route::get('/events', 'EventController@events')->name('events');
+    Route::get('/events/{id}', 'EventController@show'); 
     Route::post('/events', 'EventController@store');
 
     // Event
