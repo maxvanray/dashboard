@@ -49,7 +49,8 @@ Route::group([
     Route::post('/calendar', 'CalendarController@store')->name('calendar.post');
     Route::post('/calendar/update', 'CalendarController@update')->name('calendar.update');
 
-    Route::get('/calendarlist', 'CalendarController@calendarList');
+    //Route::get('/calendarlist', 'CalendarController@calendarList');
+    Route::get('/calendarlist/{location}', 'CalendarController@calendarList');
     Route::post('/calendarlist', 'CalendarController@store');
 
     //Media

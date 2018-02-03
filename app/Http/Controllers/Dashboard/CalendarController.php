@@ -22,16 +22,18 @@ class CalendarController extends Controller
     {
         $user = Auth::user();
         $events = Event::all();
+        $locations = Location::all();
 
         return view('dashboard/calendar', [
             'user' => $user, 
-            'events' => $events
+            'events' => $events,
+            'locations' => $locations
         ]);
     }
 
-    public function calendarList()
+    public function calendarList($location)
     {
-    	$calendar = Calendar::all();
+        $calendar = Calendar::where('location', '=', $location)->get();
     	return response( $this->transformCollection($calendar) );
     }
 
@@ -59,7 +61,6 @@ class CalendarController extends Controller
         $event_id = $input['event'];
         $user = Auth::user();
         $event = Event::find($event_id);
-
         $calendar = New Calendar();
         if(!empty($event_id)){
             $calendar->event_id = $event_id;
@@ -68,6 +69,7 @@ class CalendarController extends Controller
             $calendar->description = $event->description;
             $calendar->created_by = $user->id;
         }
+        $calendar->location = $input['location'];
         $calendar->background_color = $input['backgroundColor'];
         $calendar->start = $input['date'];
         $calendar->all_day = $input['all_day'];

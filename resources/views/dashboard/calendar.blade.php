@@ -96,7 +96,36 @@
             <div class="col-md-9">
                 <div class="box">
                     <div class="box-body">
-                        <div id="calendar"></div>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <i class="fa fa-fw fa-columns"></i> Calendar
+                                </h3>
+                                <span class="pull-right">
+                                    <i class="fa fa-fw fa-chevron-up clickable"></i>
+                                    <i class="fa fa-fw fa-times removepanel clickable"></i>
+                            </span>
+                            </div>
+                            <div class="panel-body">
+                                <div class="bs-example">
+                                    <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+                                        @for ($i = 0; $i < count($locations); $i++)
+                                        <li class="{{ $i===0 ? 'active' : '' }}" data-location="{{$locations[$i]['id']}}">
+                                            <a href="#location_{{$locations[$i]['id']}}" data-toggle="tab">{{$locations[$i]['name']}}</a>
+                                        </li>
+                                        @endfor
+                                    </ul>
+                                    <div id="myTabContent" class="tab-content">
+                                        @for ($i = 0; $i < count($locations); $i++)
+                                        <div class="tab-pane fade {{ $i===0 ? 'active in' : '' }}" id="location_{{$locations[$i]['id']}}">
+                                            <div class="calendar" data-location="{{$locations[$i]['id']}}"></div>
+                                        </div>
+                                        @endfor
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <!-- /.box -->

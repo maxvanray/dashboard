@@ -47,8 +47,147 @@ $(document).ready(function () {
         return event_data;
     }
 
+    $('.calendar').each(function(){
+        var location_id = $(this).data('location');
+        // alert(location_id);
+        $(this).fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            selectable: true,
+            selectHelper: true,
+            droppable: true,
+            editable: true,
+            eventLimit: true,
+            defaultView: 'agendaWeek',
+            defaultTimedEventDuration: '01:00:00',
+            events: '/dashboard/calendarlist/'+location_id,
+            drop: function (date, event, ui, resourceId) {
+                var event_id = $(event.target).attr('data-event-id');
+                var calendar_date = date.format();
+                var calendar_time = date.format("hh:mm:ss a");
+                var all_day = date._ambigTime;
+                var bg_color = $(event.target).css('backgroundColor');
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'POST',
+                    url: '/dashboard/calendar',
+                    data: {
+                        location: location_id,
+                        event: event_id,
+                        date: calendar_date,
+                        time: calendar_time,
+                        all_day: all_day,
+                        backgroundColor: bg_color
+                    },
+                    success: function (data) {
+                        location.reload();
+                    }
+                });
+                // var m = date.moment();
+                // console.log(m);
+                // is the "remove after drop" checkbox checked?
+                if ($('#drop-remove').is(':checked')) {
+                    // if so, remove the element from the "Draggable Events" list
+                    $(this).remove();
+                }
+            },
+            eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
 
-    $('#calendar').fullCalendar({
+                /*--------
+                    alert(
+                        " id " + event.id + " " +
+                        event.title + " was moved " +
+                        delta._days + " days and " +
+                        delta._milliseconds + " minutes."
+                    );
+                */
+                if (event.allDay) {
+                    toastr["success"](event.title + " is now all-day", event.title);
+                } else {
+                    toastr["success"](event.title + " has a time-of-day", event.title);
+                }
+                //--------
+                //     if (!confirm("Are you sure about this change?")) {
+                //         revertFunc();
+                //     }
+                //--------
+                // var calender_id = event.id;
+                // var all_day = event.allDay;
+                // var start = event.start.format();
+
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'POST',
+                    url: '/dashboard/calendar/update',
+                    data: {
+                        location: location_id,
+                        id: event.id,
+                        start: event.start.format(),
+                        all_day: event.allDay
+                    },
+                    success: function (data) {
+                        //location.reload();
+                    },
+                    fail: function (data) {
+                        console.log("error");
+                        console.log(data);
+                    }
+                });
+            },
+            eventRender: function (event, element) {
+                var start_time = moment(event.start).calendar();
+                var end_time = moment(event.start).calendar();
+                var event_price = event.price;
+                var event_id = event.event_id;
+                element.popover({
+                    animation: true,
+                    content: '<div class="row"><div class="col-md-12"><b>Start</b>: ' + start_time + "<br><b>End</b>: " + end_time + " <br><b>Price:</b> $" + event_price + "<br><a href='/dashboard/events/" + event_id + "' class='btn btn-primary' style='width: 100%'>Edit</a></div></div>",
+                    container: 'body',
+                    delay: 800,
+                    html: true,
+                    placement: 'top',
+                    title: event.title,
+                    trigger: 'hover',
+                });
+            },
+            eventResize: function (event, delta, revertFunc) {
+                var end = event.end.format();
+                console.log(end);
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'POST',
+                    url: '/dashboard/calendar/update',
+                    data: {
+                        id: event.id,
+                        start: event.start.format(),
+                        end: end,
+                        all_day: event.allDay
+                    },
+                    success: function (data) {
+                        //location.reload();
+                    },
+                    fail: function (data) {
+                        alert("error");
+                        console.log(data);
+                    }
+                });
+            },
+        });
+    });
+
+
+   /* $('.calendar').fullCalendar({
         header: {
             left: 'prev,next today',
             center: 'title',
@@ -61,7 +200,7 @@ $(document).ready(function () {
         eventLimit: true,
         defaultView: 'agendaWeek',
         defaultTimedEventDuration: '01:00:00',
-        events: '/dashboard/calendarlist',
+        events: '/dashboard/calendarlist/'+$(this).data('location'),
         drop: function (date, event, ui, resourceId) {
             var event_id = $(event.target).attr('data-event-id');
             var calendar_date = date.format();
@@ -95,14 +234,14 @@ $(document).ready(function () {
         },
         eventDrop: function (event, delta, revertFunc, jsEvent, ui, view) {
 
-            /*--------
+            /!*--------
                 alert(
                     " id " + event.id + " " +
                     event.title + " was moved " +
                     delta._days + " days and " +
                     delta._milliseconds + " minutes."
                 );
-            */
+            *!/
             if (event.allDay) {
                 toastr["success"](event.title + " is now all-day", event.title);
             } else {
@@ -179,11 +318,11 @@ $(document).ready(function () {
                 }
             });
         },
-    });
+    });*/
 
 
     /* ADDING EVENTS */
-    var currColor = "#ffffff"; //default
+    var currColor = "#4FC1E9"; //default
     //Color chooser button
     var colorChooser = $("#color-chooser-btn");
     $("#color-chooser").find('li a').on('click', function (e) {
