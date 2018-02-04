@@ -53,6 +53,14 @@
                         </div>
                         <div id="gallery-content">
                             <div id="gallery-content-center">
+                                @foreach($media as $m )
+                                    <a class="fancybox img-responsive" href="{{ url('/') }}/{{ $m->location.'/'.$m->filename }}"
+                                       data-fancybox-group="gallery" title="ID: {{ $m->id }} | {{ $m->name }}">
+                                        <img alt="{{ $m->name }}" src="{{ url('/') }}/{{ $m->location.'/'.$m->filename }}" class="all studio"/>
+                                    </a>
+                                @endforeach
+                                <?php
+                                /*
                                 <a class="fancybox img-responsive" href="{{asset('assets/img/gallery/full/1.jpg')}}"
                                    data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet">
                                     <img alt="gallery" src="{{asset('assets/img/gallery/full/1.jpg')}}" class="all studio"/>
@@ -188,7 +196,8 @@
                                 <a class="fancybox img-responsive" href="{{asset('assets/img/gallery/full/34.jpg')}}"
                                    data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet">
                                     <img alt="gallery" src="{{asset('assets/img/gallery/thumbs/34.jpg')}}" class="all studio"/>
-                                </a>
+                                </a> */
+                                ?>
                             </div>
                         </div>
                         <!-- .images-box -->

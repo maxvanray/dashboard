@@ -16,6 +16,14 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>Add Media</h1>
+
+           <?php /* {!! Form::open(['route' => 'media.post', 'files' => true]) !!}
+
+            {{ Form::label('media', 'E-Mail Address', ['class' => 'media']) }}
+            {{ Form::file('media') }}
+            {{ Form::submit('Click Me!') }}
+            {!! Form::close() !!} */ ?>
+
             <ol class="breadcrumb">
                 <li>
                     <a href="index">
@@ -31,8 +39,11 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
+                    {!! Form::open(['route' => 'media.post', 'files' => true]) !!}
                     <p><strong>Upload Media:</strong> AllowedFileExtensions (JPG, PNG and GIF )</p>
-                    <input type="file" class="dropify" data-allowed-file-extensions="jpg png gif"/>
+                    <input name="media" type="file" class="dropify" data-allowed-file-extensions="jpg png gif" data-max-file-size="2M" />
+                    {{ Form::submit('Submit') }}
+                    {!! Form::close() !!}
                 </div>
             </div>
             {{--end of row--}}

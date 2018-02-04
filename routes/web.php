@@ -55,6 +55,7 @@ Route::group([
 
     //Media
     Route::get('/media', 'MediaController@index')->name('media.index');
+    Route::post('/media', 'MediaController@store')->name('media.post');
     Route::get('/media/create', 'MediaController@create')->name('media.create');
 
     //Events

@@ -15,8 +15,12 @@ class CreateMediaTable extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('filename')->nullable();
+            $table->string('filename_original')->nullable();
+            $table->string('location')->nullable();
             $table->string('name')->nullable();
             $table->text('description')->nullable();
+            $table->boolean('active')->nullable();
             $table->string('type')->nullable();
             $table->integer('created_by')->unsigned()->nullable();
             $table->foreign('created_by')->references('id')->on('users');
