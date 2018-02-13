@@ -17,6 +17,16 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class MediaController extends Controller
 {
+
+    protected function replaceAll($text)
+    {
+        $text = strtolower(htmlentities($text));
+        $text = str_replace(get_html_translation_table(), "-", $text);
+        $text = str_replace(" ", "-", $text);
+        $text = preg_replace("/[-]+/i", "-", $text);
+        return $text;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,11 +34,32 @@ class MediaController extends Controller
      */
     public function index()
     {
+
         $media = Media::all();
+
+        $media_categories = '';
+        foreach($media as $m){
+            $media_categories .= ','.$m->categories;
+        }
+        $media_categories = str_replace("-", " ", $media_categories);
+        $categories_array = explode(",", $media_categories);
+        $categories_unique = array_unique($categories_array);
+        $categories = array_filter($categories_unique);
+        sort($categories);
+
+        $clean_categories = [];
+        foreach ($categories as $cat){
+            $clean_categories[$cat] = $this->replaceAll($cat);
+        }
+
         $user = Auth::user();
         $events = Event::all();
 
+
+
         return view('dashboard/media', [
+            'clean_categories' => $clean_categories,
+            'categories' => $categories,
             'media' => $media,
             'user' => $user,
             'events' => $events
@@ -71,12 +102,13 @@ class MediaController extends Controller
 
         if($request->hasFile('media'))
         {
+            $categories = $request->categories;
             $destination_path = 'media_library';
             $file = $request->file('media');
             $extension = strtolower($file->getClientOriginalExtension());
             $filename_original = $file->getClientOriginalName();
             $mime_type = $file->getClientMimeType();
-            $filename = $user->id .'-'. date("Y-m-d-h:i:sa") .'.'. $extension;
+            $filename = $user->id .'-'. uniqid() .'.'. $extension;
 
             $img = Image::make($file->getRealPath());
 
@@ -85,11 +117,13 @@ class MediaController extends Controller
             })->save(public_path('/'.$destination_path).'/'.$filename);
 
             $media_item = new Media;
-            $media_item->name = $filename_original;
+            $media_item->name = $request->name;
             $media_item->filename_original = $filename_original;
             $media_item->filename = $filename;
             $media_item->type = $extension;
-            $media_item->description = $mime_type;
+            $media_item->description = $request->description;
+            $media_item->categories = $categories;
+            $media_item->mime = $mime_type;
             $media_item->active = 1;
             $media_item->location = $destination_path;
             $media_item->created_by = $user->id;

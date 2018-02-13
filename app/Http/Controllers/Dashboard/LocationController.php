@@ -8,6 +8,8 @@ use App\User;
 use App\Event;
 use App\Location;
 use Auth;
+use App\Media;
+
 
 class LocationController extends Controller
 {
@@ -21,8 +23,10 @@ class LocationController extends Controller
         $user = Auth::user();
         $events = Event::all();
         $locations = Location::all();
+        $media = Media::all();
 
         return view('dashboard/locations', [
+            'media' => $media,
             'user' => $user, 
             'events' => $events, 
             'locations' => $locations
@@ -132,7 +136,18 @@ class LocationController extends Controller
     public function show($id)
     {
         $location = Location::find($id);
-        return view('dashboard.location_show', compact('location'));
+
+        $image_keys = $location->images;
+        $image_keys_array = explode(',',$image_keys);
+        $images = [];
+        foreach($image_keys_array as $k){
+            $images[] = Media::find($k);
+        }
+        $location['images'] = $images;
+
+        return view('dashboard.location_show',
+            ['location' => $location]
+        );
     }
 
     /**

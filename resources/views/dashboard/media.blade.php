@@ -35,28 +35,39 @@
                     <div id="gallery">
                         <div class="row m-b-10">
                             <div class="col-md-5 col-xs-12" id="gallery-header-center-left-title">
-                                All Galleries
+                                All Media
                             </div>
                             <div class="pull-right">
                                 <div class="col-xs-12">
                                     <button type="button" id="filter-all" class="btn btn-responsive btn-info btn-xs">
                                         All
                                     </button>
-                                    <button type="button" id="filter-studio"
-                                            class="btn btn-responsive btn-primary btn-xs">Studio
-                                    </button>
-                                    <button type="button" id="filter-landscape"
-                                            class="btn btn-responsive btn-success btn-xs">Landscape
-                                    </button>
+                                    @foreach($clean_categories as $k => $v)
+                                        <button type="button" id="filter-{{$v}}"
+                                                class="btn btn-responsive btn-primary btn-xs">{{$v}}
+                                        </button>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                         <div id="gallery-content">
                             <div id="gallery-content-center">
                                 @foreach($media as $m )
-                                    <a class="fancybox img-responsive" href="{{ url('/') }}/{{ $m->location.'/'.$m->filename }}"
-                                       data-fancybox-group="gallery" title="ID: {{ $m->id }} | {{ $m->name }}">
-                                        <img alt="{{ $m->name }}" src="{{ url('/') }}/{{ $m->location.'/'.$m->filename }}" class="all studio"/>
+                                    <a class="fancybox img-responsive"
+                                       href="{{ url('/') }}/{{ $m->location.'/'.$m->filename }}"
+                                       data-fancybox-group="gallery"
+                                       title="Name: {{ $m->name }} | ID: {{ $m->id }} | {{ $m->description }}">
+                                        <img alt="gallery" src="{{ url('/') }}/{{ $m->location.'/'.$m->filename }}" class="all @php
+                                            $media_categories = $m->categories;
+                                            $categories_array = explode(",", $media_categories);
+                                            foreach($categories_array as $mcat){
+                                                $text = strtolower(htmlentities($mcat));
+                                                $text = str_replace(get_html_translation_table(), "-", $text);
+                                                $text = str_replace(" ", "-", $text);
+                                                $text = preg_replace("/[-]+/i", "-", $text);
+                                                echo ' '.$text.' ';
+                                            }
+                                        @endphp "/>
                                     </a>
                                 @endforeach
                                 <?php
@@ -211,9 +222,34 @@
 @stop
 
 @section('footer_scripts')
+
     <script type="text/javascript" src="{{asset('assets/js/jquery.isotope.min.js')}}" ></script>
     <script type="text/javascript" src="{{asset('assets/vendors/fancybox/jquery.fancybox.pack.js')}}" ></script>
     <script type="text/javascript" src="{{asset('assets/vendors/fancybox/helpers/jquery.fancybox-buttons.js')}}" ></script>
     <script type="text/javascript" src="{{asset('assets/vendors/fancybox/jquery.fancybox.js')}}"></script>
-    <script type="text/javascript" src="{{asset('assets/js/animated-masonry-gallery.js')}}" ></script>
+    <script>
+        
+        $(window).on('load', function() {
+
+            var button = 'all';
+            var $container = $('#gallery-content-center');
+            $container.isotope({ itemSelector: 'img' });
+            $('.fancybox').fancybox();
+
+            $("#filter-all").on('click', function() {
+                $container.isotope({ filter: '.all' });
+                $("#gallery-header-center-left-title").html('All Media');
+                button = 'all';
+            });
+
+            @foreach($clean_categories as $k => $v)
+                $("#filter-{{$v}}").on('click', function() {
+                    $container.isotope({ filter: '.{{$v}}' });
+                    $("#gallery-header-center-left-title").html('{{$v}}');
+                    button = {{$v}};
+                });
+            @endforeach
+
+        });
+    </script>
 @stop

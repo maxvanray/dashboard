@@ -173,6 +173,35 @@
 
             <div class="col-lg-12">
                 <div class="panel panel-default">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <i class="fa fa-fw fa-info-circle"></i> Images
+                        </h3>
+                    </div>
+                    <table id="user" class="table table-bordered table-striped m-t-10">
+                        <tbody>
+                        <tr>
+                            <td class="table_simple">Images:<br><a href="#">Add | Edit</a> </td>
+                            <td class="table_superuser">
+                                @if( count($location->images)>0 )
+                                @foreach( $location->images as $image)
+                                    <img src="{{url($image->location)}}/{{ $image->filename }}" class="img-responsive" style="padding: 5px">
+
+                                @endforeach
+                                @endif
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+
+                </div><!-- .panel -->
+            </div>
+
+            <div class="col-lg-12">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             <i class="fa fa-fw fa-info-circle"></i> Location Contact
