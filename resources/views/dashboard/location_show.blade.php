@@ -42,6 +42,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/toastr/css/toastr.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom_css/toastr_notificatons.css')}}">
 
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/custom_css/advanced_modals.css')}}">
+
     <meta name="csrf-token" id="_token" data-token="{{ csrf_token() }}" content="{!! csrf_token() !!}" >
     
 @stop
@@ -182,12 +184,61 @@
                     <table id="user" class="table table-bordered table-striped m-t-10">
                         <tbody>
                         <tr>
-                            <td class="table_simple">Images:<br><a href="#">Add | Edit</a> </td>
-                            <td class="table_superuser">
-                                @if( count($location->images)>0 )
-                                @foreach( $location->images as $image)
-                                    <img src="{{url($image->location)}}/{{ $image->filename }}" class="img-responsive" style="padding: 5px">
+                            <td class="table_simple">
+                                Images:<br>
+                                <a href="#" data-toggle="modal"
+                                   data-target="#sidebar_modal">Add | Edit</a>
+                                <button type="button" class="btn btn-info sidebarmodal" data-toggle="modal"
+                                        data-target="#sidebar_modal">Side-bar Modal
+                                </button>
 
+                                <div id="sidebar_modal" class="modal fade animated" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Media</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                @foreach($media as $m)
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label>
+                                                                <input type="checkbox" name="image_{{$m->id}}" id="image_{{$m->id}}" value="{{$m->id}}"
+                                                                       <?php
+
+                                                            $media_id = $m->id;
+                                                            ?>
+                                                                       @if( in_array($media_id, $used_images) )
+                                                                       checked
+                                                                       @endif
+                                                                > {{$m->name}}
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <img class="img-responsive" src="{{url($m->location)}}/{{ $m->filename }}" class="img-responsive" style="padding: 5px" title="{{ $m->name }}">
+                                                    </div>
+                                                @endforeach
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary">Save
+                                                </button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td class="table_superuser">
+                                @if( count($location->images_full)>0 )
+                                @foreach( $location->images_full as $image)
+                                    <img src="{{url($image->location)}}/{{ $image->filename }}" class="img-responsive" style="padding: 5px">
                                 @endforeach
                                 @endif
                             </td>

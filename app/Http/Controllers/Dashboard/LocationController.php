@@ -136,6 +136,7 @@ class LocationController extends Controller
     public function show($id)
     {
         $location = Location::find($id);
+        $media = Media::all();
 
         $image_keys = $location->images;
         $image_keys_array = explode(',',$image_keys);
@@ -143,10 +144,15 @@ class LocationController extends Controller
         foreach($image_keys_array as $k){
             $images[] = Media::find($k);
         }
-        $location['images'] = $images;
+        $location['images_full'] = $images;
 
-        return view('dashboard.location_show',
-            ['location' => $location]
+        //return $location;
+
+        return view('dashboard.location_show', [
+            'location' => $location,
+            'media' => $media,
+                'used_images' => $image_keys_array
+            ]
         );
     }
 
