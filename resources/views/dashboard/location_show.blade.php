@@ -183,60 +183,60 @@
                     </div>
                     <table id="user" class="table table-bordered table-striped m-t-10">
                         <tbody>
-                        <tr>
-                            <td class="table_simple">
-                                Images:<br>
-                                <a href="#" data-toggle="modal"
-                                   data-target="#sidebar_modal">Add | Edit</a>
-                                <button type="button" class="btn btn-info sidebarmodal" data-toggle="modal"
-                                        data-target="#sidebar_modal">Side-bar Modal
-                                </button>
+                            <tr>
+                                <td class="table_simple">
+                                    Images:<br>
+                                    <a href="#" data-toggle="modal"
+                                       data-target="#sidebar_modal">Add | Edit</a>
 
-                                <div id="sidebar_modal" class="modal fade animated" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Media</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                @foreach($media as $m)
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>
-                                                                <input type="checkbox" name="image_{{$m->id}}" id="image_{{$m->id}}" value="{{$m->id}}"
-                                                                       <?php
+                                    <div id="sidebar_modal" class="modal fade animated" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <form class="location_images">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        <h4 class="modal-title">Media Library</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
 
-                                                            $media_id = $m->id;
-                                                            ?>
-                                                                       @if( in_array($media_id, $used_images) )
-                                                                       checked
-                                                                       @endif
-                                                                > {{$m->name}}
-                                                            </label>
+                                                        @foreach($media as $m)
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label>
+                                                                        <input type="checkbox" name="image_{{$m->id}}" value="{{$m->id}}"
+                                                                               <?php
+                                                                                    $media_id = $m->id;
+                                                                               ?>
+                                                                               @if( in_array($media_id, $used_images) )
+                                                                               checked
+                                                                               @endif
+                                                                        > {{$m->name}}
+                                                                    </label>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <img class="img-responsive" src="{{url($m->location)}}/{{ $m->filename }}" class="img-responsive" style="padding: 5px" title="{{ $m->name }}">
+                                                            </div>
+                                                        @endforeach
 
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <img class="img-responsive" src="{{url($m->location)}}/{{ $m->filename }}" class="img-responsive" style="padding: 5px" title="{{ $m->name }}">
+                                                    <div class="modal-footer">
+                                                        <button type="submit" id="media_save" class="btn btn-primary">Save
+                                                        </button>
+                                                        <button type="button" id="media_close" class="btn btn-default" data-dismiss="modal">Close
+                                                        </button>
                                                     </div>
-                                                @endforeach
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary">Save
-                                                </button>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close
-                                                </button>
-                                            </div>
+                                                </form>
                                         </div>
                                     </div>
                                 </div>
 
                             </td>
                             <td class="table_superuser">
-                                @if( count($location->images_full)>0 )
+                                @if( !empty($location->images) )
                                 @foreach( $location->images_full as $image)
                                     <img src="{{url($image->location)}}/{{ $image->filename }}" class="img-responsive" style="padding: 5px">
                                 @endforeach
@@ -708,12 +708,6 @@
                         <button id="update-hours" class="btn btn-primary">Update</button>
                     </div>
                 </div>
-                
-                
-                
-                  
-            
-                
 
 <?php /*
                     <div class="panel-body">
@@ -795,6 +789,7 @@
                             </tbody>
                         </table>
                     </div> */ ?>
+
             </div> 
         </div>
         <!--fourth table end-->
@@ -838,7 +833,33 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        
+        $('input').each(function(){
+            $(this).iCheck({
+                checkboxClass: 'icheckbox_minimal',
+                radioClass: 'iradio_minimal',
+                increaseArea: '20%' // optional
+            });
+        });
+
+
+        $('#media_save').on('click', function (event) {
+            event.preventDefault();
+            var form = $('form.location_images').serialize();
+            $.ajax({
+                url:'{{url('/dashboard/location/'.$location->id.'/media')}}',
+                type: 'POST',
+                data: form,
+                success: function(msg){
+                    console.log(msg);
+                    location.reload();
+                }
+            });
+            console.log({{ $location->id }});
+        });
+
+        $('.icheckbox_square-blue').on('click', function (event) {
+            alert('x');
+        })
     });
 </script>
 

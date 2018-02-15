@@ -181,7 +181,7 @@ class LocationController extends Controller
         $location = Location::find($id);
         $name = $request->get('name');
         $value = $request->get('value');
-        $location->$name = $value;
+        $location->name = $value;
         $location->save();
 
         return $value;
@@ -351,5 +351,22 @@ class LocationController extends Controller
         //return redirect()->route('location.index')
                         //->with('success','Location deleted successfully');
     }
-    
+
+    public function media(Request $request, $id)
+    {
+        $images_submitted = $request->input();
+        $image_ids = '';
+        foreach ($images_submitted as $k => $v){
+            $image_ids .= ','.$v;
+        }
+        $image_ids = trim($image_ids, ',');
+        $location = Location::find($id);
+        $location->images = $image_ids;
+        $location->save();
+
+        return $location;
+
+
+    }
+
 }
